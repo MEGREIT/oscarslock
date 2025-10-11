@@ -1,0 +1,460 @@
+{
+  "hcms_cities": [
+    {
+      "id": 1,
+      "subdomain": "acton",
+      "city": "Acton, MA",
+      "phone": "508-736-7178"
+    },
+    {
+      "id": 2,
+      "subdomain": "attleboro",
+      "city": "Attleboro, MA",
+      "phone": "508-736-7178"
+    },
+    {
+      "id": 3,
+      "subdomain": "bedford",
+      "city": "Bedford, MA",
+      "phone": "508-736-7178"
+    },
+    {
+      "id": 4,
+      "subdomain": "billerica",
+      "city": "Billerica, MA",
+      "phone": "508-736-7178"
+    },
+    {
+      "id": 5,
+      "subdomain": "chelmsford",
+      "city": "Chelmsford, MA",
+      "phone": "508-736-7178"
+    },
+    {
+      "id": 6,
+      "subdomain": "concord",
+      "city": "Concord, MA",
+      "phone": "508-736-7178"
+    },
+    {
+      "id": 7,
+      "subdomain": "fitchburg",
+      "city": "Fitchburg, MA",
+      "phone": "508-736-7178"
+    },
+    {
+      "id": 8,
+      "subdomain": "foxborough",
+      "city": "Foxborough, MA",
+      "phone": "508-736-7178"
+    },
+    {
+      "id": 9,
+      "subdomain": "littleton",
+      "city": "Littleton, MA",
+      "phone": "508-736-7178"
+    },
+    {
+      "id": 10,
+      "subdomain": "lunenburg",
+      "city": "Lunenburg, MA",
+      "phone": "508-736-7178"
+    },
+    {
+      "id": 11,
+      "subdomain": "maynard",
+      "city": "Maynard, MA",
+      "phone": "508-736-7178"
+    },
+    {
+      "id": 12,
+      "subdomain": "medfield",
+      "city": "Medfield, MA",
+      "phone": "508-736-7178"
+    },
+    {
+      "id": 13,
+      "subdomain": "natick",
+      "city": "Natick, MA",
+      "phone": "508-736-7178"
+    },
+    {
+      "id": 14,
+      "subdomain": "needham",
+      "city": "Needham, MA",
+      "phone": "508-736-7178"
+    },
+    {
+      "id": 15,
+      "subdomain": "north-attleborough",
+      "city": "North Attleborough, MA",
+      "phone": "508-736-7178"
+    },
+    {
+      "id": 16,
+      "subdomain": "norton",
+      "city": "Norton, MA",
+      "phone": "508-736-7178"
+    },
+    {
+      "id": 17,
+      "subdomain": "norwood",
+      "city": "Norwood, MA",
+      "phone": "508-736-7178"
+    },
+    {
+      "id": 18,
+      "subdomain": "stoughton",
+      "city": "Stoughton, MA",
+      "phone": "508-736-7178"
+    },
+    {
+      "id": 19,
+      "subdomain": "sudbury",
+      "city": "Sudbury, MA",
+      "phone": "508-736-7178"
+    },
+    {
+      "id": 20,
+      "subdomain": "walpole",
+      "city": "Walpole, MA",
+      "phone": "508-736-7178"
+    },
+    {
+      "id": 21,
+      "subdomain": "wayland",
+      "city": "Wayland, MA",
+      "phone": "508-736-7178"
+    },
+    {
+      "id": 22,
+      "subdomain": "wellesley",
+      "city": "Wellesley, MA",
+      "phone": "508-736-7178"
+    },
+    {
+      "id": 23,
+      "subdomain": "westford",
+      "city": "Westford, MA",
+      "phone": "508-736-7178"
+    },
+    {
+      "id": 24,
+      "subdomain": "whitinsville",
+      "city": "Whitinsville, MA",
+      "phone": "508-736-7178"
+    },
+    {
+      "id": 25,
+      "subdomain": "wrentham",
+      "city": "Wrentham, MA",
+      "phone": "508-736-7178"
+    },
+    {
+      "id": 26,
+      "subdomain": "leominster",
+      "city": "Leominster, MA",
+      "phone": "508-736-7178"
+    },
+    {
+      "id": 27,
+      "subdomain": "marlborough",
+      "city": "Marlborough, MA",
+      "phone": "508-736-7178"
+    },
+    {
+      "id": 28,
+      "subdomain": "medway",
+      "city": "Medway, MA",
+      "phone": "508-736-7178"
+    },
+    {
+      "id": 29,
+      "subdomain": "mendon",
+      "city": "Mendon, MA",
+      "phone": "508-736-7178"
+    },
+    {
+      "id": 30,
+      "subdomain": "milford",
+      "city": "Milford, MA",
+      "phone": "508-736-7178"
+    },
+    {
+      "id": 31,
+      "subdomain": "millbury",
+      "city": "Millbury, MA",
+      "phone": "508-736-7178"
+    },
+    {
+      "id": 32,
+      "subdomain": "millville",
+      "city": "Millville, MA",
+      "phone": "508-736-7178"
+    },
+    {
+      "id": 33,
+      "subdomain": "north-brookfield",
+      "city": "North Brookfield, MA",
+      "phone": "508-736-7178"
+    },
+    {
+      "id": 34,
+      "subdomain": "northborough",
+      "city": "Northborough, MA",
+      "phone": "508-736-7178"
+    },
+    {
+      "id": 35,
+      "subdomain": "northbridge",
+      "city": "Northbridge, MA",
+      "phone": "508-736-7178"
+    },
+    {
+      "id": 36,
+      "subdomain": "oxford",
+      "city": "Oxford, MA",
+      "phone": "508-736-7178"
+    },
+    {
+      "id": 37,
+      "subdomain": "rutland",
+      "city": "Rutland, MA",
+      "phone": "508-736-7178"
+    },
+    {
+      "id": 38,
+      "subdomain": "shrewsbury",
+      "city": "Shrewsbury, MA",
+      "phone": "508-736-7178"
+    },
+    {
+      "id": 39,
+      "subdomain": "southborough",
+      "city": "Southborough, MA",
+      "phone": "508-736-7178"
+    },
+    {
+      "id": 40,
+      "subdomain": "southbridge",
+      "city": "Southbridge, MA",
+      "phone": "508-736-7178"
+    },
+    {
+      "id": 41,
+      "subdomain": "spencer",
+      "city": "Spencer, MA",
+      "phone": "508-736-7178"
+    },
+    {
+      "id": 42,
+      "subdomain": "sterling",
+      "city": "Sterling, MA",
+      "phone": "508-736-7178"
+    },
+    {
+      "id": 43,
+      "subdomain": "sturbridge",
+      "city": "Sturbridge, MA",
+      "phone": "508-736-7178"
+    },
+    {
+      "id": 44,
+      "subdomain": "sutton",
+      "city": "Sutton, MA",
+      "phone": "508-736-7178"
+    },
+    {
+      "id": 45,
+      "subdomain": "upton",
+      "city": "Upton, MA",
+      "phone": "508-736-7178"
+    },
+    {
+      "id": 46,
+      "subdomain": "uxbridge",
+      "city": "Uxbridge, MA",
+      "phone": "508-736-7178"
+    },
+    {
+      "id": 47,
+      "subdomain": "webster",
+      "city": "Webster, MA",
+      "phone": "508-736-7178"
+    },
+    {
+      "id": 48,
+      "subdomain": "west-boylston",
+      "city": "West Boylston, MA",
+      "phone": "508-736-7178"
+    },
+    {
+      "id": 49,
+      "subdomain": "westborough",
+      "city": "Westborough, MA",
+      "phone": "508-736-7178"
+    },
+    {
+      "id": 50,
+      "subdomain": "westminster",
+      "city": "Westminster, MA",
+      "phone": "508-736-7178"
+    },
+    {
+      "id": 51,
+      "subdomain": "worcester",
+      "city": "Worcester, MA",
+      "phone": "508-736-7178"
+    },
+    {
+      "id": 52,
+      "subdomain": "ashland",
+      "city": "Ashland, MA",
+      "phone": "508-736-7178"
+    },
+    {
+      "id": 53,
+      "subdomain": "auburn",
+      "city": "Auburn, MA",
+      "phone": "508-736-7178"
+    },
+    {
+      "id": 54,
+      "subdomain": "bellingham",
+      "city": "Bellingham, MA",
+      "phone": "508-736-7178"
+    },
+    {
+      "id": 55,
+      "subdomain": "berlin",
+      "city": "Berlin, MA",
+      "phone": "508-736-7178"
+    },
+    {
+      "id": 56,
+      "subdomain": "blackstone",
+      "city": "Blackstone, MA",
+      "phone": "508-736-7178"
+    },
+    {
+      "id": 57,
+      "subdomain": "bolton",
+      "city": "Bolton, MA",
+      "phone": "508-736-7178"
+    },
+    {
+      "id": 58,
+      "subdomain": "boylston",
+      "city": "Boylston, MA",
+      "phone": "508-736-7178"
+    },
+    {
+      "id": 59,
+      "subdomain": "brookfield",
+      "city": "Brookfield, MA",
+      "phone": "508-736-7178"
+    },
+    {
+      "id": 60,
+      "subdomain": "charlton",
+      "city": "Charlton, MA",
+      "phone": "508-736-7178"
+    },
+    {
+      "id": 61,
+      "subdomain": "clinton",
+      "city": "Clinton, MA",
+      "phone": "508-736-7178"
+    },
+    {
+      "id": 62,
+      "subdomain": "douglas",
+      "city": "Douglas, MA",
+      "phone": "508-736-7178"
+    },
+    {
+      "id": 63,
+      "subdomain": "dudley",
+      "city": "Dudley, MA",
+      "phone": "508-736-7178"
+    },
+    {
+      "id": 64,
+      "subdomain": "east-brookfield",
+      "city": "East Brookfield, MA",
+      "phone": "508-736-7178"
+    },
+    {
+      "id": 65,
+      "subdomain": "framingham",
+      "city": "Framingham, MA",
+      "phone": "508-736-7178"
+    },
+    {
+      "id": 66,
+      "subdomain": "franklin",
+      "city": "Franklin, MA",
+      "phone": "508-736-7178"
+    },
+    {
+      "id": 67,
+      "subdomain": "gardner",
+      "city": "Gardner, MA",
+      "phone": "508-736-7178"
+    },
+    {
+      "id": 68,
+      "subdomain": "grafton",
+      "city": "Grafton, MA",
+      "phone": "508-736-7178"
+    },
+    {
+      "id": 69,
+      "subdomain": "holden",
+      "city": "Holden, MA",
+      "phone": "508-736-7178"
+    },
+    {
+      "id": 70,
+      "subdomain": "holland",
+      "city": "Holland, MA",
+      "phone": "508-736-7178"
+    },
+    {
+      "id": 71,
+      "subdomain": "holliston",
+      "city": "Holliston, MA",
+      "phone": "508-736-7178"
+    },
+    {
+      "id": 72,
+      "subdomain": "hopedale",
+      "city": "Hopedale, MA",
+      "phone": "508-736-7178"
+    },
+    {
+      "id": 73,
+      "subdomain": "hopkinton",
+      "city": "Hopkinton, MA",
+      "phone": "508-736-7178"
+    },
+    {
+      "id": 74,
+      "subdomain": "hudson",
+      "city": "Hudson, MA",
+      "phone": "508-736-7178"
+    },
+    {
+      "id": 75,
+      "subdomain": "lancaster",
+      "city": "Lancaster, MA",
+      "phone": "508-736-7178"
+    },
+    {
+      "id": 76,
+      "subdomain": "leicester",
+      "city": "Leicester, MA",
+      "phone": "508-736-7178"
+    }
+  ]
+}
