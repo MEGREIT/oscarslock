@@ -1,4 +1,4 @@
-import Image from "next/image";
+import React, { useState } from "react";
 
 export default function GalleryComponent() {
   // Generate an array of image paths
@@ -69,19 +69,34 @@ export default function GalleryComponent() {
     <div className="p-4 pb-10 pt-16 md:pt-4 flex flex-col">
       <div className="grid justify-center grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 ">
         {images.map((src, index) => (
-          <div
-            key={index}
-            className="relative mx-auto md:w-full mt-4 h-96"
-          >
-            <img
-              src={`/gallery/${src}`}
-              alt={`Gallery Image ${index + 1}`}
-              loading="lazy"
-              className="rounded-lg object-fill w-full h-96"
-            />
-          </div>
+          <GalleryTile key={index} src={`/gallery/${src}`} index={index} />
         ))}
       </div>
+    </div>
+  );
+}
+
+function GalleryTile({ src, index }: { src: string; index: number }) {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  return (
+    <div className="relative mx-auto md:w-full mt-4 h-96">
+      {!isLoaded && (
+        <div className="absolute inset-0 rounded-lg animate-pulse bg-gray-200" />
+      )}
+      <img
+        src={src}
+        alt="Gallery Image"
+        loading="lazy"
+        decoding="async"
+        fetchPriority={index < 6 ? "high" : "auto"}
+        sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+        onLoad={() => setIsLoaded(true)}
+        className={
+          "rounded-lg object-cover w-full h-96 transition-opacity duration-300 " +
+          (isLoaded ? "opacity-100" : "opacity-0")
+        }
+      />
     </div>
   );
 }
