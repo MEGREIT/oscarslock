@@ -13,7 +13,7 @@ const images = [
   // "/slider/8.jpg",
   "/slider/9.jpg",
   "/slider/10.jpg",
-  "/slider/11.jpg",
+  // "/slider/11.jpg",
   // "/slider/12.jpg",
   "/slider/13.jpg",
   "/slider/14.jpeg",
@@ -23,6 +23,7 @@ const images = [
   "/slider/18.jpeg",
   "/slider/19.jpeg",
   "/slider/20.jpeg",
+  "/slider/21.jpeg",
 ];
 
 const PhotoSlider: React.FC = () => {
