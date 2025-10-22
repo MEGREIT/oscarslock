@@ -167,7 +167,7 @@ export default function Navbar({ items, currentCity }: any) {
   return (
     <StickyWrapper>
       <div className="w-screen bg-white">
-        '''#*#<GoogleScript />*'''
+        <GoogleScript />
         <NavbarContainer hidden={isNavbarHidden} transparent={isTransparent}>
           <Content>
             <NextLink className="max-h-52" href={getLink(city)} passHref>
