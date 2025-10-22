@@ -1,119 +1,109 @@
+// views/ContactPage/FormSection.tsx
 import { useState } from "react";
 import styled from "styled-components";
-import Button from "components/Button";
-import Input from "components/Input";
-import { media } from "utils/media";
 
 export default function FormSection() {
-  const [hasSuccessfullySentMail, setHasSuccessfullySentMail] = useState(false);
-  const [hasErrored, setHasErrored] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState("");
+  const [error, setError] = useState("");
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setHasErrored(false);
-    setHasSuccessfullySentMail(false);
-    setIsLoading(true);
+    setLoading(true);
+    setSuccess("");
+    setError("");
 
-    const fd = new FormData(e.currentTarget);
-    const payload = {
-      name: fd.get("name")?.toString() || "",
-      email: fd.get("email")?.toString() || "",
-      phone: fd.get("phone")?.toString() || "",
-      subject: fd.get("subject")?.toString() || "",
-      description: fd.get("description")?.toString() || "",
-    };
+    if (!name || !email || !message) {
+      setError("Please fill all fields");
+      setLoading(false);
+      return;
+    }
 
     try {
-      const res = await fetch("/api/sendEmail", {
+      const res = await fetch("/api/sendMail", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+        body: JSON.stringify({ name, email, message }),
       });
 
+      const data = await res.json();
       if (res.ok) {
-        setHasSuccessfullySentMail(true);
-        e.currentTarget.reset();
+        setSuccess("Mail sent successfully!");
+        setName("");
+        setEmail("");
+        setMessage("");
       } else {
-        setHasErrored(true);
+        setError(data.error || "Failed to send mail");
       }
-    } catch {
-      setHasErrored(true);
-    } finally {
-      setIsLoading(false);
+    } catch (err) {
+      setError("Something went wrong");
     }
-  }
+    setLoading(false);
+  };
 
   return (
-    <Wrapper>
-      <Form onSubmit={handleSubmit}>
-        <InputGroup>
-          <InputStack>
-            <Input placeholder="Your Name" id="name" name="name" required />
-          </InputStack>
-          <InputStack>
-            <Input placeholder="Your Email" id="email" name="email" required />
-          </InputStack>
-          <InputStack>
-            <Input placeholder="Your Phone Number" id="phone" name="phone" />
-          </InputStack>
-        </InputGroup>
-
-        <InputStack>
-          <Input placeholder="Subject" id="subject" name="subject" />
-        </InputStack>
-
-        <InputStack>
-          <Textarea
-            as="textarea"
-            placeholder="How Can We Help you..."
-            id="description"
-            name="description"
-            required
-          />
-        </InputStack>
-
-        <Button as="button" type="submit" disabled={isLoading}>
-          {isLoading ? "Sending..." : "Send Message"}
-        </Button>
-
-        {hasSuccessfullySentMail && <Message success>✅ Mail sent successfully!</Message>}
-        {hasErrored && <Message error>❌ Something went wrong. Try again.</Message>}
-      </Form>
-    </Wrapper>
+    <FormWrapper onSubmit={handleSubmit}>
+      <h2>Contact Us</h2>
+      {success && <SuccessMsg>{success}</SuccessMsg>}
+      {error && <ErrorMsg>{error}</ErrorMsg>}
+      <Input
+        type="text"
+        placeholder="Your Name"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+      />
+      <Input
+        type="email"
+        placeholder="Your Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      />
+      <TextArea
+        placeholder="Your Message"
+        value={message}
+        onChange={(e) => setMessage(e.target.value)}
+      />
+      <SubmitButton type="submit" disabled={loading}>
+        {loading ? "Sending..." : "Send Message"}
+      </SubmitButton>
+    </FormWrapper>
   );
 }
 
-// ===== STYLES =====
-const Wrapper = styled.div`
-  justify-content: center;
-  margin: 0 10rem;
-  text-align: center;
-  ${media("<tablet")} { margin: 0 2rem; }
-`;
-
-const Form = styled.form`
-  input::placeholder, textarea::placeholder { font-weight: bold; color: #0a3161; }
-  input, textarea { background-color: #fff; }
-  & > * { margin-bottom: 2rem; }
-`;
-
-const InputGroup = styled.div`
+const FormWrapper = styled.form`
   display: flex;
-  align-items: center;
-  & > *:not(:first-child) { margin-left: 0.5rem; }
-  & > * { flex: 1; }
-  ${media("<=tablet")} {
-    flex-direction: column;
-    & > *:not(:first-child) { margin-top: 2rem; }
-  }
+  flex-direction: column;
+  max-width: 500px;
+  gap: 1rem;
 `;
 
-const InputStack = styled.div` display: flex; flex-direction: column; width: 100%; `;
-const Textarea = styled(Input)` width: 100%; min-height: 20rem; `;
+const Input = styled.input`
+  padding: 0.8rem;
+  font-size: 1rem;
+`;
 
-const Message = styled.p<{ success?: boolean; error?: boolean }>`
-  color: ${(props) => (props.success ? "green" : props.error ? "red" : "black")};
-  font-weight: bold;
-  margin-top: 1rem;
+const TextArea = styled.textarea`
+  padding: 0.8rem;
+  font-size: 1rem;
+  min-height: 120px;
+`;
+
+const SubmitButton = styled.button`
+  padding: 0.8rem;
+  background-color: #751318;
+  color: white;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+`;
+
+const SuccessMsg = styled.p`
+  color: green;
+`;
+
+const ErrorMsg = styled.p`
+  color: red;
 `;
