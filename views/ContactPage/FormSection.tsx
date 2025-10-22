@@ -1,4 +1,5 @@
 // views/ContactPage/FormSection.tsx
+"use client";
 import { useState } from "react";
 import styled from "styled-components";
 
