@@ -91,7 +91,7 @@ export default function Slider({ phone }: { phone?: string }) {
       <Container>
         <Title>Oscars Lock & Key Services LLC</Title>
         <SubTitle>Your Safety is Our Priority</SubTitle>
-        <PhoneBtn phone={phone || '(508) 736-7178'} />
+        <PhoneBtn phone={phone || '(800) 687- 0480'} />
       </Container>
     </ImageWrapper>
   );
