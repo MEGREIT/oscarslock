@@ -133,9 +133,19 @@ function Providers({ children }: PropsWithChildren) {
 }
 
 function Modals() {
+  // 1. Call the hook unconditionally at the top.
   const { isModalOpened, setIsModalOpened } = useNewsletterModalContext();
-  if (!isModalOpened) return null;
-  return <NewsletterModal onClose={() => setIsModalOpened(false)} />;
+
+  // 2. Use the state for conditional rendering *after* all hooks have been called.
+  return (
+    <>
+      {isModalOpened && (
+        <NewsletterModal onClose={() => setIsModalOpened(false)} />
+      )}
+    </>
+  );
+  // Or simply:
+  // return isModalOpened ? <NewsletterModal onClose={() => setIsModalOpened(false)} /> : null;
 }
 
 export default MyApp;
