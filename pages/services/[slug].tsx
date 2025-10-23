@@ -56,14 +56,14 @@ export default function ServiceSlugRoute(props: ServiceProps) {
       imgURL={urlForImage(source).height(1000).width(2000).url()}
     >
       <ServiceContainer>
-        <PhoneBtn phone="(508) 736-7178" />
+        <PhoneBtn phone="(800) 687- 0480" />
         <div className="lg:flex xl:align-top lg:space-x-0 pl-5 xl:px-5 md:space-y-0 space-y-2 lg:space-y-0 max-w-[1250px]">
           <ServicePage service={service} city={currentCity} />
           <PaymentBox>
             <PaymentContainer>
               <img src="/payment.png" />
             </PaymentContainer>
-            <PhoneBtn phone="(508) 736-7178" />
+            <PhoneBtn phone="(800) 687- 0480" />
             <TextBubble />
             <img src="/logos/oscar-logo.png" className="w-[25rem] ml-0" />
           </PaymentBox>
