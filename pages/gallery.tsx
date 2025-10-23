@@ -83,13 +83,13 @@ const Gallery = () => {
           <PaymentContainer>
             <img src="/payment.png" />
           </PaymentContainer>
-          <PhoneBtn phone="(508) 736-7178" />
+          <PhoneBtn phone="(800) 687- 0480" />
           <TextBubble />
           <img src="/logos/oscar-logo.png" className="w-[25rem] ml-0" />
         </PaymentBox>
       </div>
       <div className="w-full flex flex-col pb-10">
-        <PhoneBtn phone="(508) 736-7178" />
+        <PhoneBtn phone="(800) 687- 0480" />
         <Cta />
         <button
           onClick={() => {
