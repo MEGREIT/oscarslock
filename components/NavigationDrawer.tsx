@@ -1,55 +1,49 @@
-import NextLink from "next/link";
 import { useRouter } from "next/router";
-import { PropsWithChildren, useEffect, useRef } from "react";
+import NextLink from "next/link";
+import { PropsWithChildren, useEffect } from "react";
 import styled, { css } from "styled-components";
 import { NavItems, SingleNavItem } from "types";
-import ClientOnly from "./ClientOnly";
+import * as Dialog from "@radix-ui/react-dialog";
 import CloseIcon from "./CloseIcon";
-import OriginalDrawer from "./Drawer";
 
 type NavigationDrawerProps = PropsWithChildren<{ items: NavItems }>;
 
-export default function NavigationDrawer({
-  children,
-  items,
-}: NavigationDrawerProps) {
+export default function NavigationDrawer({ children, items }: NavigationDrawerProps) {
+  console.log('NavigationDrawer rendering');
   return (
-    <OriginalDrawer.Drawer>
+    <Dialog.Root>
       <Wrapper>
-        <ClientOnly>
-          <OriginalDrawer.Target
-            openClass="drawer-opened"
-            closedClass="drawer-closed"
-          >
-            <div className="my-drawer">
-              <div className="my-drawer-container">
-                <DrawerCloseButton />
-                <NavItemsList items={items} />
-              </div>
+        <Dialog.Portal>
+          <Dialog.Overlay className="drawer-overlay" />
+          <Dialog.Content className="my-drawer">
+            <div className="my-drawer-container">
+              <Dialog.Close asChild>
+                <CloseIcon className="close-icon" />
+              </Dialog.Close>
+              <NavItemsList items={items} />
             </div>
-          </OriginalDrawer.Target>
-        </ClientOnly>
+          </Dialog.Content>
+        </Dialog.Portal>
       </Wrapper>
       {children}
-    </OriginalDrawer.Drawer>
+    </Dialog.Root>
   );
 }
 
 function NavItemsList({ items }: NavigationDrawerProps) {
-  const { close } = OriginalDrawer.useDrawer();
+  console.log('NavItemsList rendering');
   const router = useRouter();
-
   const currentPage = router.pathname;
 
   useEffect(() => {
+    console.log('NavItemsList useEffect');
     function handleRouteChangeComplete() {
-      close();
+      // Dialog closes automatically via Dialog.Close
     }
-
     router.events.on("routeChangeComplete", handleRouteChangeComplete);
     return () =>
       router.events.off("routeChangeComplete", handleRouteChangeComplete);
-  }, [close, router]);
+  }, [router]);
 
   return (
     <ul>
@@ -57,45 +51,19 @@ function NavItemsList({ items }: NavigationDrawerProps) {
         SingleNavItem.href === currentPage ? (
           <HoverUnderlineAnimation outlined={true} key={idx}>
             <NavItem>
-              <NextLink href={SingleNavItem.href}>
-                {SingleNavItem.title}
-              </NextLink>
+              <NextLink href={SingleNavItem.href}>{SingleNavItem.title}</NextLink>
             </NavItem>
           </HoverUnderlineAnimation>
         ) : (
           <HoverUnderlineAnimation outlined={false} key={idx}>
             <NavItem>
-              <NextLink href={SingleNavItem.href}>
-                {SingleNavItem.title}
-              </NextLink>
+              <NextLink href={SingleNavItem.href}>{SingleNavItem.title}</NextLink>
             </NavItem>
           </HoverUnderlineAnimation>
         )
       )}
-      {/* {items.map((SingleNavItem, idx) => {
-        SingleNavItem.href === currentPage ? (
-          <HoverUnderlineAnimation outlined={true} key={idx}>
-            <NavItem>
-              <NextLink href={SingleNavItem.href}>{SingleNavItem.title}</NextLink>
-            </NavItem>
-          </HoverUnderlineAnimation>
-        ) : (
-          <HoverUnderlineAnimation outlined={false} key={idx}>
-            <NavItem>
-              <NextLink href={SingleNavItem.href}>{SingleNavItem.title}</NextLink>
-            </NavItem>
-          </HoverUnderlineAnimation>
-        );
-      })} */}
     </ul>
   );
-}
-
-function DrawerCloseButton() {
-  const ref = useRef(null);
-  const a11yProps = OriginalDrawer.useA11yCloseButton(ref);
-
-  return <CloseIcon className="close-icon" _ref={ref} {...a11yProps} />;
 }
 
 const Wrapper = styled.div`
@@ -106,6 +74,9 @@ const Wrapper = styled.div`
     background: rgb(251, 251, 253);
     transition: margin-left 0.3s cubic-bezier(0.82, 0.085, 0.395, 0.895);
     overflow: hidden;
+    position: fixed;
+    top: 0;
+    left: 0;
   }
 
   .my-drawer-container {
@@ -122,12 +93,13 @@ const Wrapper = styled.div`
     top: 2rem;
   }
 
-  .drawer-closed {
-    margin-left: -100%;
-  }
-
-  .drawer-opened {
-    margin-left: 0;
+  .drawer-overlay {
+    background: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
   }
 
   ul {
