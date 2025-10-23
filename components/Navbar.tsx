@@ -212,35 +212,23 @@ export default function Navbar({ items, currentCity }: any) {
                 <span>
                   <span className="phone mx-0 px-0">{`Call Now: `}</span>
 
-                  {/* --- START: Phone Number Logic Fix --- */}
-                  {currentPath === "/" || currentPath === "" ? (
-                    // Force the new number on the root homepage
+                  {/* --- START: REVISED PHONE NUMBER LOGIC --- */}
+                  {city !== "" && cityObject?.phone ? (
+                    // CITY PAGE LOGIC: Show city-specific phone number
+                    <a href={"tel:" + removeHyphens(cityObject?.phone)}>
+                      <p className=" cursor-pointer text-[#751318]">
+                        {formatToPhone(cityObject?.phone)}
+                      </p>
+                    </a>
+                  ) : (
+                    // HOMEPAGE/FALLBACK: Force the new national number
                     <a href={`tel:${NEW_PHONE_NUMBER_CLEAN}`}>
                       <p className="cursor-pointer text-[#751318]">
                         {NEW_PHONE_NUMBER_FORMATTED}
                       </p>
                     </a>
-                  ) : (
-                    // Use the existing city logic for all other pages
-                    <>
-                      {cityObject?.phone ? (
-                        <a href={"tel:" + removeHyphens(cityObject?.phone)}>
-                          <p className=" cursor-pointer text-[#751318]">
-                            {formatToPhone(cityObject?.phone)}
-                          </p>
-                        </a>
-                      ) : (
-                        // Fallback to the new number if cityObject is missing or has no phone
-                        <a href={`tel:${NEW_PHONE_NUMBER_CLEAN}`}>
-                          <p className=" cursor-pointer text-[#751318]">
-                            {NEW_PHONE_NUMBER_FORMATTED}
-                          </p>
-                        </a>
-                      )}
-                    </>
                   )}
-                  {/* --- END: Phone Number Logic Fix --- */}
-
+                  {/* --- END: REVISED PHONE NUMBER LOGIC --- */}
                 </span>
               </div>
             </div>
@@ -250,8 +238,6 @@ export default function Navbar({ items, currentCity }: any) {
     </StickyWrapper>
   );
 }
-
-// ... (Rest of the file remains unchanged)
 
 function NavItem({ href, title, outlined }: SingleNavItem) {
   const { setIsModalOpened } = useNewsletterModalContext();
