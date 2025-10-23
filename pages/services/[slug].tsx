@@ -69,7 +69,7 @@ export default function ServiceSlugRoute(props: ServiceProps) {
           </PaymentBox>
         </div>
         <ServiceCTA />
-        <PhoneBtn phone="(508) 736-7178" />
+        <PhoneBtn phone="(800) 687- 0480" />
         <button
           onClick={() => {
             router.push("/coupons");
