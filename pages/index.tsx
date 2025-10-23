@@ -72,14 +72,14 @@ export default function Homepage({
             <div className="lg:flex xl:align-top lg:space-x-4  space-y-2 lg:space-y-0 justify-center align-middle mx-0">
               <div className="flex flex-col mx-0 w-auto 2xl:max-w-[65%] xl:max-w-[80%]">
                 <ServicesGrid services={sortBySlug(services)} />
-                <PhoneBtn phone="(508) 736-7178" />
+                <PhoneBtn phone="(800) 687- 0480" />
                 <About />
               </div>
               <PaymentBox>
                 <PaymentContainer>
                   <img src="/payment.png" alt="Payment methods accepted" />
                 </PaymentContainer>
-                <PhoneBtn phone="(508) 736-7178" />
+                <PhoneBtn phone="(800) 687- 0480" />
                 <TextBubble />
                 <img src="/logos/oscar-logo.png" className="w-[25rem] ml-0" alt="Oscar's Lock logo" />
               </PaymentBox>
