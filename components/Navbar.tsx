@@ -210,17 +210,17 @@ export default function Navbar({ items, currentCity }: any) {
                           </p>
                         </a>
                       ) : (
-                        <a href="tel:5087367178">
+                        <a href="tel:8006870480">
                           <p className=" cursor-pointer text-[#751318]">
-                            (508) 736-7178
+                            (800) 687-0480
                           </p>
                         </a>
                       )}
                     </>
                   ) : (
-                    <a href="tel:5087367178">
+                    <a href="tel:8006870480">
                       <p className="cursor-pointer text-[#751318]">
-                        (508) 736-7178
+                        (800) 687-0480
                       </p>
                     </a>
                   )}
