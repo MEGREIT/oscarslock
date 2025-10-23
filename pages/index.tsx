@@ -1,5 +1,6 @@
 import { InferGetServerSidePropsType } from "next";
 import Head from "next/head";
+import dynamic from "next/dynamic";
 import styled from "styled-components";
 import { EnvVars } from "env";
 import Cta from "views/HomePage/Cta";
@@ -17,11 +18,20 @@ import About from "@/components/About";
 import { media } from "@/utils/media";
 import ServicesGrid from "@/components/ServicesGrid";
 import TextBubble from "@/components/TextBubble";
-import PhotoSlider from "@/components/PhotoSlider";
 import { useEffect } from "react";
 import GoogleScript from "@/components/Script";
 import PhoneBtn from "@/components/PhoneBtn";
 import OurTeam from "@/views/AboutPage/OurTeam";
+
+// Load PhotoSlider only on client-side to avoid SSR issues with Swiper
+const PhotoSlider = dynamic(() => import("@/components/PhotoSlider"), {
+  ssr: false,
+  loading: () => (
+    <div className="flex w-[80vw] md:w-[267px] h-[30vh] min-h-[260px] border-2 border-gray-500 rounded-lg items-center justify-center">
+      <p>Loading...</p>
+    </div>
+  ),
+});
 
 const client = getClient();
 
