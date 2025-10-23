@@ -1,9 +1,7 @@
-import dynamic from "next/dynamic";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 import React, { useRef, useState } from "react";
 import styled, { css } from "styled-components";
-import hcms_cities from "@/utils/cities_data.json";
 import { useNewsletterModalContext } from "contexts/newsletter-modal.context";
 import {
   ScrollPositionEffectProps,
@@ -14,15 +12,14 @@ import { media } from "utils/media";
 import Button from "./Button";
 import Container from "./Container";
 import Logo from "./Logo";
-// import { HoverUnderlineAnimation } from 'utils/styled-animations';
-import NextImage from "next/image";
 import { findSubdomain } from "@/utils/cities";
 import { getCityFromPath } from "@/utils/formatString";
 import GoogleScript from "./Script";
-import Script from "next/script";
+
 type NavbarProps = { items: NavItems };
 type ScrollingDirections = "up" | "down" | "none";
 type NavbarContainerProps = { hidden: boolean; transparent: boolean };
+
 const omitList = [
   "price",
   "contact",
@@ -35,9 +32,9 @@ const omitList = [
   "mailbox",
   "commercial",
 ];
+
 export const extractCityFromPath = (path: any) => {
-  // First, remove any query parameters from the path
-  const cleanPath = path.split("?")[0]; // Splits by '?' and takes the first part
+  const cleanPath = path.split("?")[0];
   const parts = cleanPath.split("/");
   let isOmitted = false;
 
@@ -52,6 +49,7 @@ export const extractCityFromPath = (path: any) => {
   }
   return parts[1];
 };
+
 export const getLink = (city: any) => {
   if (city !== "" || city == null) {
     if (
@@ -76,7 +74,6 @@ export const getLink = (city: any) => {
   return "/";
 };
 
-// StickyWrapper component - moved before Navbar component
 const StickyWrapper = styled.div`
   position: sticky;
   top: 0;
@@ -88,9 +85,8 @@ const StickyWrapper = styled.div`
 
 export default function Navbar({ items, currentCity }: any) {
   const router = useRouter();
-  // const citiesData = cityData ? cityData.hcms_cities : [];
   const currentPath = router.asPath;
-  // const city = getCityFromPath(extractCityFromPath(currentPath));
+
   function formatToPhone(number) {
     const cleaned = number.toString().replace(/\D/g, "");
 
@@ -104,6 +100,7 @@ export default function Navbar({ items, currentCity }: any) {
 
     return `(${areaCode}) ${prefix}-${lineNumber}`;
   }
+
   function removeHyphens(numberString) {
     return numberString.replace(/-/g, "");
   }
@@ -112,7 +109,7 @@ export default function Navbar({ items, currentCity }: any) {
     ? currentCity.subdomain
     : getCityFromPath(extractCityFromPath(currentPath));
   const cityObject = findSubdomain(city);
-  // console.log("cityeee:", city);
+
   const [scrollingDirection, setScrollingDirection] =
     useState<ScrollingDirections>("none");
 
@@ -162,46 +159,19 @@ export default function Navbar({ items, currentCity }: any) {
 
   const isNavbarHidden = scrollingDirection === "down";
   const isTransparent = scrollingDirection === "none";
-  // console.log("city", cityObject);
-  <head>
-    {/* Google Tag Manager - Part 1 (placed in <head>) */}
-    <Script
-      id="gtm-script" // Unique ID for the script
-      strategy="afterInteractive" // Loads after the page is interactive
-      dangerouslySetInnerHTML={{
-        __html: `
-                (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-                new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-                j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-                'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-                })(window,document,'script','dataLayer','GTM-WPNF8ZTD');
-              `,
-      }}
-    />
-  </head>;
-  // console.log(router.pathname);
+
   return (
     <StickyWrapper>
       <div className="w-screen bg-white">
         <GoogleScript />
         <NavbarContainer hidden={isNavbarHidden} transparent={isTransparent}>
-        <Content>
-          <NextLink className="max-h-52" href={getLink(city)} passHref>
-            <LogoWrapper>
-              <Logo />
-            </LogoWrapper>
-          </NextLink>
-          <p className="var hidden md:block text-[33px]">
-            {city !== ""
-              ? `${
-                  cityObject?.city
-                    ? cityObject?.city
-                    : `Need a Local Locksmith?`
-                }`
-              : `Need a Local Locksmith?`}
-          </p>
-          <div className="flex flex-col space-y-2 ">
-            <p className="block md:hidden text-[14px]">
+          <Content>
+            <NextLink className="max-h-52" href={getLink(city)} passHref>
+              <LogoWrapper>
+                <Logo />
+              </LogoWrapper>
+            </NextLink>
+            <p className="var hidden md:block text-[33px]">
               {city !== ""
                 ? `${
                     cityObject?.city
@@ -210,53 +180,57 @@ export default function Navbar({ items, currentCity }: any) {
                   }`
                 : `Need a Local Locksmith?`}
             </p>
-            <div>
-              <svg
-                fill="#751318"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 512 512"
-              >
-                <path d="M164.9 24.6c-7.7-18.6-28-28.5-47.4-23.2l-88 24C12.1 30.2 0 46 0 64C0 311.4 200.6 512 448 512c18 0 33.8-12.1 38.6-29.5l24-88c5.3-19.4-4.6-39.7-23.2-47.4l-96-40c-16.3-6.8-35.2-2.1-46.3 11.6L304.7 368C234.3 334.7 177.3 277.7 144 207.3L193.3 167c13.7-11.2 18.4-30 11.6-46.3l-40-96z" />
-              </svg>
-              <span>
-                <span className="phone mx-0 px-0">{`Call Now: `}</span>
+            <div className="flex flex-col space-y-2 ">
+              <p className="block md:hidden text-[14px]">
+                {city !== ""
+                  ? `${
+                      cityObject?.city
+                        ? cityObject?.city
+                        : `Need a Local Locksmith?`
+                    }`
+                  : `Need a Local Locksmith?`}
+              </p>
+              <div>
+                <svg
+                  fill="#751318"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 512 512"
+                >
+                  <path d="M164.9 24.6c-7.7-18.6-28-28.5-47.4-23.2l-88 24C12.1 30.2 0 46 0 64C0 311.4 200.6 512 448 512c18 0 33.8-12.1 38.6-29.5l24-88c5.3-19.4-4.6-39.7-23.2-47.4l-96-40c-16.3-6.8-35.2-2.1-46.3 11.6L304.7 368C234.3 334.7 177.3 277.7 144 207.3L193.3 167c13.7-11.2 18.4-30 11.6-46.3l-40-96z" />
+                </svg>
+                <span>
+                  <span className="phone mx-0 px-0">{`Call Now: `}</span>
 
-                {city !== "" ? (
-                  <>
-                    {cityObject?.phone ? (
-                      <a href={"tel:" + removeHyphens(cityObject?.phone)}>
-                        <p className=" cursor-pointer text-[#751318]">
-                          {formatToPhone(cityObject?.phone)}
-                        </p>
-                      </a>
-                    ) : (
-                      <a href="tel:5087367178">
-                        <p className=" cursor-pointer text-[#751318]">
-                          {/* (508) 736-7178 */}
-                          (508) 736-7178
-                        </p>
-                      </a>
-                    )}
-                  </>
-                ) : (
-                  <a href="tel:5087367178">
-                    / <p className="cursor-pointer">(800) 687-0480</p> /
-                    <p className="cursor-pointer text-[#751318]">
-                      (508) 736-7178
-                    </p>
-                  </a>
-                )}
-              </span>
+                  {city !== "" ? (
+                    <>
+                      {cityObject?.phone ? (
+                        <a href={"tel:" + removeHyphens(cityObject?.phone)}>
+                          <p className=" cursor-pointer text-[#751318]">
+                            {formatToPhone(cityObject?.phone)}
+                          </p>
+                        </a>
+                      ) : (
+                        <a href="tel:5087367178">
+                          <p className=" cursor-pointer text-[#751318]">
+                            (508) 736-7178
+                          </p>
+                        </a>
+                      )}
+                    </>
+                  ) : (
+                    <a href="tel:5087367178">
+                      <p className="cursor-pointer text-[#751318]">
+                        (508) 736-7178
+                      </p>
+                    </a>
+                  )}
+                </span>
+              </div>
             </div>
-          </div>
-
-          {/* <HamburgerMenuWrapper>
-          <HamburgerIcon aria-label="Toggle menu" onClick={toggle} />
-        </HamburgerMenuWrapper> */}
-        </Content>
-      </NavbarContainer>
-    </div>
-  </StickyWrapper>
+          </Content>
+        </NavbarContainer>
+      </div>
+    </StickyWrapper>
   );
 }
 
@@ -282,12 +256,10 @@ const CustomButton = styled(Button)`
 `;
 
 const NavItemList = styled.div`
-  /* background-color: greenyellow; */
   display: flex;
   list-style: none;
   width: 100%;
   font-size: 2rem;
-  /* color: white; */
   div {
     display: flex;
   }
@@ -296,12 +268,10 @@ const NavItemList = styled.div`
     width: 20px;
   }
   span {
-    /* color: white; */
     display: flex;
     margin-left: 1rem;
   }
   .var {
-    /* font-size: 33px; */
     margin-right: 1rem;
     color: #000;
   }
@@ -312,8 +282,6 @@ const NavItemList = styled.div`
     color: #751318;
   }
   p {
-    /* color: white; */
-
     font-weight: 800;
   }
   @media (max-width: 424px) {
@@ -324,22 +292,19 @@ const NavItemList = styled.div`
   ${media("<desktop")} {
   }
 `;
+
 const NavContainer = styled.div`
-  /* background-color: green; */
   display: flex;
   list-style: none;
   font-size: 2rem;
   width: 100%;
-  /* color: white; */
   div {
     display: flex;
   }
   svg {
-    /* color: white; */
     width: 20px;
   }
   span {
-    /* color: white; */
     display: flex;
     margin-left: 1rem;
     align-items: center;
@@ -348,8 +313,6 @@ const NavContainer = styled.div`
     }
   }
   p {
-    /* color: white; */
-
     font-weight: 800;
     ${media("<=smallPhone")} {
       font-size: 1rem;
@@ -370,7 +333,6 @@ const LogoWrapper = styled.div`
   display: flex;
   margin-right: auto;
   text-decoration: none;
-
   color: rgb(36, 58, 90);
 `;
 
@@ -438,6 +400,7 @@ const NavItemWrapper = styled.li<Partial<SingleNavItem>>`
     margin-right: 2rem;
   }
 `;
+
 const NavbarContainer = styled.div<NavbarContainerProps>`
   position: sticky;
   top: 0;
@@ -468,7 +431,6 @@ const Content = styled(Container)`
   align-items: center;
   margin: 0 auto;
   font-size: 2rem;
-  /* color: white; */
   div {
     display: flex;
   }
@@ -484,10 +446,8 @@ const Content = styled(Container)`
     }
   }
   span {
-    /* color: white; */
     display: flex;
     align-items: center;
-    /* margin-left: 1rem; */
     font-size: 3rem;
     @media (max-width: 1040px) {
       font-size: 2rem;
