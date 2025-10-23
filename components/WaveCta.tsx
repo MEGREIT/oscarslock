@@ -1,16 +1,16 @@
 import NextLink from "next/link";
 import styled from "styled-components";
-import Button from "components/Button";
+// import Button from "components/Button"; // Unused
 import ButtonGroup from "components/ButtonGroup";
-import Container from "components/Container";
-import SectionTitle from "components/SectionTitle";
-import { useNewsletterModalContext } from "contexts/newsletter-modal.context";
+// import Container from "components/Container"; // Unused
+import SectionTitle from "components/SectionTitle"; // Unused by WaveCta, but used by Title
+// import { useNewsletterModalContext } from "contexts/newsletter-modal.context"; // Unused
 import { media } from "utils/media";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
-import { height } from "./OpenGraphImage";
-import { WhatsappIcon } from "./WhatsappIcon";
-import { useRouter } from "next/router";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; // Unused
+// import { faWhatsapp } from "@fortawesome/free-brands-svg-icons"; // Unused
+// import { height } from "./OpenGraphImage"; // Unused
+// import { WhatsappIcon } from "./WhatsappIcon"; // Unused
+// import { useRouter } from "next/router"; // Unused
 
 const Link = styled.button`
   display: flex;
@@ -37,19 +37,24 @@ const Link = styled.button`
   }
 `;
 
-export default function WaveCta(city: any) {
-  const { setIsModalOpened } = useNewsletterModalContext();
-  const router = useRouter();
+// 1. Fixed the function to correctly receive props by destructuring { city }
+//    and added a basic type for it.
+export default function WaveCta({ city }: { city?: string }) {
+  // const { setIsModalOpened } = useNewsletterModalContext(); // This was not being used
+  // const router = useRouter(); // This was not being used
+
+  // 2. Created safe href logic to prevent the '//contact' bug.
+  //    This checks if 'city' exists AND isn't just a slash.
+  const cityPath = city && city !== "/" ? `/${city}` : "";
+  const contactHref = `${cityPath}/contact`;
 
   return (
     <>
       <CtaWrapper>
         <div className="flex flex-col space-y-4">
           <ButtonGroup>
-            <NextLink
-              href={city === "" ? `/contact` : `/${city.city}/contact`}
-              passHref
-            >
+            {/* 3. Used the new, safe 'contactHref' variable */}
+            <NextLink href={contactHref} passHref>
               <Link>Contact Us</Link>
             </NextLink>
           </ButtonGroup>
