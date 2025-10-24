@@ -108,12 +108,12 @@ export default function Footer({ currentCity }: any) {
             </Copyright>
           </div>
           <div>
-            <Copyright>
-              <p className="text-center text-3xl w-[250px]">
-                oscar@oscarslock.com
-              </p>
-            </Copyright>
-          </div>
+  <Copyright>
+    <span className="text-center text-3xl w-[250px]"> {/* <--- CORRECTED opening tag */}
+      oscar@oscarslock.com
+    </span> {/* <--- Correct closing tag */}
+  </Copyright>
+</div>
         </BottomBar>
       </FooterContainer>
     </FooterWrapper>
