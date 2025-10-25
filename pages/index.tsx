@@ -64,7 +64,7 @@ export default function Homepage({
           content="Reliable locksmith service offering residential, commercial, and automotive lock solutions. Get fast, secure assistance for emergencies, lock changes, key replacements, and high-security systems. Licensed, bonded, and insured professionals serving your security needs."
         />
       </Head>
-      #<GoogleScript />
+      <GoogleScript />
       <HomepageWrapper>
         <Slider />
         <WhiteBackgroundContainer>
