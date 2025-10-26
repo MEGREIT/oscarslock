@@ -1,14 +1,18 @@
 import styled from "styled-components";
 import NextLink from "next/link";
-import { getCityPhone } from "@/utils/getCityPhone";
+import { getCityPhone } from "@/utils/getCityPhone"; // Assuming this is still needed for city-specific numbers
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
-function formatToPhone(number: string) {
+// --- Phone Formatting Helpers (moved outside component) ---
+function formatToPhone(number: string | number | undefined | null): string {
+  const defaultFormatted = '(800) 687-0480';
+  if (number === null || number === undefined) return defaultFormatted;
   const cleaned = number.toString().replace(/\D/g, "");
 
   if (cleaned.length !== 10) {
-    throw new Error("Phone number must be exactly 10 digits.");
+    console.error("Invalid phone number length:", number);
+    return defaultFormatted; // Return default if invalid length
   }
 
   const areaCode = cleaned.slice(0, 3);
@@ -18,56 +22,66 @@ function formatToPhone(number: string) {
   return `(${areaCode}) ${prefix}-${lineNumber}`;
 }
 
-function removeHyphens(numberString: string) {
-  return numberString.replace(/-/g, "");
+function removeHyphens(numberString: string | number | undefined | null): string {
+  const defaultRaw = '8006870480';
+  if (numberString === null || numberString === undefined) return defaultRaw;
+  return numberString.toString().replace(/-/g, "");
 }
+// --- End Phone Formatting Helpers ---
 
 export default function CallUsNowBtn() {
   const router = useRouter();
-  const { city } = router.query;
-  const [phone, setPhone] = useState<string>("5087367178");
+  const { city } = router.query; // Get city slug from query parameters
+
+  // --- Set Correct Default Phone Number ---
+  const defaultPhoneNumber = "8006870480";
+  const [phone, setPhone] = useState<string>(defaultPhoneNumber);
+  // --- End Default Phone Number ---
+
   const [isMobile, setIsMobile] = useState(false);
 
+  // Effect to check screen size
   useEffect(() => {
     const checkIfMobile = () => {
-      setIsMobile(window.innerWidth <= 767);
+      // Check if window exists (client-side) before accessing innerWidth
+      if (typeof window !== 'undefined') {
+        setIsMobile(window.innerWidth <= 767);
+      }
     };
-
-    // Initial check
     checkIfMobile();
-    
-    // Add event listener for resize
     window.addEventListener('resize', checkIfMobile);
-    
-    // Cleanup
     return () => window.removeEventListener('resize', checkIfMobile);
   }, []);
 
+  // Effect to update phone based on city, fallback to default
   useEffect(() => {
+    let phoneNumberToSet = defaultPhoneNumber; // Start with default
     if (typeof city === "string") {
-      const phoneNumber = getCityPhone(city);
-      setPhone(phoneNumber || "5087367178");
-    } else {
-      setPhone("5087367178");
+      const cityPhoneNumber = getCityPhone(city); // Check if city has specific number
+      if (cityPhoneNumber) {
+        phoneNumberToSet = cityPhoneNumber;
+      }
     }
-  }, [city]);
+    setPhone(phoneNumberToSet);
+  }, [city]); // Re-run only when city changes
 
+  // Only render the button on mobile
   if (!isMobile) return null;
 
   return (
     <FixedBottomContainer>
-      <NextLink href={`tel:${removeHyphens(phone)}`} passHref>
-        <CallNowButton>
-          <CallNowText>
-            <CallNowLabel>Call Now</CallNowLabel>
-            <PhoneNumber>{formatToPhone(phone)}</PhoneNumber>
-          </CallNowText>
-        </CallNowButton>
-      </NextLink>
+      {/* Use NextLink for client-side navigation consistency if needed, otherwise <a> is fine for tel: */}
+      <CallNowButton href={`tel:${removeHyphens(phone)}`}>
+        <CallNowText>
+          <CallNowLabel>Call Now</CallNowLabel>
+          <PhoneNumber>{formatToPhone(phone)}</PhoneNumber>
+        </CallNowText>
+      </CallNowButton>
     </FixedBottomContainer>
   );
 }
 
+// --- Styled Components (remain the same) ---
 const FixedBottomContainer = styled.div`
   position: fixed;
   bottom: 0;
@@ -77,7 +91,7 @@ const FixedBottomContainer = styled.div`
   padding: 15px 0;
   background-color: #751318;
   text-align: center;
-  display: block !important;
+  display: block !important; /* Ensure it displays, overriding potential external styles */
   box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
 `;
 
@@ -111,5 +125,5 @@ const PhoneNumber = styled.span`
   font-size: 1.8rem;
   font-weight: 800;
   letter-spacing: 0.5px;
-  font-family: 'Arial', sans-serif;
+  font-family: 'Arial', sans-serif; // Consider using a project font if available
 `;
