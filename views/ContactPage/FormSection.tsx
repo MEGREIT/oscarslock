@@ -49,19 +49,17 @@ export default function FormSection() {
     };
 
     return (
-        // Added padding to the outer div for better spacing on small screens
         <FormContainer>
             <FormWrapper onSubmit={handleSubmit}>
                 <h2>Contact Us</h2>
                 {success && <SuccessMsg>{success}</SuccessMsg>}
                 {error && <ErrorMsg>{error}</ErrorMsg>}
 
-                {/* Added Labels */}
                 <Label htmlFor="contact-name">Your Name</Label>
                 <Input
-                    id="contact-name" // Match label htmlFor
+                    id="contact-name"
                     type="text"
-                    placeholder="Enter your name" // Placeholder is now a hint
+                    placeholder="Enter your name"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     required
@@ -106,87 +104,81 @@ export default function FormSection() {
 
 // --- Styles ---
 
-// New container for padding
 const FormContainer = styled.div`
-    padding: 1rem; // Add padding around the form
+    padding: 1rem;
     width: 100%;
     display: flex;
-    justify-content: center; // Center the form wrapper
+    justify-content: center;
 `;
 
-
-// --- Increase max-width for larger form ---
 const FormWrapper = styled.form`
     display: flex;
     flex-direction: column;
-    max-width: 700px; /* Increased width */
-    width: 100%; /* Ensure it takes available width up to max-width */
-    margin: 2rem auto; /* Center the form */
-    padding: 2rem; /* Add padding inside the form */
-    background-color: #f9f9f9; /* Optional: Light background for contrast */
-    border-radius: 8px; /* Optional: Rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Subtle shadow */
-    gap: 0.75rem; /* Gap between label and input */
+    max-width: 700px;
+    width: 100%;
+    margin: 2rem auto;
+    padding: 2.5rem; /* Slightly more padding */
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    gap: 0.8rem; /* Adjusted gap */
 
     h2 {
-        font-size: 2.25rem; /* Larger heading */
-        margin-bottom: 1.5rem;
+        font-size: 2.5rem; /* Larger heading */
+        margin-bottom: 2rem;
         text-align: center;
         color: #15233e;
     }
 `;
 
-// New Label style
 const Label = styled.label`
-    font-size: 1rem;
+    font-size: 1.1rem; /* Increased label size */
     font-weight: 600;
-    color: #333; // Darker label text
-    margin-bottom: 0.25rem; // Space below label
+    color: #333;
+    margin-bottom: 0.3rem;
 `;
 
-
-// --- Increase padding and font-size for inputs ---
 const Input = styled.input`
-    padding: 0.9rem 1rem; /* Adjusted padding */
-    font-size: 1rem; /* Standard font size */
+    padding: 1rem 1.1rem; /* Adjusted padding */
+    font-size: 1.1rem; /* Increased font size */
     border: 1px solid #ccc;
     border-radius: 4px;
-    width: 100%; // Ensure full width
-    margin-bottom: 0.75rem; // Space below input
+    width: 100%;
+    margin-bottom: 0.8rem;
 
     &::placeholder {
-        color: #999; // Lighter placeholder text
+        color: #999;
+        font-size: 1.1rem; /* Increased placeholder size */
     }
 `;
 
-// --- Increase padding and font-size for textarea ---
 const TextArea = styled.textarea`
-    padding: 0.9rem 1rem; /* Adjusted padding */
-    font-size: 1rem; /* Standard font size */
+    padding: 1rem 1.1rem; /* Adjusted padding */
+    font-size: 1.1rem; /* Increased font size */
     border: 1px solid #ccc;
     border-radius: 4px;
-    min-height: 150px;
+    min-height: 160px; /* Taller */
     resize: vertical;
-    width: 100%; // Ensure full width
-    margin-bottom: 0.75rem; // Space below input
+    width: 100%;
+    margin-bottom: 0.8rem;
 
      &::placeholder {
-        color: #999; // Lighter placeholder text
+        color: #999;
+        font-size: 1.1rem; /* Increased placeholder size */
     }
 `;
 
-// --- Style submit button ---
 const SubmitButton = styled.button`
-    padding: 1rem 1.5rem; /* Adjusted padding */
+    padding: 1.1rem 1.5rem; /* Adjusted padding */
     background-color: #751318;
     color: white;
-    font-size: 1.1rem;
+    font-size: 1.2rem; /* Increased button text size */
     font-weight: bold;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.2s;
-    margin-top: 1rem; // Add space above button
+    margin-top: 1rem;
 
     &:hover:not(:disabled) {
         background-color: #5e0a0a;
@@ -201,13 +193,13 @@ const SubmitButton = styled.button`
 const SuccessMsg = styled.p`
     color: green;
     text-align: center;
-    font-size: 1rem;
+    font-size: 1rem; // Kept message size standard
     margin-bottom: 1rem;
 `;
 
 const ErrorMsg = styled.p`
     color: red;
     text-align: center;
-    font-size: 1rem;
+    font-size: 1rem; // Kept message size standard
     margin-bottom: 1rem;
 `;
