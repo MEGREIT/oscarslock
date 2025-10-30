@@ -1,4 +1,6 @@
+import Image from "next/image";
 import React, { useState } from "react";
+import { height } from './OpenGraphImage';
 
 export default function GalleryComponent() {
   // Generate an array of image paths
@@ -84,10 +86,12 @@ function GalleryTile({ src, index }: { src: string; index: number }) {
       {!isLoaded && (
         <div className="absolute inset-0 rounded-lg animate-pulse bg-gray-200" />
       )}
-      <img
+      <Image
         src={src}
+        width={100}
         alt="Gallery Image"
         loading="lazy"
+        height={100}
         decoding="async"
         fetchPriority={index < 6 ? "high" : "auto"}
         sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
