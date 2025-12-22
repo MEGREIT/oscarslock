@@ -1,0 +1,1932 @@
+{
+  "hcms_cities":[
+    {
+      "id": 1,
+      "subdomain": "ashland",
+      "city": "Ashland, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 2,
+      "subdomain": "auburn",
+      "city": "Auburn, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 3,
+      "subdomain": "bellingham",
+      "city": "Bellingham, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 4,
+      "subdomain": "berlin",
+      "city": "Berlin, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 5,
+      "subdomain": "blackstone",
+      "city": "Blackstone, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 6,
+      "subdomain": "bolton",
+      "city": "Bolton, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 7,
+      "subdomain": "boylston",
+      "city": "Boylston, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 8,
+      "subdomain": "brookfield",
+      "city": "Brookfield, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 9,
+      "subdomain": "charlton",
+      "city": "Charlton, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 10,
+      "subdomain": "clinton",
+      "city": "Clinton, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 11,
+      "subdomain": "douglas",
+      "city": "Douglas, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 12,
+      "subdomain": "dudley",
+      "city": "Dudley, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 13,
+      "subdomain": "eastbrookfield",
+      "city": "East Brookfield, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 14,
+      "subdomain": "framingham",
+      "city": "Framingham, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 15,
+      "subdomain": "franklin",
+      "city": "Franklin, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 16,
+      "subdomain": "gardner",
+      "city": "Gardner, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 17,
+      "subdomain": "grafton",
+      "city": "Grafton, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 18,
+      "subdomain": "holden",
+      "city": "Holden, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 19,
+      "subdomain": "holland",
+      "city": "Holland, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 20,
+      "subdomain": "holliston",
+      "city": "Holliston, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 21,
+      "subdomain": "hopedale",
+      "city": "Hopedale, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 22,
+      "subdomain": "hopkinton",
+      "city": "Hopkinton, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 23,
+      "subdomain": "hudson",
+      "city": "Hudson, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 24,
+      "subdomain": "lancaster",
+      "city": "Lancaster, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 25,
+      "subdomain": "leicester",
+      "city": "Leicester, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 26,
+      "subdomain": "leominster",
+      "city": "Leominster, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 27,
+      "subdomain": "marlborough",
+      "city": "Marlborough, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 28,
+      "subdomain": "medway",
+      "city": "Medway, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 29,
+      "subdomain": "mendon",
+      "city": "Mendon, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 30,
+      "subdomain": "milford",
+      "city": "Milford, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 31,
+      "subdomain": "millbury",
+      "city": "Millbury, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 32,
+      "subdomain": "millville",
+      "city": "Millville, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 33,
+      "subdomain": "north-brookfield",
+      "city": "North Brookfield, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 34,
+      "subdomain": "northborough",
+      "city": "Northborough, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 35,
+      "subdomain": "northbridge",
+      "city": "Northbridge, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 36,
+      "subdomain": "oxford",
+      "city": "Oxford, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 37,
+      "subdomain": "rutland",
+      "city": "Rutland, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 38,
+      "subdomain": "shrewsbury",
+      "city": "Shrewsbury, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 39,
+      "subdomain": "southborough",
+      "city": "Southborough, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 40,
+      "subdomain": "southbridge",
+      "city": "Southbridge, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 41,
+      "subdomain": "spencer",
+      "city": "Spencer, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 42,
+      "subdomain": "sterling",
+      "city": "Sterling, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 43,
+      "subdomain": "sturbridge",
+      "city": "Sturbridge, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 44,
+      "subdomain": "sutton",
+      "city": "Sutton, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 45,
+      "subdomain": "upton",
+      "city": "Upton, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 46,
+      "subdomain": "uxbridge",
+      "city": "Uxbridge, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 47,
+      "subdomain": "webster",
+      "city": "Webster, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 48,
+      "subdomain": "west-boylston",
+      "city": "West Boylston, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 49,
+      "subdomain": "westborough",
+      "city": "Westborough, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 50,
+      "subdomain": "westminster",
+      "city": "Westminster, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 51,
+      "subdomain": "worcester",
+      "city": "Worcester, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 52,
+      "subdomain": "acton",
+      "city": "Acton, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 53,
+      "subdomain": "attleboro",
+      "city": "Attleboro, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 54,
+      "subdomain": "bedford",
+      "city": "Bedford, MA",
+      "phone": "617-949-9530",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 55,
+      "subdomain": "billerica",
+      "city": "Billerica, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 56,
+      "subdomain": "chelmsford",
+      "city": "Chelmsford, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 57,
+      "subdomain": "concord",
+      "city": "Concord, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 58,
+      "subdomain": "fitchburg",
+      "city": "Fitchburg, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 59,
+      "subdomain": "foxborough",
+      "city": "Foxborough, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 60,
+      "subdomain": "littleton",
+      "city": "Littleton, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 61,
+      "subdomain": "lunenburg",
+      "city": "Lunenburg, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 62,
+      "subdomain": "maynard",
+      "city": "Maynard, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 63,
+      "subdomain": "medfield",
+      "city": "Medfield, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 64,
+      "subdomain": "natick",
+      "city": "Natick, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 65,
+      "subdomain": "needham",
+      "city": "Needham, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 66,
+      "subdomain": "north-attleborough",
+      "city": "North Attleborough, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 67,
+      "subdomain": "norton",
+      "city": "Norton, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 68,
+      "subdomain": "norwood",
+      "city": "Norwood, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 69,
+      "subdomain": "stoughton",
+      "city": "Stoughton, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 70,
+      "subdomain": "sudbury",
+      "city": "Sudbury, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 71,
+      "subdomain": "walpole",
+      "city": "Walpole, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 72,
+      "subdomain": "wayland",
+      "city": "Wayland, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 73,
+      "subdomain": "wellesley",
+      "city": "Wellesley, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 74,
+      "subdomain": "westford",
+      "city": "Westford, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 75,
+      "subdomain": "whitinsville",
+      "city": "Whitinsville, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 76,
+      "subdomain": "wrentham",
+      "city": "Wrentham, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 77,
+      "subdomain": "barrington",
+      "city": "Barrington, RI",
+      "phone": "401-440-8626",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 78,
+      "subdomain": "burrillville",
+      "city": "Burrillville RI",
+      "phone": "401-440-8626",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 79,
+      "subdomain": "centralfalls",
+      "city": "Central Falls RI",
+      "phone": "401-440-8626",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 80,
+      "subdomain": "coventry",
+      "city": "Coventry RI",
+      "phone": "401-440-8626",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 81,
+      "subdomain": "cranston",
+      "city": "Cranston RI",
+      "phone": "401-440-8626",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 82,
+      "subdomain": "cumberland",
+      "city": "Cumberland RI",
+      "phone": "401-440-8626",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 83,
+      "subdomain": "eastgreenwich",
+      "city": "East Greenwich RI",
+      "phone": "401-440-8626",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 84,
+      "subdomain": "eastprovidence",
+      "city": "East Providence RI",
+      "phone": "401-440-8626",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 85,
+      "subdomain": "johnston",
+      "city": "Johnston RI",
+      "phone": "401-440-8626",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 86,
+      "subdomain": "lincoln",
+      "city": "Lincoln RI",
+      "phone": "401-440-8626",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 87,
+      "subdomain": "northprovidence",
+      "city": "North Providence RI ",
+      "phone": "401-440-8626",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 88,
+      "subdomain": "northsmithfield",
+      "city": "North Smithfield RI",
+      "phone": "401-440-8626",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 89,
+      "subdomain": "pawtucket",
+      "city": "Pawtucket RI",
+      "phone": "401-440-8626",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 90,
+      "subdomain": "providence",
+      "city": "Providence RI",
+      "phone": "401-440-8626",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 91,
+      "subdomain": "scituate",
+      "city": "Scituate RI",
+      "phone": "(401) 440-8626",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 92,
+      "subdomain": "smithfield",
+      "city": "Smithfield RI",
+      "phone": "401-440-8626",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 93,
+      "subdomain": "warwick",
+      "city": "Warwick RI",
+      "phone": "401-440-8626",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 94,
+      "subdomain": "westwarwick",
+      "city": "West Warwick RI",
+      "phone": "401-440-8626",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 95,
+      "subdomain": "woonsocket",
+      "city": "Woonsocket RI",
+      "phone": "401-440-8626",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 96,
+      "subdomain": "warren",
+      "city": "Warren RI",
+      "phone": "401-440-8626",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 97,
+      "subdomain": "abington",
+      "city": "Abington MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 98,
+      "subdomain": "amesbury",
+      "city": "Amesbury MA",
+      "phone": "617-949-9530",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 99,
+      "subdomain": "andover",
+      "city": "Andover MA",
+      "phone": "617-949-9530",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 100,
+      "subdomain": "arlington",
+      "city": "Arlington, MA",
+      "phone": "617-949-9530",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 101,
+      "subdomain": "belmont",
+      "city": "Belmont, MA",
+      "phone": "617-949-9530",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 102,
+      "subdomain": "boston",
+      "city": "Boston, MA",
+      "phone": "617-949-9530",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 103,
+      "subdomain": "boxford",
+      "city": "Boxford, MA",
+      "phone": "617-949-9530",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 104,
+      "subdomain": "braintree",
+      "city": "Braintree, MA",
+      "phone": "617-949-9530",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 105,
+      "subdomain": "bridgewater",
+      "city": "Bridgewater, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 106,
+      "subdomain": "brockton",
+      "city": "Brockton, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 107,
+      "subdomain": "brookline",
+      "city": "Brookline, MA",
+      "phone": "617-949-9530",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 108,
+      "subdomain": "burlington",
+      "city": "Burlington MA",
+      "phone": "617-949-9530",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 109,
+      "subdomain": "cambridge",
+      "city": "Cambridge MA",
+      "phone": "617-949-9530",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 110,
+      "subdomain": "carlisle",
+      "city": "Carlisle, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 111,
+      "subdomain": "charlestown",
+      "city": "Charlestown MA",
+      "phone": "617-949-9530",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 112,
+      "subdomain": "dedham",
+      "city": "Dedham, MA",
+      "phone": "617-949-9530",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 113,
+      "subdomain": "dracut",
+      "city": "Dracut, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 114,
+      "subdomain": "eastbridgewater",
+      "city": "East Bridgewater MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 115,
+      "subdomain": "georgetown",
+      "city": "Georgetown MA",
+      "phone": "617-949-9530",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 116,
+      "subdomain": "groton",
+      "city": "Groton, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 117,
+      "subdomain": "groveland",
+      "city": "Groveland, MA",
+      "phone": "617-949-9530",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 118,
+      "subdomain": "hanson",
+      "city": "Hanson, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 119,
+      "subdomain": "hingham",
+      "city": "Hingham, MA",
+      "phone": "617-949-9530",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 120,
+      "subdomain": "lakeville",
+      "city": "Lakeville, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 121,
+      "subdomain": "lawrence",
+      "city": "Lawrence, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 122,
+      "subdomain": "malden",
+      "city": "Malden, MA",
+      "phone": "617-949-9530",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 123,
+      "subdomain": "medford",
+      "city": "Medford, MA",
+      "phone": "617-949-9530",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 124,
+      "subdomain": "melrose",
+      "city": "Melrose, MA",
+      "phone": "617-949-9530",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 125,
+      "subdomain": "merrimack",
+      "city": "Merrimack, MA",
+      "phone": "617-949-9530",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 126,
+      "subdomain": "methuen",
+      "city": "Methuen, MA",
+      "phone": "617-949-9530",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 127,
+      "subdomain": "middleborough",
+      "city": "Middleborough, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 128,
+      "subdomain": "middleton",
+      "city": "Middleton, MA",
+      "phone": "617-949-9530",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 129,
+      "subdomain": "milton",
+      "city": "Milton, MA",
+      "phone": "617-949-9530",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 130,
+      "subdomain": "newton",
+      "city": "Newton, MA",
+      "phone": "617-949-9530",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 131,
+      "subdomain": "northandover",
+      "city": "North Andover, MA",
+      "phone": "617-949-9530",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 132,
+      "subdomain": "northreading",
+      "city": "North Reading, MA",
+      "phone": "617-949-9530",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 133,
+      "subdomain": "norwell",
+      "city": "Norwell, MA",
+      "phone": "617-949-9530",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 134,
+      "subdomain": "pepperell",
+      "city": "Pepperell, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 135,
+      "subdomain": "plymouth",
+      "city": "Plymouth, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 136,
+      "subdomain": "quincy",
+      "city": "Quincy, MA",
+      "phone": "617-949-9530",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 137,
+      "subdomain": "randolph",
+      "city": "Randolph, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 138,
+      "subdomain": "raynham",
+      "city": "Raynham, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 139,
+      "subdomain": "reading",
+      "city": "Reading, MA",
+      "phone": "617-949-9530",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 140,
+      "subdomain": "rehoboth",
+      "city": "Rehoboth, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 141,
+      "subdomain": "rockland",
+      "city": "Rockland, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 142,
+      "subdomain": "seekonk",
+      "city": "Seekonk, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 143,
+      "subdomain": "sharon",
+      "city": "Sharon, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 144,
+      "subdomain": "somerville",
+      "city": "Somerville, MA",
+      "phone": "617-949-9530",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 145,
+      "subdomain": "southboston",
+      "city": "South Boston, MA",
+      "phone": "617-949-9530",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 146,
+      "subdomain": "stoneham",
+      "city": "Stoneham, MA",
+      "phone": "617-949-9530",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 147,
+      "subdomain": "taunton",
+      "city": "Taunton, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 148,
+      "subdomain": "tewksbury",
+      "city": "Tewksbury, MA",
+      "phone": "617-949-9530",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 149,
+      "subdomain": "topsfield",
+      "city": "Topsfield, MA",
+      "phone": "617-949-9530",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 150,
+      "subdomain": "tyngsborough",
+      "city": "Tyngsborough, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 151,
+      "subdomain": "wakefield",
+      "city": "Wakefield, MA",
+      "phone": "617-949-9530",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 152,
+      "subdomain": "waltham",
+      "city": "Waltham, MA",
+      "phone": "617-949-9530",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 153,
+      "subdomain": "watertown",
+      "city": "Watertown, MA",
+      "phone": "617-949-9530",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 154,
+      "subdomain": "weymouth",
+      "city": "Weymouth, MA",
+      "phone": "617-949-9530",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 155,
+      "subdomain": "willmington",
+      "city": "Willmington, MA",
+      "phone": "617-949-9530",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 156,
+      "subdomain": "winchester",
+      "city": "Winchester, MA",
+      "phone": "617-949-9530",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 157,
+      "subdomain": "woburn",
+      "city": "Woburn, MA",
+      "phone": "617-949-9530",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 158,
+      "subdomain": "plaistow",
+      "city": "Plaistow, NH",
+      "phone": "603-573-5161",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 159,
+      "subdomain": "salem",
+      "city": "Salem, NH",
+      "phone": "603-573-5161",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 160,
+      "subdomain": "sandown",
+      "city": "Sandown, NH",
+      "phone": "603-573-5161",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 161,
+      "subdomain": "swanzey",
+      "city": "Swanzey, NH",
+      "phone": "603-573-5161",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 162,
+      "subdomain": "wilton",
+      "city": "Wilton, NH",
+      "phone": "603-573-5161",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 163,
+      "subdomain": "windham",
+      "city": "Windham, NH",
+      "phone": "603-573-5161",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 164,
+      "subdomain": "amherst",
+      "city": "Amherst, NH",
+      "phone": "603-573-5161",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 165,
+      "subdomain": "atkinson",
+      "city": "Atkinson, NH",
+      "phone": "603-573-5161",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 166,
+      "subdomain": "bedford",
+      "city": "Bedford, NH",
+      "phone": "603-573-5161",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 167,
+      "subdomain": "chester",
+      "city": "Chester, NH",
+      "phone": "603-573-5161",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 168,
+      "subdomain": "derry",
+      "city": "Derry, NH",
+      "phone": "603-573-5161",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 169,
+      "subdomain": "goffstown",
+      "city": "Goffstown, NH",
+      "phone": "603-573-5161",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 170,
+      "subdomain": "hampstead",
+      "city": "Hampstead, NH",
+      "phone": "603-573-5161",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 171,
+      "subdomain": "hollis",
+      "city": "Hollis, NH",
+      "phone": "603-573-5161",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 172,
+      "subdomain": "hudson",
+      "city": "Hudson, NH",
+      "phone": "603-573-5161",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 173,
+      "subdomain": "jaffrey",
+      "city": "Jaffrey, NH",
+      "phone": "603-573-5161",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 174,
+      "subdomain": "keene",
+      "city": "Keene, NH",
+      "phone": "603-573-5161",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 175,
+      "subdomain": "litchfield",
+      "city": "Litchfield, NH",
+      "phone": "603-573-5161",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 176,
+      "subdomain": "londonderry",
+      "city": "Londonderry, NH",
+      "phone": "603-573-5161",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 177,
+      "subdomain": "manchesternh",
+      "city": "Manchester, NH",
+      "phone": "603-573-5161",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 178,
+      "subdomain": "milford",
+      "city": "Milford, NH",
+      "phone": "603-573-5161",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 179,
+      "subdomain": "nashua",
+      "city": "Nashua, NH",
+      "phone": "603-573-5161",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 180,
+      "subdomain": "newboston",
+      "city": "New Boston, NH",
+      "phone": "603-573-5161",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 181,
+      "subdomain": "newipswich",
+      "city": "New Ipswich, NH",
+      "phone": "603-573-5161",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 182,
+      "subdomain": "carnston",
+      "city": "Carnston, RI",
+      "phone": "401-440-8626",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 183,
+      "subdomain": "lexington",
+      "city": "Lexington, MA",
+      "phone": "617-949-9530",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 184,
+      "subdomain": "haverhill",
+      "city": "Haverhill, MA",
+      "phone": "617-949-9530",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 185,
+      "subdomain": "lowell",
+      "city": "Lowell, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 186,
+      "subdomain": "westboylston",
+      "city": "West boylston, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 187,
+      "subdomain": "northattleborough",
+      "city": "North Attleborough, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+
+{
+      "id": 188,
+      "subdomain": "Pelham",
+      "city": "Pelham, NH",
+      "phone": "603-573-5161",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+
+{
+      "id": 189,
+      "subdomain": "Peterborough",
+      "city": "Peterborough, NH",
+      "phone": "603-573-5161",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+{
+      "id": 190,
+      "subdomain": "boxborough",
+      "city": "Boxborough, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+
+{
+      "id": 191,
+      "subdomain": "Wareham",
+      "city": "Wareham, MA",
+      "phone": "508-736-7178",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    },
+    {
+      "id": 192,
+      "subdomain": "manchester",
+      "city": "Manchester, MA",
+      "phone": "617-949-9530",
+      "coordinates": {
+        "longitude": 0,
+        "latitude": 0
+      }
+    }
+
+]
+}
+
+
+
+
