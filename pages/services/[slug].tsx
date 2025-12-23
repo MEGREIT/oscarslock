@@ -34,13 +34,20 @@ const STATIC_SERVICES_LIST = [
 ];
 
 const STATIC_SERVICES_DATA: Record<string, any> = {
-  // --- NEW PICS (From your service-bg folder) ---
   residential: {
     title: "Residential Locksmith",
     heroImage: "/service-bg/residential.png", 
     slug: { current: "residential" }, 
     description: "Complete residential locksmith services for your home security.",
     fullText: "We provide comprehensive residential locksmith services including lockouts, rekeying, and lock installation to keep your home safe. Our expert technicians are available to ensure your family's security with high-quality locks and precision installation.",
+  },
+  commercial: {
+    title: "Commercial Locksmith",
+    // --- FIXED PATH: Now pointing to 'service-bg' folder ---
+    heroImage: "/service-bg/commercial.png", 
+    slug: { current: "commercial" }, 
+    description: "Professional security solutions for businesses and offices.",
+    fullText: "Our commercial services ensure your business is secure with high-security locks, master key systems, and access control. We understand the unique security needs of businesses and offer tailored solutions to protect your assets.",
   },
   automotive: {
     title: "Automotive Locksmith",
@@ -70,15 +77,6 @@ const STATIC_SERVICES_DATA: Record<string, any> = {
     description: "Safe opening, repair, and installation.",
     fullText: "Expert safe opening and repair services for your valuables. We can help with forgotten combinations, malfunctioning digital locks, and professional installation of new safes.",
   },
-
-  // --- OLD PICS (Using the images that were already working) ---
-  commercial: {
-    title: "Commercial Locksmith",
-    heroImage: "/service/commercial.png", // Using the icon/image from your Grid
-    slug: { current: "commercial" }, 
-    description: "Professional security solutions for businesses and offices.",
-    fullText: "Our commercial services ensure your business is secure with high-security locks, master key systems, and access control. We understand the unique security needs of businesses and offer tailored solutions to protect your assets.",
-  },
   coupons: {
     title: "Coupons",
     heroImage: "/service/coupons.png", 
@@ -100,7 +98,8 @@ export default function ServiceSlugRoute(props: ServiceProps) {
   const { service } = props;
   
   if (router.isFallback) return <div>Loading...</div>;
-  
+  if (!service) return <div>Loading...</div>;
+
   return (
     <Page
       title={service.title}
@@ -144,6 +143,16 @@ export const getServerSideProps: GetServerSideProps<ServiceProps, Query> = async
   const { draftMode = false, params = {} } = ctx;
   const slug = params.slug as string;
   const service = STATIC_SERVICES_DATA[slug];
-  if (!service) return { notFound: true };
-  return { props: { service, draftMode, token: "" } };
+  
+  if (service) {
+    return { props: { service, draftMode, token: "" } };
+  }
+
+  return { 
+    props: { 
+      service: STATIC_SERVICES_DATA['residential'], 
+      draftMode, 
+      token: "" 
+    } 
+  };
 };
