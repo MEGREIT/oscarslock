@@ -1,11 +1,13 @@
 import React from "react";
+// --- FIXED IMPORTS BELOW ---
 import { SharedPageProps } from "../../../pages/_app"; 
+import { PaymentBox, PaymentContainer, WhiteBackgroundContainer } from "../../../pages/index"; 
+// ---------------------------
 import styled from "styled-components";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import ServicesGrid from "@/components/ServicesGrid";
 import Page from "@/components/Page";
-import { PaymentBox, PaymentContainer, WhiteBackgroundContainer } from "../../..";
 import TextBubble from "@/components/TextBubble";
 import ServiceCTA from "@/views/HomePage/ServiceCTA";
 import PhoneBtn from "@/components/PhoneBtn";
@@ -23,7 +25,7 @@ const ServiceContainer = styled(WhiteBackgroundContainer)`
   padding-top: 0rem;
 `;
 
-// --- STATIC DATA (Same as the main page) ---
+// --- STATIC DATA ---
 const STATIC_SERVICES_LIST = [
   { title: "Residential", slug: { current: "residential" } },
   { title: "Commercial", slug: { current: "commercial" } },
@@ -45,7 +47,6 @@ const STATIC_SERVICES_DATA: Record<string, any> = {
   },
   commercial: {
     title: "Commercial Locksmith",
-    // --- FIXED PATH: Pointing to 'service-bg' folder ---
     heroImage: "/service-bg/commercial.png", 
     slug: { current: "commercial" }, 
     description: "Professional security solutions for businesses and offices.",
@@ -102,7 +103,6 @@ export default function ServiceSlugRoute(props: ServiceProps) {
   if (router.isFallback) return <div>Loading...</div>;
   if (!service) return <div>Loading...</div>;
 
-  // We add the City Name to the title if it exists
   const displayTitle = city 
     ? `${service.title} in ${city.charAt(0).toUpperCase() + city.slice(1)}` 
     : service.title;
