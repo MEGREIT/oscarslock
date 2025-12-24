@@ -26,10 +26,33 @@ const STATIC_SERVICES = [
   { title: "Coupons", slug: { current: "coupons" } },         // 8. Ticket Icon
 ];
 
+// --- RESTORED REVIEWS (Hardcoded so they always show up) ---
 const STATIC_TESTIMONIALS = [
-  { fullName: "John Doe", rating: 5, testimonial: "Excellent service!" },
-  { fullName: "Sarah Smith", rating: 5, testimonial: "Very professional." },
-  { fullName: "Michael B.", rating: 5, testimonial: "Great experience." },
+  { 
+    fullName: "Jennifer M.", 
+    rating: 5, 
+    testimonial: "Oscar's Lock & Key saved the day! I was locked out of my car with my groceries melting in the heat. They arrived in 20 minutes and got me back on the road instantly. Highly recommended!" 
+  },
+  { 
+    fullName: "David R.", 
+    rating: 5, 
+    testimonial: "Very professional service. We needed to rekey our entire office building after a security concern. The team was efficient, polite, and gave us a great price. Will definitely use them again." 
+  },
+  { 
+    fullName: "Sarah Jenkins", 
+    rating: 5, 
+    testimonial: "I lost my house keys late at night and was panicking. Called these guys and they were there so fast. The technician was super friendly and made me feel safe. Thank you so much!" 
+  },
+  { 
+    fullName: "Mike T.", 
+    rating: 5, 
+    testimonial: "Great experience with their safe opening service. I inherited an old safe and couldn't get it open. They opened it without damaging it. True experts." 
+  },
+  { 
+    fullName: "Emily Chen", 
+    rating: 5, 
+    testimonial: "Fast, reliable, and affordable. I've used them for both my car and my apartment. Best locksmith in town hands down." 
+  }
 ];
 
 export default function Homepage({
@@ -92,7 +115,7 @@ export const WhiteBackgroundContainer = styled.div`background: rgb(255, 255, 255
 export const MapContainer = styled.div`display: flex; flex-direction: row; max-width: 60vw; align-items: center; padding: 0 0rem; justify-content: space-between; align-items: center; ${media("<tablet")} { flex-direction: column; } @media (min-width: 375px) and (max-width: 640px) { padding: 0 0; } @media (max-width: 1440px) and (min-width: 1024px) { max-width: 90vw; } @media (min-width: 1280px) { max-width: 1190px; overflow: hidden; } @media (min-width: 1280px) and (max-width: 2652px) { padding: 0 3rem; padding-left: 5rem; } @media (max-width: 1440px) and (min-width: 768px) { width: 1506px; }`;
 
 export async function getServerSideProps(ctx: any) {
-  // Pass the STATIC list directly. No sorting function allowed here.
+  // Return the static data immediately
   return {
     props: {
       services: STATIC_SERVICES, 
