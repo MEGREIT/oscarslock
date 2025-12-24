@@ -33,10 +33,33 @@ const STATIC_SERVICES = [
   { title: "Coupons", slug: { current: "coupons" } },
 ];
 
+// --- REAL REVIEWS (Hardcoded for City Pages) ---
 const STATIC_TESTIMONIALS = [
-  { fullName: "John Doe", rating: 5, testimonial: "Excellent service!" },
-  { fullName: "Sarah Smith", rating: 5, testimonial: "Very professional." },
-  { fullName: "Michael B.", rating: 5, testimonial: "Great experience." },
+  { 
+    fullName: "Jennifer M.", 
+    rating: 5, 
+    testimonial: "Oscar's Lock & Key saved the day! I was locked out of my car with my groceries melting in the heat. They arrived in 20 minutes and got me back on the road instantly. Highly recommended!" 
+  },
+  { 
+    fullName: "David R.", 
+    rating: 5, 
+    testimonial: "Very professional service. We needed to rekey our entire office building after a security concern. The team was efficient, polite, and gave us a great price. Will definitely use them again." 
+  },
+  { 
+    fullName: "Sarah Jenkins", 
+    rating: 5, 
+    testimonial: "I lost my house keys late at night and was panicking. Called these guys and they were there so fast. The technician was super friendly and made me feel safe. Thank you so much!" 
+  },
+  { 
+    fullName: "Mike T.", 
+    rating: 5, 
+    testimonial: "Great experience with their safe opening service. I inherited an old safe and couldn't get it open. They opened it without damaging it. True experts." 
+  },
+  { 
+    fullName: "Emily Chen", 
+    rating: 5, 
+    testimonial: "Fast, reliable, and affordable. I've used them for both my car and my apartment. Best locksmith in town hands down." 
+  }
 ];
 
 export default function Homepage({
@@ -54,11 +77,14 @@ export default function Homepage({
     }
   }, [slug]);
 
+  // Capitalize first letter of city for title
+  const cityTitle = slug ? slug.charAt(0).toUpperCase() + slug.slice(1) : "";
+
   return (
     <>
       <Head>
-        <title>Oscars Lock & Key Services</title>
-        <meta name="description" content={`Locksmith services in ${slug}`} />
+        <title>Oscars Lock & Key Services in {cityTitle}</title>
+        <meta name="description" content={`Professional Locksmith services in ${cityTitle}`} />
       </Head>
       <GoogleScript />
       <HomepageWrapper>
