@@ -33,62 +33,172 @@ const STATIC_SERVICES_LIST = [
   { title: "Coupons", slug: { current: "coupons" } },
 ];
 
+// --- COMMON FOOTER TEXT (Price List & Info) ---
+const PRICE_LIST_TEXT = `
+
+Take a Look At Our Coupons - You Might Qualify For a Discount!
+
+Price List
+The Most Popular Services
+
+Service call                                               $35
+Lockout Service                                      $65-$195
+Lock Change                                           $45-$65
+Lock Rekey                                              $25-$45
+Lock Repair                                             $55-$145
+Hole Cut-Out For New Locks              $85-$125
+Safe Opening                                          $155-$395
+Car key (Non-Transponder)               $155-$205
+Car key (Transponder)                       $205-$275
+Car Key (Smart / Prox)                        $285-$465
+Car Ignition Lock Cylinder Change / Repair    $75-$155
+
+* Please take into notice that our dispatch team can only give an estimate of the cost for the task, based on the explanation of the situation given by a customer over the phone. The actual complexity or situation may differ in reality, therefore the costs may vary.
+
+* Each of our technicians require payment on the spot when the service is completed. Oscar's Lock & Key accepts all major credit cards, cash, debit cards and business checks as a form of payment. On each completed job customer will get the copy of the original receipt (work order invoice) with detailed description of work performed, warranty and our contact information.`;
+
 const STATIC_SERVICES_DATA: Record<string, any> = {
+  automotive: {
+    title: "Automotive",
+    heroImage: "/service-bg/automotive.png", 
+    slug: { current: "automotive" }, 
+    description: "Car key replacement and lockout services.",
+    fullText: `Lost your car keys? Our on-call automotive locksmith professional will make all keys & remotes on site. We can fix faulty auto ignitions or locks right on the spot.
+
+Oscar’s Lock & Key Services can help you quickly duplicate or replace lost, damaged or stolen electronic car keys and key fobs. We make electronic car keys for hundreds of car makes and models. Our locksmiths have the technical training and equipment that is necessary to provide fast and accurate car key duplication and replacement services. Our fully equipped mobile van comes to your location and offers the ultimate in convenience and time savings.
+
+Keys & Remotes for Most Vehicles, Makes & Models
+Oscar’s Lock & Key Services has an extensive stock of base keys, as well as more than 90 auto transponder keys for nearly 200 vehicle models, including cars, vans and trucks. Please call us with any questions regarding your specific vehicle make and model.
+Car Key Replacement & Duplication Services
+
+Oscar’s Lock & Key Services offers the following automotive key services:
+
+●Transponder (remote and key FOB) replacement
+●Transponder chip repair, duplication, and replacement
+●Smart and Flip Blade key repair or replacement
+●VIN key copying
+●PROX Car Key duplication and replacement
+●Immobilizer key reprogramming
+●Car remote programming
+●Ignition switch repair and unlocking
+●Broken key removal
+●Car trunk opening
+●High Security Car Key Cutting` + PRICE_LIST_TEXT,
+  },
   residential: {
     title: "Residential",
     heroImage: "/service-bg/residential.png", 
     slug: { current: "residential" }, 
     description: "Complete residential locksmith services for your home security.",
-    fullText: "We provide comprehensive residential locksmith services including lockouts, rekeying, and lock installation to keep your home safe. Our expert technicians are available to ensure your family's security with high-quality locks and precision installation.",
+    fullText: `Ensuring the security of your home is a top priority
+
+Oscar’s Lock & key Services provides a comprehensive range of residential locksmith services. Our highly skilled licensed locksmith professionals can resolve your locksmith service needs.
+
+With the support of qualified locksmiths, you can make right decisions and maximize the effectiveness of your security investments. We provide services which include fixing broken locks, installing new hardware, replacing lost keys or making your existing locks work with a different key and a master key.
+
+Common residential lock and key issues we can help you with include:
+
+●Home Lockout Service – Oscar’s Lock & key Services will quickly dispatch an experienced licensed locksmith professional to your home to address the issue.
+●Lock Installation, Replacement, and Repair – We carry a wide range of locks, deadbolts and keys to ensure we're able to provide you with the best products and services when locks break or need to be replaced.
+●Lock Rekeying – Rekeying is an essential service offered by Oscar’s Lock & Key Services that often goes overlooked. It involves changing the internal lock mechanism so that previous keys no longer work and new keys are required for access. Rekeying offers an affordable and efficient alternative to lock replacement and is particularly useful when keys are lost or stolen,or unauthorized access is suspected.
+●A master Key System – A Master key system allows your access to multiple locks using a single key, while individual keys only open specific locks.
+●High-Security Locks & Deadbolts – A high-security lock with key control adds an increased level of safety to your home by reducing the chance that your house key can be duplicated in an unauthorized fashion.
+
+We are committed to providing an unmatched level of service to our customers, please ask us about our Price Match Guarantee.` + PRICE_LIST_TEXT,
   },
   commercial: {
     title: "Commercial",
     heroImage: "/service-bg/commercial.png", 
     slug: { current: "commercial" }, 
     description: "Professional security solutions for businesses and offices.",
-    fullText: "Our commercial services ensure your business is secure with high-security locks, master key systems, and access control. We understand the unique security needs of businesses and offer tailored solutions to protect your assets.",
-  },
-  automotive: {
-    title: "Automotive",
-    heroImage: "/service-bg/automotive.png", 
-    slug: { current: "automotive" }, 
-    description: "Car key replacement and lockout services.",
-    fullText: "Locked out of your car? We offer fast automotive locksmith services including key fob programming, ignition repair, and emergency car door unlocking. We work with most makes and models to get you back on the road quickly.",
+    fullText: `Commercial Locksmith Services & Products
+
+Business security is a top priority for any organization. Oscar’s Lock & Key Services provides a wide range of commercial high-security locks, including un-pickable, do-not-duplicate, push and panic bars.
+
+Commercial Service Offerings:
+
+●High-security deadbolts, locks and key control systems
+●Lock repair, rekeying, replacement and installation
+●Master Key Systems
+●Keyless entry systems
+●Key duplication and replacement
+●Key extraction
+●Door lever locks, closers and hinge installation and repair
+●Door viewers and guards
+●Exit devices
+●File cabinet locks, locking bars and key replacement
+●Showcase, desk and cabinet lock installation, repair and replacement` + PRICE_LIST_TEXT,
   },
   emergency: {
     title: "Emergency",
     heroImage: "/service-bg/emergency.png", 
     slug: { current: "emergency" }, 
     description: "24/7 Emergency assistance for lockouts.",
-    fullText: "Available 24/7 for all your emergency locksmith needs. Whether you are locked out of your home, car, or office, our rapid response team is ready to help you anytime, day or night.",
+    fullText: `Quick and Reliable Emergency Locksmith Service
+
+Locked Out? We’ve Got the Key to Your Solution!
+
+Wе knоw hоw ѕtrеѕѕful it is to be lосkеd оut оf уоur home, break or lose your ignition kеу.Wе саn handle аnу tуре оf emergency lосkѕmіth situation.
+
+Our experienced locksmith company like Oscar’s Lock & Key Services offers 24/7 emergency lockout services, ensuring that you can regain access quickly and efficiently.
+
+Our team of professionals operates to minimize damage to your property, by using non-destructive techniques and tools.
+
+Wе оffеr the following emergency locksmith ѕеrvісеѕ:
+
+●Emergency Lосkоut Sеrvісеѕ for Hоmеѕ, Commercial Buildings, and Vеhісlеѕ
+●Lосk Changes аnd Rераіr
+●Re-Keying
+●Kеуlеѕѕ Entry Systems
+●Master Kеу Sуѕtеmѕ
+●Pаnіс Bаr Rераіr аnd Installation
+●Aссеѕѕ Cоntrоl Sуѕtеmѕ
+
+
+Yоu саn соunt оn Oscar’s Lock & Key Services to get the job dоnе ԛuісklу and еffісіеntlу, and we оffеr the mоѕt competitive rates with a price match guarantee.` + PRICE_LIST_TEXT,
   },
   mailbox: {
     title: "Mailbox",
     heroImage: "/service-bg/mailbox.png", 
     slug: { current: "mailbox" }, 
     description: "Mailbox lock replacement and key services.",
-    fullText: "Secure your mail with our mailbox lock replacement services. If you've lost your mailbox key or the lock is damaged, we can quickly replace it to ensure your private mail stays safe.",
+    fullText: `We have changed many mailbox locks for our customers.
+
+We offer fully trained locksmith technicians who have every mailbox lock in stock at all times - so you never have to wait!
+
+Mailboxes are an easy target to break into. Here is why you should protect your mailbox. It’s no secret though that identity fraud has become rife in recent years and one of the easiest ways to get the important data is through mail!
+
+Low cost options are available to increase the security of your mailbox to prevent theft that could lead to something much more costly and serious!` + PRICE_LIST_TEXT,
   },
   safe: {
     title: "Safe",
     heroImage: "/service-bg/safe.png", 
     slug: { current: "safe" }, 
     description: "Safe opening, repair, and installation.",
-    fullText: "Expert safe opening and repair services for your valuables. We can help with forgotten combinations, malfunctioning digital locks, and professional installation of new safes.",
+    fullText: `Having issues with your safe? 
+
+We are expert safe locksmiths! 
+
+We have tools and techniques. No matter how complicated a situation you might have!
+Oscar’s Lock & Key Services technicians are highly trained and have years of experience.
+
+We have worked with many different types of safe locks and know every method to getting your safe opened.
+
+When the technician sees your safe, he determines the best method to gain entry.` + PRICE_LIST_TEXT,
   },
   coupons: {
     title: "Coupons",
     heroImage: "/service/coupons.png", 
     slug: { current: "coupons" }, 
     description: "Discount coupons for locksmith services.",
-    fullText: "Check here for our latest offers and discounts. We strive to provide affordable locksmith services without compromising on quality.",
+    fullText: "Check here for our latest offers and discounts. We strive to provide affordable locksmith services without compromising on quality." + PRICE_LIST_TEXT,
   },
   gallery: {
     title: "Gallery",
     heroImage: "/service/images-regular.svg", 
     slug: { current: "gallery" }, 
     description: "Our work gallery.",
-    fullText: "Browse photos of our recent work and see the quality of our craftsmanship.",
+    fullText: "Browse photos of our recent work and see the quality of our craftsmanship." + PRICE_LIST_TEXT,
   }
 };
 
@@ -111,14 +221,13 @@ export default function ServiceSlugRoute(props: ServiceProps) {
         <div className="lg:flex xl:align-top lg:space-x-0 pl-5 xl:px-5 md:space-y-0 space-y-2 lg:space-y-0 max-w-[1250px]">
           <div className="flex-1 pr-0 md:pr-8">
              <div className="mb-8">
-               {/* --- BACK BUTTON (Main Page) --- */}
+               {/* Back Button (JUST "Home") */}
                <button 
                  onClick={() => router.push("/")} 
                  className="mb-6 px-6 py-2 bg-[#0a3161] text-white rounded hover:bg-[#15233e] transition-colors font-bold flex items-center"
                >
-                 ← Back to Home
+                 Home
                </button>
-               {/* ----------------------------- */}
                
                <h1 className="text-4xl font-bold mb-4 text-[#15233e]">{service.title}</h1>
                <p className="text-xl font-semibold mb-4 text-gray-700">{service.description}</p>
