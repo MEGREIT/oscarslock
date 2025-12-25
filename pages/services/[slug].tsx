@@ -35,43 +35,42 @@ const STATIC_SERVICES_LIST = [
 
 const STATIC_SERVICES_DATA: Record<string, any> = {
   residential: {
-    title: "Residential Locksmith",
+    title: "Residential",
     heroImage: "/service-bg/residential.png", 
     slug: { current: "residential" }, 
     description: "Complete residential locksmith services for your home security.",
     fullText: "We provide comprehensive residential locksmith services including lockouts, rekeying, and lock installation to keep your home safe. Our expert technicians are available to ensure your family's security with high-quality locks and precision installation.",
   },
   commercial: {
-    title: "Commercial Locksmith",
-    // --- FIXED PATH: Now pointing to 'service-bg' folder ---
+    title: "Commercial",
     heroImage: "/service-bg/commercial.png", 
     slug: { current: "commercial" }, 
     description: "Professional security solutions for businesses and offices.",
     fullText: "Our commercial services ensure your business is secure with high-security locks, master key systems, and access control. We understand the unique security needs of businesses and offer tailored solutions to protect your assets.",
   },
   automotive: {
-    title: "Automotive Locksmith",
+    title: "Automotive",
     heroImage: "/service-bg/automotive.png", 
     slug: { current: "automotive" }, 
     description: "Car key replacement and lockout services.",
     fullText: "Locked out of your car? We offer fast automotive locksmith services including key fob programming, ignition repair, and emergency car door unlocking. We work with most makes and models to get you back on the road quickly.",
   },
   emergency: {
-    title: "Emergency Locksmith",
+    title: "Emergency",
     heroImage: "/service-bg/emergency.png", 
     slug: { current: "emergency" }, 
     description: "24/7 Emergency assistance for lockouts.",
     fullText: "Available 24/7 for all your emergency locksmith needs. Whether you are locked out of your home, car, or office, our rapid response team is ready to help you anytime, day or night.",
   },
   mailbox: {
-    title: "Mailbox Locksmith",
+    title: "Mailbox",
     heroImage: "/service-bg/mailbox.png", 
     slug: { current: "mailbox" }, 
     description: "Mailbox lock replacement and key services.",
     fullText: "Secure your mail with our mailbox lock replacement services. If you've lost your mailbox key or the lock is damaged, we can quickly replace it to ensure your private mail stays safe.",
   },
   safe: {
-    title: "Safe Services",
+    title: "Safe",
     heroImage: "/service-bg/safe.png", 
     slug: { current: "safe" }, 
     description: "Safe opening, repair, and installation.",
@@ -112,6 +111,15 @@ export default function ServiceSlugRoute(props: ServiceProps) {
         <div className="lg:flex xl:align-top lg:space-x-0 pl-5 xl:px-5 md:space-y-0 space-y-2 lg:space-y-0 max-w-[1250px]">
           <div className="flex-1 pr-0 md:pr-8">
              <div className="mb-8">
+               {/* --- BACK BUTTON (Main Page) --- */}
+               <button 
+                 onClick={() => router.push("/")} 
+                 className="mb-6 px-6 py-2 bg-[#0a3161] text-white rounded hover:bg-[#15233e] transition-colors font-bold flex items-center"
+               >
+                 ← Back to Home
+               </button>
+               {/* ----------------------------- */}
+               
                <h1 className="text-4xl font-bold mb-4 text-[#15233e]">{service.title}</h1>
                <p className="text-xl font-semibold mb-4 text-gray-700">{service.description}</p>
                <p className="text-lg text-gray-600 leading-relaxed whitespace-pre-line">
