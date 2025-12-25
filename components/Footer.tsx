@@ -90,7 +90,6 @@ function FooterList({ title, items }: SingleFooterList) {
   );
 }
 
-// --- THE FIX IS HERE ---
 function ListItem({ title, href }: SingleFooterListItem) {
   // If the link is for Policy or Terms, use a standard <a> tag.
   // This bypasses the React Router and forces the static file to load.
@@ -170,16 +169,27 @@ const ListWrapper = styled.div`
   }
 `;
 
+// --- FIXED CSS IS HERE ---
 const ListItemWrapper = styled.p`
   font-size: 1.6rem;
   a {
     text-decoration: none;
     margin: 0 auto;
     align-self: center;
-    color: rgba(255, 255, 255, 0.75);
+    
+    /* FORCE WHITE COLOR ALWAYS */
+    color: white !important; 
+    
     transition: all ease-in-out 0.4s;
+    
+    /* Ensure it stays white even if visited */
+    &:visited {
+      color: white !important;
+    }
+
     &:hover {
       color: white;
+      opacity: 0.8; /* Optional: Slight dim on hover so they know it's clickable */
     }
   }
 `;
