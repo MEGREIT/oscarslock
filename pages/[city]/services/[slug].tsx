@@ -1,8 +1,6 @@
 import React from "react";
-// --- FIXED IMPORTS ---
 import { SharedPageProps } from "../../../pages/_app"; 
 import { PaymentBox, PaymentContainer, WhiteBackgroundContainer } from "../../../pages/index"; 
-// ---------------------
 import styled from "styled-components";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
@@ -36,30 +34,6 @@ const STATIC_SERVICES_LIST = [
   { title: "Coupons", slug: { current: "coupons" } },
 ];
 
-// --- COMMON FOOTER TEXT (Price List & Info) ---
-const PRICE_LIST_TEXT = `
-
-Take a Look At Our Coupons - You Might Qualify For a Discount!
-
-Price List
-The Most Popular Services
-
-Service call                                               $35
-Lockout Service                                      $65-$195
-Lock Change                                           $45-$65
-Lock Rekey                                              $25-$45
-Lock Repair                                             $55-$145
-Hole Cut-Out For New Locks              $85-$125
-Safe Opening                                          $155-$395
-Car key (Non-Transponder)               $155-$205
-Car key (Transponder)                       $205-$275
-Car Key (Smart / Prox)                        $285-$465
-Car Ignition Lock Cylinder Change / Repair    $75-$155
-
-* Please take into notice that our dispatch team can only give an estimate of the cost for the task, based on the explanation of the situation given by a customer over the phone. The actual complexity or situation may differ in reality, therefore the costs may vary.
-
-* Each of our technicians require payment on the spot when the service is completed. Oscar's Lock & Key accepts all major credit cards, cash, debit cards and business checks as a form of payment. On each completed job customer will get the copy of the original receipt (work order invoice) with detailed description of work performed, warranty and our contact information.`;
-
 const STATIC_SERVICES_DATA: Record<string, any> = {
   automotive: {
     title: "Automotive",
@@ -86,7 +60,7 @@ Oscar’s Lock & Key Services offers the following automotive key services:
 ●Ignition switch repair and unlocking
 ●Broken key removal
 ●Car trunk opening
-●High Security Car Key Cutting` + PRICE_LIST_TEXT,
+●High Security Car Key Cutting`,
   },
   residential: {
     title: "Residential",
@@ -107,7 +81,7 @@ Common residential lock and key issues we can help you with include:
 ●A master Key System – A Master key system allows your access to multiple locks using a single key, while individual keys only open specific locks.
 ●High-Security Locks & Deadbolts – A high-security lock with key control adds an increased level of safety to your home by reducing the chance that your house key can be duplicated in an unauthorized fashion.
 
-We are committed to providing an unmatched level of service to our customers, please ask us about our Price Match Guarantee.` + PRICE_LIST_TEXT,
+We are committed to providing an unmatched level of service to our customers, please ask us about our Price Match Guarantee.`,
   },
   commercial: {
     title: "Commercial",
@@ -130,7 +104,7 @@ Commercial Service Offerings:
 ●Door viewers and guards
 ●Exit devices
 ●File cabinet locks, locking bars and key replacement
-●Showcase, desk and cabinet lock installation, repair and replacement` + PRICE_LIST_TEXT,
+●Showcase, desk and cabinet lock installation, repair and replacement`,
   },
   emergency: {
     title: "Emergency",
@@ -158,7 +132,7 @@ Wе оffеr the following emergency locksmith ѕеrvісеѕ:
 ●Aссеѕѕ Cоntrоl Sуѕtеmѕ
 
 
-Yоu саn соunt оn Oscar’s Lock & Key Services to get the job dоnе ԛuісklу and еffісіеntlу, and we оffеr the mоѕt competitive rates with a price match guarantee.` + PRICE_LIST_TEXT,
+Yоu саn соunt оn Oscar’s Lock & Key Services to get the job dоnе ԛuісklу and еffісіеntlу, and we оffеr the mоѕt competitive rates with a price match guarantee.`,
   },
   mailbox: {
     title: "Mailbox",
@@ -171,7 +145,7 @@ We offer fully trained locksmith technicians who have every mailbox lock in stoc
 
 Mailboxes are an easy target to break into. Here is why you should protect your mailbox. It’s no secret though that identity fraud has become rife in recent years and one of the easiest ways to get the important data is through mail!
 
-Low cost options are available to increase the security of your mailbox to prevent theft that could lead to something much more costly and serious!` + PRICE_LIST_TEXT,
+Low cost options are available to increase the security of your mailbox to prevent theft that could lead to something much more costly and serious!`,
   },
   safe: {
     title: "Safe",
@@ -187,21 +161,21 @@ Oscar’s Lock & Key Services technicians are highly trained and have years of e
 
 We have worked with many different types of safe locks and know every method to getting your safe opened.
 
-When the technician sees your safe, he determines the best method to gain entry.` + PRICE_LIST_TEXT,
+When the technician sees your safe, he determines the best method to gain entry.`,
   },
   coupons: {
     title: "Coupons",
     heroImage: "/service/coupons.png", 
     slug: { current: "coupons" }, 
     description: "Discount coupons for locksmith services.",
-    fullText: "Check here for our latest offers and discounts. We strive to provide affordable locksmith services without compromising on quality." + PRICE_LIST_TEXT,
+    fullText: "Check here for our latest offers and discounts. We strive to provide affordable locksmith services without compromising on quality.",
   },
   gallery: {
     title: "Gallery",
     heroImage: "/service/images-regular.svg", 
     slug: { current: "gallery" }, 
     description: "Our work gallery.",
-    fullText: "Browse photos of our recent work and see the quality of our craftsmanship." + PRICE_LIST_TEXT,
+    fullText: "Browse photos of our recent work and see the quality of our craftsmanship.",
   }
 };
 
@@ -213,6 +187,7 @@ export default function ServiceSlugRoute(props: ServiceProps) {
   if (!service) return <div>Loading...</div>;
 
   const displayTitle = service.title; 
+  const isCouponsPage = service.slug.current === 'coupons';
 
   return (
     <Page
@@ -226,7 +201,7 @@ export default function ServiceSlugRoute(props: ServiceProps) {
         <div className="lg:flex xl:align-top lg:space-x-0 pl-5 xl:px-5 md:space-y-0 space-y-2 lg:space-y-0 max-w-[1250px]">
           <div className="flex-1 pr-0 md:pr-8">
              <div className="mb-8">
-               {/* Back Button (JUST "Home") */}
+               {/* Back Button */}
                <button 
                  onClick={() => router.push(city ? `/${city}` : "/")} 
                  className="mb-6 px-6 py-2 bg-[#0a3161] text-white rounded hover:bg-[#15233e] transition-colors font-bold flex items-center"
@@ -235,10 +210,14 @@ export default function ServiceSlugRoute(props: ServiceProps) {
                </button>
 
                <h1 className="text-4xl font-bold mb-4 text-[#15233e]">{displayTitle}</h1>
-               <p className="text-xl font-semibold mb-4 text-gray-700">{service.description}</p>
-               <p className="text-lg text-gray-600 leading-relaxed whitespace-pre-line">
+               <p className="text-3xl font-semibold mb-4 text-gray-700">{service.description}</p>
+
+               {/* --- TEXT SIZE INCREASED TO 4XL HERE --- */}
+               <p className="text-4xl text-gray-800 leading-relaxed whitespace-pre-line">
                  {service.fullText}
                </p>
+               {/* -------------------------------------- */}
+
              </div>
              <div className="mt-8">
                 <ServicesGrid services={STATIC_SERVICES_LIST} />
@@ -251,6 +230,13 @@ export default function ServiceSlugRoute(props: ServiceProps) {
             <img src="/logos/oscar-logo.png" className="w-[25rem] ml-0" alt="Logo" />
           </PaymentBox>
         </div>
+        
+        {!isCouponsPage && (
+          <h2 className="text-3xl font-bold text-center text-[#0a3161] mt-12 px-4">
+            Take a Look At Our Coupons - You Might Qualify For a Discount!
+          </h2>
+        )}
+
         <ServiceCTA />
         <PhoneBtn phone="(800) 687- 0480" />
         <button onClick={() => router.push(`/${city}/coupons`)} className="bg-[#751318] text-2xl px-32 py-2 text-white mx-auto block mt-8 hover:bg-[#5e0a0a] transition-colors">
