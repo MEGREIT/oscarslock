@@ -23,6 +23,7 @@ const About = () => {
                 alt="Lock"
               />
               <div className="flex flex-col my-auto text-[17px]">
+                {/* These spans will now be Dark Blue #0A3161 */}
                 <span>{`OUR MISSION – `}</span>
                 Partnering with Oscars Lock & Key Services ensures you receive
                 personalized security solutions tailored to your specific needs.
@@ -42,23 +43,16 @@ const About = () => {
               <div className="flex flex-col space-y-4 w-full xl:ml-24">
                 <h1>Are you looking for</h1>
                 {list.map((text: string) => (
-                  <div className="flex space-x-2">
+                  <div className="flex space-x-2" key={text}>
                     <img className="w-10 h-10 object-contain flex-shrink-0" src="/logos/LOGO-bullet.png" />
                     <p>{`${text}`}</p>
                   </div>
                 ))}
               </div>
             </div>
-            {/* <h2>Don't Wait, Reach Out To Oscars Lock & Key Services!</h2> */}
           </Description>
         </ReversedRow>
-        {/* <div className="flex flex-col max-w-[930px] space-x-2 justify-center align-middle">
-          <PhotoSlider />
-        </div> */}
       </Container>
-      {/* <PaymentContainer>
-        <img src="/header-payment.webp" />
-      </PaymentContainer> */}
     </Wrapper>
   );
 };
@@ -81,7 +75,6 @@ const Wrapper = styled.div`
     padding: 4rem 2rem;
     padding-top: 0rem;
   }
-  /* align-items: center; */
 `;
 const Container = styled.div``;
 const Title = styled.h1`
@@ -101,7 +94,6 @@ const Title = styled.h1`
   }
 `;
 const PaymentContainer = styled.div`
-  /* width: 100%; */
   display: flex;
   justify-content: center;
   margin: 2rem 0;
@@ -157,16 +149,21 @@ const ReversedRow = styled.div`
     margin-top: 0rem;
   }
 `;
+
 const Description = styled.span`
   font-size: 14px;
   text-align: left;
   font-weight: normal;
-  /* margin: 10rem 10rem; */
   font-family: "Times New Roman", sans-serif;
+  
+  /* --- CHANGED HERE: Added Dark Blue Color --- */
   span {
     font-weight: bold;
     font-size: 2rem;
+    color: #0A3161; 
   }
+  /* ------------------------------------------ */
+
   p {
     font-size: 17px;
   }
