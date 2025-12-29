@@ -35,20 +35,18 @@ export default function PrivacyPolicy() {
             <Content>
               <NextLink className="max-h-52" href="/" passHref>
                 <LogoWrapper>
-                  <div className="relative w-24 h-16 sm:w-32 sm:h-20 md:w-40 md:h-24 lg:w-44 lg:h-28">
-                    <img
-                      src="/logos/LOGO.png"
-                      alt="logo"
-                      style={{ width: '100%', height: '100%', objectFit: 'contain' }}
-                    />
-                  </div>
+                  <img
+                    src="/logos/LOGO.png"
+                    alt="logo"
+                    style={{ width: 'auto', height: '100%', maxHeight: '4rem', objectFit: 'contain' }}
+                  />
                 </LogoWrapper>
               </NextLink>
               <p className="var hidden md:block text-[33px]">
                 {cityNameDisplay}
               </p>
               <div className="flex flex-col space-y-2">
-                <p className="block md:hidden text-[12px]">
+                <p className="block md:hidden text-[10px]">
                   {cityNameDisplay}
                 </p>
                 <div>
@@ -194,19 +192,19 @@ const NavbarContainer = styled.div`
   top: 0;
   z-index: 1000;
   display: flex;
-  padding: 1rem 20px;
+  padding: 0.5rem 90px;
   width: 100%;
   max-width: 1550px;
+  max-height: 5rem;
   margin: 0 auto;
   background-color: #fff;
   
   ${media("<=tablet")} {
-    padding: 0.8rem 10px;
+    padding: 0.5rem 1rem;
   }
   
   @media (min-width: 1440px) {
     max-width: 1430px;
-    padding: 1.5rem 90px;
   }
   
   @media (min-width: 1535px) and (max-width: 2652px) {
@@ -228,16 +226,16 @@ const Content = styled.div`
 
   svg {
     color: #751318;
-    width: 30px;
+    width: 20px;
     margin-right: 4px;
     
     @media (max-width: 1040px) {
-      width: 18px;
+      width: 16px;
       margin-right: 3px;
     }
     
     @media (max-width: 425px) {
-      width: 14px;
+      width: 12px;
       margin-right: 2px;
     }
   }
@@ -245,18 +243,18 @@ const Content = styled.div`
   span {
     display: flex;
     align-items: center;
-    font-size: 3rem;
+    font-size: 2rem;
     
     @media (max-width: 1040px) {
-      font-size: 1.8rem;
+      font-size: 1.4rem;
     }
     
     @media (max-width: 869px) {
-      font-size: 1.2rem;
+      font-size: 1rem;
     }
     
     @media (max-width: 425px) {
-      font-size: 0.9rem;
+      font-size: 0.8rem;
     }
   }
 
@@ -271,18 +269,18 @@ const Content = styled.div`
 
   .phone {
     color: #751318;
-    font-size: 3rem;
+    font-size: 2rem;
     
     @media (max-width: 1040px) {
-      font-size: 1.8rem;
+      font-size: 1.4rem;
     }
     
     @media (max-width: 869px) {
-      font-size: 1.2rem;
+      font-size: 0.9rem;
     }
     
-    @media (max-width: 425px) {
-      font-size: 0.9rem;
+    @media (max-width: 305px) {
+      font-size: 0.8rem;
     }
   }
 
