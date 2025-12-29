@@ -14,9 +14,13 @@ export default function Cta() {
       <Container>
         <Stack>
           {/* <OverTitle>Lorem ipsum dolor sit amet</OverTitle> */}
-          <SectionTitle>
+          
+          {/* --- TEXT REMOVED FROM HERE --- */}
+          {/* <SectionTitle>
             Don't Wait, Reach Out To Oscars Lock & Key Services!
-          </SectionTitle>
+          </SectionTitle> */}
+          {/* ----------------------------- */}
+
           {/* <Description> Contact Us Today to Get Started!</Description> */}
         </Stack>
       </Container>

@@ -1,3 +1,4 @@
+import React from "react";
 import NextLink from "next/link";
 import styled from "styled-components";
 import Container from "components/Container";
@@ -45,7 +46,7 @@ export default function Footer({ currentCity }: any) {
       items: [
         { title: "Home", href: getLink(city) },
         { title: "About Us", href: city ? `/${city}/about` : "/about" },
-        // These links will now be handled specially in the ListItem component
+        // These point to the new TSX pages
         { title: "Privacy Policy", href: "/privacy-policy" },
         { title: "Terms & Conditions", href: "/terms-conditions" },
       ],
@@ -90,26 +91,15 @@ function FooterList({ title, items }: SingleFooterList) {
   );
 }
 
-// --- THE FIX IS HERE ---
 function ListItem({ title, href }: SingleFooterListItem) {
-  // If the link is for Policy or Terms, use a standard <a> tag.
-  // This bypasses the React Router and forces the static file to load.
-  if (href.includes("privacy-policy") || href.includes("terms-conditions")) {
-    return (
-      <ListItemWrapper>
-        {/* Using standard <a> tag to force full reload */}
-        <a href={href} style={{ textDecoration: 'none', color: 'inherit' }}>
-          {title}
-        </a>
-      </ListItemWrapper>
-    );
-  }
-
-  // For all other links, use the smart NextLink
   return (
     <ListItemWrapper>
-      <NextLink href={href} passHref>
-        <>{title}</>
+      {/* FIX: Added <a> tag inside. 
+         Without this, NextLink doesn't know where to attach the 'href', 
+         and it might be falling back to default browser behavior or cached HTML.
+      */}
+      <NextLink href={href} passHref legacyBehavior>
+        <a>{title}</a>
       </NextLink>
     </ListItemWrapper>
   );
@@ -172,14 +162,22 @@ const ListWrapper = styled.div`
 
 const ListItemWrapper = styled.p`
   font-size: 1.6rem;
+  
   a {
     text-decoration: none;
     margin: 0 auto;
     align-self: center;
-    color: rgba(255, 255, 255, 0.75);
+    color: white !important; 
     transition: all ease-in-out 0.4s;
+    cursor: pointer;
+    
+    &:visited {
+      color: white !important;
+    }
+
     &:hover {
       color: white;
+      opacity: 0.8; 
     }
   }
 `;
