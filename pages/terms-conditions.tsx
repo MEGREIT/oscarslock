@@ -18,7 +18,7 @@ export default function TermsConditions() {
         <meta name="description" content="Terms and Conditions for Oscars Lock & Key Services" />
       </Head>
       
-      {/* Hide GoogleScript floating elements */}
+      {/* Hide any extra floating elements */}
       <style jsx global>{`
         body::before,
         body > div:not(#__next),
@@ -34,7 +34,7 @@ export default function TermsConditions() {
             <Content>
               <NextLink className="max-h-52" href="/" passHref>
                 <LogoWrapper>
-                  <div className="relative w-44 h-28 sm:w-56 sm:h-36 md:w-72 md:h-48">
+                  <div className="relative w-32 h-20 sm:w-44 sm:h-24 md:w-56 md:h-36 lg:w-72 lg:h-48">
                     <img
                       src="/logos/LOGO.png"
                       alt="logo"
@@ -46,11 +46,11 @@ export default function TermsConditions() {
               <p className="var hidden md:block text-[33px]">
                 {cityNameDisplay}
               </p>
-              <div className="flex items-center">
-                <p className="block md:hidden text-[14px] mr-4">
+              <div className="flex flex-col space-y-2">
+                <p className="block md:hidden text-[12px]">
                   {cityNameDisplay}
                 </p>
-                <div className="flex items-center">
+                <div>
                   <svg
                     fill="#751318"
                     xmlns="http://www.w3.org/2000/svg"
@@ -58,12 +58,12 @@ export default function TermsConditions() {
                   >
                     <path d="M164.9 24.6c-7.7-18.6-28-28.5-47.4-23.2l-88 24C12.1 30.2 0 46 0 64C0 311.4 200.6 512 448 512c18 0 33.8-12.1 38.6-29.5l24-88c5.3-19.4-4.6-39.7-23.2-47.4l-96-40c-16.3-6.8-35.2-2.1-46.3 11.6L304.7 368C234.3 334.7 177.3 277.7 144 207.3L193.3 167c13.7-11.2 18.4-30 11.6-46.3l-40-96z" />
                   </svg>
-                  <span className="flex items-center whitespace-nowrap">
+                  <span>
                     <span className="phone mx-0 px-0">{`Call Now: `}</span>
-                    <a href={phoneLink} className="inline">
-                      <span className="cursor-pointer text-[#751318] font-extrabold">
+                    <a href={phoneLink}>
+                      <p className="cursor-pointer text-[#751318]">
                         {phoneDisplay}
-                      </span>
+                      </p>
                     </a>
                   </span>
                 </div>
@@ -142,6 +142,21 @@ export default function TermsConditions() {
 
         </ContentRow>
       </MainWrapper>
+
+      {/* --- FOOTER --- */}
+      <FooterWrapper>
+        <FooterContent>
+          <p>© 2024 Oscar's Lock & Key Services. All rights reserved.</p>
+          <FooterLinks>
+            <a href="/">Home</a>
+            <a href="/about">About</a>
+            <a href="/services">Services</a>
+            <a href="/contact">Contact</a>
+            <a href="/privacy-policy">Privacy Policy</a>
+            <a href="/terms-conditions">Terms & Conditions</a>
+          </FooterLinks>
+        </FooterContent>
+      </FooterWrapper>
     </>
   );
 }
@@ -162,19 +177,19 @@ const NavbarContainer = styled.div`
   top: 0;
   z-index: 1000;
   display: flex;
-  padding: 1.5rem 90px;
+  padding: 1rem 20px;
   width: 100%;
   max-width: 1550px;
-  max-height: 7.7rem;
   margin: 0 auto;
   background-color: #fff;
   
   ${media("<=tablet")} {
-    padding: 2rem 1rem;
+    padding: 0.8rem 10px;
   }
   
   @media (min-width: 1440px) {
     max-width: 1430px;
+    padding: 1.5rem 90px;
   }
   
   @media (min-width: 1535px) and (max-width: 2652px) {
@@ -197,17 +212,16 @@ const Content = styled.div`
   svg {
     color: #751318;
     width: 30px;
-    margin-right: 10px;
-    flex-shrink: 0;
+    margin-right: 4px;
     
     @media (max-width: 1040px) {
-      width: 20px;
-      margin-right: 6px;
+      width: 18px;
+      margin-right: 3px;
     }
     
     @media (max-width: 425px) {
-      width: 15px;
-      margin-right: 4px;
+      width: 14px;
+      margin-right: 2px;
     }
   }
 
@@ -215,27 +229,27 @@ const Content = styled.div`
     display: flex;
     align-items: center;
     font-size: 3rem;
-    gap: 6px;
     
     @media (max-width: 1040px) {
-      font-size: 2rem;
-      gap: 4px;
+      font-size: 1.8rem;
     }
     
     @media (max-width: 869px) {
-      font-size: 1.4rem;
-      gap: 3px;
+      font-size: 1.2rem;
     }
     
     @media (max-width: 425px) {
-      font-size: 1rem;
-      gap: 2px;
+      font-size: 0.9rem;
     }
   }
 
   .var {
     margin-right: 1rem;
     color: #000;
+    
+    @media (max-width: 768px) {
+      margin-right: 0.5rem;
+    }
   }
 
   .phone {
@@ -243,15 +257,15 @@ const Content = styled.div`
     font-size: 3rem;
     
     @media (max-width: 1040px) {
-      font-size: 2rem;
+      font-size: 1.8rem;
     }
     
     @media (max-width: 869px) {
-      font-size: 1rem;
+      font-size: 1.2rem;
     }
     
-    @media (max-width: 305px) {
-      font-size: 1rem;
+    @media (max-width: 425px) {
+      font-size: 0.9rem;
     }
   }
 
@@ -336,6 +350,10 @@ const PageTitle = styled.h1`
   font-weight: 800;
   text-align: center;
   margin-bottom: 20px;
+  
+  ${media("<=tablet")} {
+    font-size: 2.2rem;
+  }
 `;
 
 const PageSubTitle = styled.h2`
@@ -347,6 +365,10 @@ const PageSubTitle = styled.h2`
   margin-top: 0;
   opacity: 0.9;
   margin-bottom: 30px;
+  
+  ${media("<=tablet")} {
+    font-size: 1.4rem;
+  }
 `;
 
 const TextContent = styled.div`
@@ -394,6 +416,15 @@ const CouponBox = styled.div`
     font-size: 2.2rem;
     font-weight: bold;
     margin-bottom: 30px;
+    line-height: 1.3;
+    
+    ${media("<=tablet")} {
+      font-size: 1.6rem;
+    }
+    
+    ${media("<=phone")} {
+      font-size: 1.1rem;
+    }
   }
 
   a {
@@ -408,5 +439,58 @@ const CouponBox = styled.div`
     transition: background 0.3s;
 
     &:hover { background: #5e0a0a; }
+    
+    ${media("<=phone")} {
+      padding: 15px 30px;
+      font-size: 1.2rem;
+    }
+  }
+`;
+
+// --- FOOTER STYLES ---
+
+const FooterWrapper = styled.footer`
+  background: #15233e;
+  color: white;
+  padding: 40px 20px;
+  margin-top: 60px;
+`;
+
+const FooterContent = styled.div`
+  max-width: 1300px;
+  margin: 0 auto;
+  text-align: center;
+
+  p {
+    margin-bottom: 20px;
+    font-size: 1rem;
+    color: white;
+  }
+`;
+
+const FooterLinks = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+
+  a {
+    color: white;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: opacity 0.3s;
+
+    &:hover {
+      opacity: 0.7;
+      text-decoration: underline;
+    }
+  }
+
+  ${media("<=phone")} {
+    gap: 15px;
+    
+    a {
+      font-size: 0.85rem;
+    }
   }
 `;

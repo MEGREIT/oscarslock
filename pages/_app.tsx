@@ -141,14 +141,13 @@ function MyApp({ Component, pageProps }: AppProps) {
       ) : (
         <>
           {isPolicyPage ? (
-            <SafeLayout>
-              <Component {...pageProps} />
-            </SafeLayout>
-          ) : (
-            <MainSiteLayout>
-              <Component {...pageProps} />
-            </MainSiteLayout>
-          )}
+  // Just render the component directly without SafeLayout
+  <Component {...pageProps} />
+) : (
+  <MainSiteLayout>
+    <Component {...pageProps} />
+  </MainSiteLayout>
+)}
         </>
       )}
     </>

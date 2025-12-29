@@ -22,7 +22,7 @@ const ServiceContainer = styled(WhiteBackgroundContainer)`
   padding-top: 0rem;
 `;
 
-// --- UPDATED STYLES FOR TEXT COLOR & SIZE ---
+// --- STYLES ---
 
 const StyledPageTitle = styled.h1`
   font-family: "Times New Roman", serif;
@@ -227,12 +227,8 @@ export default function ServiceSlugRoute(props: ServiceProps) {
   if (router.isFallback) return <div>Loading...</div>;
   if (!service) return <div>Loading...</div>;
 
-<<<<<<< HEAD
-  // LOGIC UPDATE: Check if we are on a blocked page (Gallery or Coupons)
+  // Check if we are on a blocked page (Gallery or Coupons)
   const isExcludedPage = ['gallery', 'coupons', 'coupon'].includes(service.slug.current);
-=======
-  const isCouponsPage = service.slug.current === 'coupons';
->>>>>>> 50433bcede580211275adc752b42118c5a09b8b1
 
   return (
     <Page
@@ -246,16 +242,15 @@ export default function ServiceSlugRoute(props: ServiceProps) {
         <div className="lg:flex xl:align-top lg:space-x-0 pl-5 xl:px-5 md:space-y-0 space-y-2 lg:space-y-0 max-w-[1250px]">
           <div className="flex-1 pr-0 md:pr-8">
              <div className="mb-8">
-<<<<<<< HEAD
-               {/* Back Button - Big and Bold */}
+               {/* Back Button: Reduced padding for mobile */}
                <button 
                  onClick={() => router.push("/")} 
-                 className="mb-10 px-10 py-4 bg-[#0a3161] text-white text-2xl rounded-lg shadow-md hover:bg-[#15233e] transition-all transform hover:scale-105 font-bold flex items-center font-serif"
+                 className="mb-10 px-6 md:px-10 py-4 bg-[#0a3161] text-white text-2xl rounded-lg shadow-md hover:bg-[#15233e] transition-all transform hover:scale-105 font-bold flex items-center font-serif"
                >
                  ← Home
                </button>
                
-               {/* --- MOVED TEXT: Added here at the top --- */}
+               {/* --- COUPON TEXT (MOVED TO TOP) --- */}
                {!isExcludedPage && (
                  <div style={{ textAlign: 'center', color: '#0A3161', marginBottom: '30px' }}>
                    <h2 style={{ fontFamily: '"Times New Roman", serif', fontSize: '2.4rem', fontWeight: 'bold', marginBottom: '10px', lineHeight: '1.2' }}>
@@ -266,7 +261,7 @@ export default function ServiceSlugRoute(props: ServiceProps) {
                    </p>
                  </div>
                )}
-               {/* ----------------------------------------- */}
+               {/* ---------------------------------- */}
 
                <StyledPageTitle>{service.title}</StyledPageTitle>
                <StyledPageDescription>{service.description}</StyledPageDescription>
@@ -275,28 +270,6 @@ export default function ServiceSlugRoute(props: ServiceProps) {
                  {service.fullText}
                </StyledFullText>
 
-=======
-               {/* Back Button */}
-               <button 
-                 onClick={() => router.push("/")} 
-                 className="mb-6 px-6 py-2 bg-[#0a3161] text-white rounded hover:bg-[#15233e] transition-colors font-bold flex items-center"
-               >
-                 Home
-               </button>
-               
-               <h1 className="text-4xl font-bold mb-4 text-[#15233e]">{service.title}</h1>
-               <p className="text-3xl font-semibold mb-4 text-gray-700">{service.description}</p>
-               
-               {/* --- TEXT SIZE INCREASED TO 4XL (HUGE) --- */}
-               <p className="text-4xl text-gray-800 leading-relaxed whitespace-pre-line">
-                 {service.fullText}
-               </p>
-               {/* -------------------------------------- */}
-
-             </div>
-             <div className="mt-8">
-                <ServicesGrid services={STATIC_SERVICES_LIST} />
->>>>>>> 50433bcede580211275adc752b42118c5a09b8b1
              </div>
           </div>
           <PaymentBox>
@@ -306,20 +279,19 @@ export default function ServiceSlugRoute(props: ServiceProps) {
             <img src="/logos/oscar-logo.png" className="w-[25rem] ml-0" alt="Logo" />
           </PaymentBox>
         </div>
-        
-<<<<<<< HEAD
-        {/* REMOVED OLD COUPON HEADING FROM HERE */}
-=======
-        {!isCouponsPage && (
-          <h2 className="text-3xl font-bold text-center text-[#0a3161] mt-12 px-4">
-            Take a Look At Our Coupons - You Might Qualify For a Discount!
-          </h2>
-        )}
->>>>>>> 50433bcede580211275adc752b42118c5a09b8b1
 
         <ServiceCTA />
         <PhoneBtn phone="(800) 687- 0480" />
-        <button onClick={() => router.push("/coupons")} className="bg-[#751318] text-2xl px-32 py-3 text-white mx-auto block mt-8 hover:bg-[#5e0a0a] transition-colors font-bold rounded-md shadow-md font-serif">
+        
+        {/* FIX: RESPONSIVE BUTTON 
+            - Changed px-32 to px-8 md:px-32
+            - Added w-11/12 md:w-auto to prevent overflowing screen
+            - Changed text-2xl to text-xl md:text-2xl for mobile
+        */}
+        <button 
+          onClick={() => router.push("/coupons")} 
+          className="bg-[#751318] text-xl md:text-2xl px-8 md:px-32 py-3 text-white mx-auto block mt-8 hover:bg-[#5e0a0a] transition-colors font-bold rounded-md shadow-md font-serif w-11/12 md:w-auto"
+        >
           FOR COUPONS CLICK HERE
         </button>
       </ServiceContainer>
