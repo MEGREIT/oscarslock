@@ -1,5 +1,10 @@
 import React from "react";
+<<<<<<< HEAD
 import { SharedPageProps } from "../../_app"; 
+=======
+import { SharedPageProps } from "../../../pages/_app"; 
+import { PaymentBox, PaymentContainer, WhiteBackgroundContainer } from "../../../pages/index"; 
+>>>>>>> 50433bcede580211275adc752b42118c5a09b8b1
 import styled from "styled-components";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
@@ -23,6 +28,7 @@ const ServiceContainer = styled(WhiteBackgroundContainer)`
   padding-top: 0rem;
 `;
 
+<<<<<<< HEAD
 // --- STYLES (Times New Roman + Dark Blue) ---
 
 const StyledPageTitle = styled.h1`
@@ -79,6 +85,8 @@ const StyledCouponHeading = styled.h2`
 
 // --------------------------------------------------
 
+=======
+>>>>>>> 50433bcede580211275adc752b42118c5a09b8b1
 const STATIC_SERVICES_LIST = [
   { title: "Residential", slug: { current: "residential" } },
   { title: "Commercial", slug: { current: "commercial" } },
@@ -243,12 +251,21 @@ export default function CityServiceSlugRoute(props: ServiceProps) {
   if (router.isFallback) return <div>Loading...</div>;
   if (!service) return <div>Loading...</div>;
 
+<<<<<<< HEAD
   // 1. UPDATED LOGIC: Check for excluded pages
   const isExcludedPage = ['gallery', 'coupons', 'coupon'].includes(service.slug.current);
 
   return (
     <Page
       title={service.title}
+=======
+  const displayTitle = service.title; 
+  const isCouponsPage = service.slug.current === 'coupons';
+
+  return (
+    <Page
+      title={displayTitle} 
+>>>>>>> 50433bcede580211275adc752b42118c5a09b8b1
       description={service.description}
       isService
       imgURL={service.heroImage}
@@ -258,6 +275,7 @@ export default function CityServiceSlugRoute(props: ServiceProps) {
         <div className="lg:flex xl:align-top lg:space-x-0 pl-5 xl:px-5 md:space-y-0 space-y-2 lg:space-y-0 max-w-[1250px]">
           <div className="flex-1 pr-0 md:pr-8">
              <div className="mb-8">
+<<<<<<< HEAD
                
                {/* --- SMART HOME BUTTON --- */}
                <button 
@@ -287,6 +305,28 @@ export default function CityServiceSlugRoute(props: ServiceProps) {
                  {service.fullText}
                </StyledFullText>
 
+=======
+               {/* Back Button */}
+               <button 
+                 onClick={() => router.push(city ? `/${city}` : "/")} 
+                 className="mb-6 px-6 py-2 bg-[#0a3161] text-white rounded hover:bg-[#15233e] transition-colors font-bold flex items-center"
+               >
+                 Home
+               </button>
+
+               <h1 className="text-4xl font-bold mb-4 text-[#15233e]">{displayTitle}</h1>
+               <p className="text-3xl font-semibold mb-4 text-gray-700">{service.description}</p>
+
+               {/* --- TEXT SIZE INCREASED TO 4XL HERE --- */}
+               <p className="text-4xl text-gray-800 leading-relaxed whitespace-pre-line">
+                 {service.fullText}
+               </p>
+               {/* -------------------------------------- */}
+
+             </div>
+             <div className="mt-8">
+                <ServicesGrid services={STATIC_SERVICES_LIST} />
+>>>>>>> 50433bcede580211275adc752b42118c5a09b8b1
              </div>
           </div>
           <PaymentBox>
@@ -297,7 +337,15 @@ export default function CityServiceSlugRoute(props: ServiceProps) {
           </PaymentBox>
         </div>
         
+<<<<<<< HEAD
         {/* --- REMOVED OLD 'StyledCouponHeading' FROM HERE --- */}
+=======
+        {!isCouponsPage && (
+          <h2 className="text-3xl font-bold text-center text-[#0a3161] mt-12 px-4">
+            Take a Look At Our Coupons - You Might Qualify For a Discount!
+          </h2>
+        )}
+>>>>>>> 50433bcede580211275adc752b42118c5a09b8b1
 
         <ServiceCTA />
         <PhoneBtn phone="(800) 687- 0480" />

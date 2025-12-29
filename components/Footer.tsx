@@ -160,6 +160,7 @@ const ListWrapper = styled.div`
   }
 `;
 
+// --- FIXED CSS IS HERE ---
 const ListItemWrapper = styled.p`
   font-size: 1.6rem;
   
@@ -167,17 +168,31 @@ const ListItemWrapper = styled.p`
     text-decoration: none;
     margin: 0 auto;
     align-self: center;
+<<<<<<< HEAD
     color: white !important; 
     transition: all ease-in-out 0.4s;
     cursor: pointer;
     
+=======
+    
+    /* FORCE WHITE COLOR ALWAYS */
+    color: white !important; 
+    
+    transition: all ease-in-out 0.4s;
+    
+    /* Ensure it stays white even if visited */
+>>>>>>> 50433bcede580211275adc752b42118c5a09b8b1
     &:visited {
       color: white !important;
     }
 
     &:hover {
       color: white;
+<<<<<<< HEAD
       opacity: 0.8; 
+=======
+      opacity: 0.8; /* Optional: Slight dim on hover so they know it's clickable */
+>>>>>>> 50433bcede580211275adc752b42118c5a09b8b1
     }
   }
 `;

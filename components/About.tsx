@@ -167,3 +167,65 @@ const Description = styled.span`
     }
   }
 `;
+
+// --- Extra Components that came from Merge (Keeping them to be safe) ---
+
+const Title = styled.h1`
+  font-size: 52px;
+  text-align: left;
+  margin-bottom: 3rem;
+  font-weight: bold;
+  font-family: "Times New Roman", sans-serif;
+  ${media("<=tablet")} {
+    font-size: 28px;
+  }
+  ${media("<tablet")} {
+    text-align: center;
+  }
+  ${media("<=desktop")} {
+    text-align: center;
+  }
+`;
+
+const PaymentContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0;
+  align-items: center;
+  border-left: solid 1px #83838390;
+  img {
+    margin-bottom: auto;
+  }
+  ${media("<largeDesktop")} {
+    border-left: none;
+  }
+`;
+
+const SubTitle = styled.h2`
+  font-size: 32px;
+  text-align: center;
+  margin: 0 10rem;
+  color: #2c2c2c;
+  margin-bottom: 3rem;
+  font-weight: 500;
+  font-family: "Times New Roman", sans-serif;
+  ${media("<=tablet")} {
+    font-size: 20px;
+    margin: 0 2rem;
+    margin-bottom: 3rem;
+  }
+`;
+
+const Row = styled.div`
+  margin: 5rem 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .image {
+    width: 14rem;
+    margin-right: 1rem;
+  }
+  ${media("<=tablet")} {
+    flex-direction: column;
+  }
+`;
