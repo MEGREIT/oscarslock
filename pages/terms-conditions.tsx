@@ -114,11 +114,6 @@ export default function TermsConditions() {
               <p>Any claim relating to Oscars Lock & Key Services' website shall be governed by the laws of the State of Massachusetts without regard to its conflict of law provisions.</p>
               
               <p><strong>General Terms and Conditions applicable to Use of a Web Site.</strong></p>
-
-              <CouponBox>
-                  <h3>Take a Look At Our Coupons - You Might Qualify For a Discount!</h3>
-                  <a href="/coupons">FOR COUPONS CLICK HERE</a>
-              </CouponBox>
             </TextContent>
           </LeftColumn>
 
@@ -401,48 +396,6 @@ const SectionHeader = styled.h3`
   margin-top: 40px;
   margin-bottom: 20px;
   font-weight: 700;
-`;
-
-const CouponBox = styled.div`
-  margin-top: 80px;
-  border-top: 2px solid #e5e7eb;
-  padding-top: 60px;
-  text-align: center;
-
-  h3 {
-    color: #0A3161;
-    font-size: 2.2rem;
-    font-weight: bold;
-    margin-bottom: 30px;
-    line-height: 1.3;
-    
-    ${media("<=tablet")} {
-      font-size: 1.6rem;
-    }
-    
-    ${media("<=phone")} {
-      font-size: 1.1rem;
-    }
-  }
-
-  a {
-    display: inline-block;
-    background: #751318;
-    color: white;
-    padding: 20px 50px;
-    font-size: 1.5rem;
-    font-weight: bold;
-    text-decoration: none;
-    border-radius: 4px;
-    transition: background 0.3s;
-
-    &:hover { background: #5e0a0a; }
-    
-    ${media("<=phone")} {
-      padding: 15px 30px;
-      font-size: 1.2rem;
-    }
-  }
 `;
 
 // --- FOOTER STYLES ---
