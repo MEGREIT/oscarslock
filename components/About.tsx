@@ -1,7 +1,6 @@
 import { media } from "@/utils/media";
 import React from "react";
 import styled from "styled-components";
-// import PhotoSlider from "./PhotoSlider"; 
 
 const list = [
   "The protection of your property or business?",
@@ -40,16 +39,18 @@ const About = () => {
             </div>
 
             <div className="flex space-x-2 lg:align-middle">
+              {/* REMOVED extra padding/margins here to maximize width */}
               <div className="flex flex-col space-y-4 w-full xl:ml-24 mobile-list-container">
                 <h1>Are you looking for</h1>
-                {list.map((text: string) => (
-                  /* UPDATED: space-x-1 on mobile saves width */
-                  <div className="flex space-x-1 md:space-x-2 items-center" key={text}>
-                    {/* UPDATED: Slightly smaller icon (w-5) to match tiny text */}
-                    <img className="w-5 h-5 md:w-10 md:h-10 object-contain flex-shrink-0" src="/logos/LOGO-bullet.png" />
+                {list.map((text: string, i: number) => (
+                  <div className="flex space-x-2 items-center" key={text}>
+                    {/* UPDATED: Bigger Logos (w-7 h-7) that don't shrink */}
+                    <img className="w-7 h-7 md:w-10 md:h-10 object-contain flex-shrink-0" src="/logos/LOGO-bullet.png" />
                     
-                    {/* --- FORCED SINGLE LINE TEXT --- */}
-                    <ListText>{`${text}`}</ListText>
+                    {/* Logic for the 3rd item vs others */}
+                    <ListText $isThirdItem={i === 2}>
+                        {text}
+                    </ListText>
                   </div>
                 ))}
               </div>
@@ -63,17 +64,31 @@ const About = () => {
 
 export default About;
 
-// --- COMPONENT FOR THE LIST ITEMS ONLY ---
-const ListText = styled.p`
+// --- OPTIMIZED LIST TEXT COMPONENT ---
+const ListText = styled.p<{ $isThirdItem?: boolean }>`
   font-size: 17px;
   margin: 0;
   
   ${media("<=tablet")} {
-    font-size: 9px !important; /* Aggressively small to fit 1 line */
-    white-space: nowrap !important; /* Force 1 line NO MATTER WHAT */
-    line-height: 1.5;
-    width: auto;
-    flex: 1; /* Allow it to take available space */
+    /* 1. MAX SIZE TRICK: Use Viewport Width (vw) */
+    /* 3.6vw calculates to ~13-14px on average phones, but ensures it fits */
+    font-size: 3.6vw !important; 
+    
+    /* 2. Squeeze letters slightly to fit more text */
+    letter-spacing: -0.5px; 
+    line-height: 1.3;
+    
+    /* 3. Safety: prevents page overflow */
+    flex: 1;
+    min-width: 0; 
+    width: 100%;
+
+    /* 4. Logic: 3rd item wraps, others are single line */
+    white-space: ${(props) => (props.$isThirdItem ? "normal" : "nowrap")} !important;
+    
+    /* Optional: If screens are TINY (like Galaxy Fold), allow swipe instead of breaking layout */
+    overflow-x: ${(props) => (props.$isThirdItem ? "visible" : "auto")};
+    &::-webkit-scrollbar { display: none; }
   }
 `;
 
@@ -82,15 +97,13 @@ const Wrapper = styled.div`
   padding-bottom: 4rem;
   height: 100%;
   max-width: 100%;
+  overflow-x: hidden;
   margin: 0 0;
   display: flex;
   ${media("<=desktop")} {
     flex-direction: column;
-    padding: 4rem 2rem;
-    padding-top: 0rem;
-  }
-  ${media("<desktop")} {
-    padding: 4rem 2rem;
+    /* REDUCED PADDING: Changed 2rem to 1rem to give text more space */
+    padding: 4rem 1rem; 
     padding-top: 0rem;
   }
 `;
@@ -113,6 +126,7 @@ const ReversedRow = styled.div`
     margin-top: 0rem;
     margin-left: 0; 
     margin-right: 0;
+    width: 100%;
   }
 `;
 
@@ -128,12 +142,10 @@ const Description = styled.span`
     color: #0A3161; 
   }
 
-  /* --- GLOBAL P STYLE (Normal wrapping for other text) --- */
   p {
     font-size: 17px;
     ${media("<=tablet")} {
       font-size: 15px; 
-      white-space: normal; 
     }
   }
 
@@ -145,7 +157,7 @@ const Description = styled.span`
     
     ${media("<=tablet")} {
       text-align: center; 
-      font-size: 2.8rem;
+      font-size: 2.5rem; /* Adjusted slightly to match new padding */
     }
   }
 
@@ -158,18 +170,18 @@ const Description = styled.span`
 
   ${media("<=tablet")} {
     font-size: 14px;
-    margin: 5rem 0.5rem; 
+    margin: 5rem 0; /* Removed side margins */
     text-align: left; 
     
     .mobile-list-container {
       align-items: flex-start; 
-      padding: 0 0.5rem; 
+      padding: 0; /* Removed padding to maximize width */
+      width: 100%;
     }
   }
 `;
 
-// --- Extra Components that came from Merge (Keeping them to be safe) ---
-
+// --- Other Components (Unchanged) ---
 const Title = styled.h1`
   font-size: 52px;
   text-align: left;
@@ -179,14 +191,7 @@ const Title = styled.h1`
   ${media("<=tablet")} {
     font-size: 28px;
   }
-  ${media("<tablet")} {
-    text-align: center;
-  }
-  ${media("<=desktop")} {
-    text-align: center;
-  }
 `;
-
 const PaymentContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -200,7 +205,6 @@ const PaymentContainer = styled.div`
     border-left: none;
   }
 `;
-
 const SubTitle = styled.h2`
   font-size: 32px;
   text-align: center;
@@ -215,7 +219,6 @@ const SubTitle = styled.h2`
     margin-bottom: 3rem;
   }
 `;
-
 const Row = styled.div`
   margin: 5rem 1rem;
   display: flex;
