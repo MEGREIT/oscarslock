@@ -131,11 +131,6 @@ export default function PrivacyPolicy() {
                   <li>Details of transactions you carry out through our Website and of the fulfillment of your orders. You may be required to provide financial information before placing an order through our Website.</li>
                   <li>Your search queries on the Website.</li>
               </ul>
-
-              <CouponBox>
-                  <h3>Take a Look At Our Coupons - You Might Qualify For a Discount!</h3>
-                  <a href="/coupons">FOR COUPONS CLICK HERE</a>
-              </CouponBox>
             </TextContent>
           </LeftColumn>
 
