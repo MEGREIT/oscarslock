@@ -250,9 +250,16 @@ export default function ServiceSlugRoute(props: ServiceProps) {
                  ← Home
                </button>
                
-               {/* --- COUPON TEXT (MOVED TO TOP) --- */}
+               <StyledPageTitle>{service.title}</StyledPageTitle>
+               <StyledPageDescription>{service.description}</StyledPageDescription>
+               
+               <StyledFullText>
+                 {service.fullText}
+               </StyledFullText>
+
+               {/* --- COUPON TEXT (MOVED TO BOTTOM) --- */}
                {!isExcludedPage && (
-                 <div style={{ textAlign: 'center', color: '#0A3161', marginBottom: '30px' }}>
+                 <div style={{ textAlign: 'center', color: '#0A3161', marginTop: '40px', marginBottom: '10px' }}>
                    <h2 style={{ fontFamily: '"Times New Roman", serif', fontSize: '2.4rem', fontWeight: 'bold', marginBottom: '10px', lineHeight: '1.2' }}>
                      Take a Look At Our Coupons - You Might Qualify For a Discount!
                    </h2>
@@ -262,13 +269,6 @@ export default function ServiceSlugRoute(props: ServiceProps) {
                  </div>
                )}
                {/* ---------------------------------- */}
-
-               <StyledPageTitle>{service.title}</StyledPageTitle>
-               <StyledPageDescription>{service.description}</StyledPageDescription>
-               
-               <StyledFullText>
-                 {service.fullText}
-               </StyledFullText>
 
              </div>
           </div>
