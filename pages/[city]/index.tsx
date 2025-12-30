@@ -1,28 +1,86 @@
-import { InferGetServerSidePropsType } from "next";
-import Head from "next/head";
+import React from "react";
+import { SharedPageProps } from "../../_app"; 
 import styled from "styled-components";
-import Cta from "views/HomePage/Cta";
-import Slider from "components/Slider";
-
-// --- IMPORT CSS (Parent Folder) ---
-import "../style.css"; 
-// ----------------------------------
-
-import OurTeam from "@/views/AboutPage/OurTeam";
+import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
-import About from "@/components/About";
-import { media } from "@/utils/media";
+import Page from "@/components/Page";
+import { PaymentBox, PaymentContainer, WhiteBackgroundContainer } from "..";
 import TextBubble from "@/components/TextBubble";
-import PhotoSlider from "@/components/PhotoSlider";
-import CityServicesGrid from "@/components/CityServicesGrid";
-import cityData from "@/utils/cities_data.json";
-import GoogleScript from "@/components/Script";
-import { useEffect, useState } from "react";
-import { getCityPhone } from "@/utils/getCityPhone";
+import ServiceCTA from "@/views/HomePage/ServiceCTA";
 import PhoneBtn from "@/components/PhoneBtn";
+import { media } from "@/utils/media";
+import Cta from "@/views/HomePage/Cta"; 
 
-// --- STATIC DATA (STRICT ORDER) ---
-const STATIC_SERVICES = [
+interface ServiceProps extends SharedPageProps {
+  service: any;
+  city?: string;
+}
+
+interface Query {
+  [key: string]: string;
+}
+
+const ServiceContainer = styled(WhiteBackgroundContainer)`
+  padding-top: 0rem;
+`;
+
+// --- STYLES ---
+
+const StyledPageTitle = styled.h1`
+  font-family: "Times New Roman", serif;
+  font-size: 4.8rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  color: #0A3161; 
+  line-height: 1.1;
+
+  ${media("<=tablet")} {
+    font-size: 3.6rem;
+  }
+`;
+
+const StyledPageDescription = styled.p`
+  font-family: "Times New Roman", serif;
+  font-size: 2.4rem;
+  font-weight: 600;
+  margin-bottom: 3rem;
+  color: #0A3161; 
+  opacity: 0.9;
+
+  ${media("<=tablet")} {
+    font-size: 2rem;
+  }
+`;
+
+const StyledFullText = styled.div`
+  font-family: "Times New Roman", serif;
+  font-size: 2rem;
+  line-height: 1.8;
+  color: #0A3161; 
+  white-space: pre-line;
+
+  ${media("<=tablet")} {
+    font-size: 1.8rem;
+  }
+`;
+
+const BottomText = styled.p`
+   font-family: "Times New Roman", serif;
+   font-size: 2.8rem; /* Large Size */
+   font-weight: 700;
+   text-align: center;
+   color: #0A3161; 
+   margin-top: 3rem; 
+   margin-bottom: 4rem; 
+
+   ${media("<=tablet")} {
+    font-size: 2rem;
+  }
+`;
+
+// --------------------------------------------------
+
+const STATIC_SERVICES_LIST = [
   { title: "Residential", slug: { current: "residential" } },
   { title: "Commercial", slug: { current: "commercial" } },
   { title: "Automotive", slug: { current: "automotive" } },
@@ -33,124 +91,245 @@ const STATIC_SERVICES = [
   { title: "Coupons", slug: { current: "coupons" } },
 ];
 
-// --- REAL REVIEWS (Hardcoded for City Pages) ---
-const STATIC_TESTIMONIALS = [
-  { 
-    fullName: "Jennifer M.", 
-    rating: 5, 
-    testimonial: "Oscar's Lock & Key saved the day! I was locked out of my car with my groceries melting in the heat. They arrived in 20 minutes and got me back on the road instantly. Highly recommended!" 
+const STATIC_SERVICES_DATA: Record<string, any> = {
+  automotive: {
+    title: "Automotive",
+    heroImage: "/service-bg/automotive.png", 
+    slug: { current: "automotive" }, 
+    description: "Car key replacement and lockout services.",
+    fullText: `Lost your car keys? Our on-call automotive locksmith professional will make all keys & remotes on site. We can fix faulty auto ignitions or locks right on the spot.
+
+Oscars Lock & Key Services can help you quickly duplicate or replace lost, damaged or stolen electronic car keys and key fobs. We make electronic car keys for hundreds of car makes and models. Our locksmiths have the technical training and equipment that is necessary to provide fast and accurate car key duplication and replacement services. Our fully equipped mobile van comes to your location and offers the ultimate in convenience and time savings.
+
+Keys & Remotes for Most Vehicles, Makes & Models
+Oscars Lock & Key Services has an extensive stock of base keys, as well as more than 90 auto transponder keys for nearly 200 vehicle models, including cars, vans and trucks. Please call us with any questions regarding your specific vehicle make and model.
+Car Key Replacement & Duplication Services
+
+Oscars Lock & Key Services offers the following automotive key services:
+
+●Transponder (remote and key FOB) replacement
+●Transponder chip repair, duplication, and replacement
+●Smart and Flip Blade key repair or replacement
+●VIN key copying
+●PROX Car Key duplication and replacement
+●Immobilizer key reprogramming
+●Car remote programming
+●Ignition switch repair and unlocking
+●Broken key removal
+●Car trunk opening
+●High Security Car Key Cutting`,
   },
-  { 
-    fullName: "David R.", 
-    rating: 5, 
-    testimonial: "Very professional service. We needed to rekey our entire office building after a security concern. The team was efficient, polite, and gave us a great price. Will definitely use them again." 
+  residential: {
+    title: "Residential",
+    heroImage: "/service-bg/residential.png", 
+    slug: { current: "residential" }, 
+    description: "Complete residential locksmith services for your home security.",
+    fullText: `Ensuring the security of your home is a top priority
+
+Oscars Lock & key Services provides a comprehensive range of residential locksmith services. Our highly skilled licensed locksmith professionals can resolve your locksmith service needs.
+
+With the support of qualified locksmiths, you can make right decisions and maximize the effectiveness of your security investments. We provide services which include fixing broken locks, installing new hardware, replacing lost keys or making your existing locks work with a different key and a master key.
+
+Common residential lock and key issues we can help you with include:
+
+●Home Lockout Service – Oscars Lock & key Services will quickly dispatch an experienced licensed locksmith professional to your home to address the issue.
+●Lock Installation, Replacement, and Repair – We carry a wide range of locks, deadbolts and keys to ensure we're able to provide you with the best products and services when locks break or need to be replaced.
+●Lock Rekeying – Rekeying is an essential service offered by Oscars Lock & Key Services that often goes overlooked. It involves changing the internal lock mechanism so that previous keys no longer work and new keys are required for access. Rekeying offers an affordable and efficient alternative to lock replacement and is particularly useful when keys are lost or stolen,or unauthorized access is suspected.
+●A master Key System – A Master key system allows your access to multiple locks using a single key, while individual keys only open specific locks.
+●High-Security Locks & Deadbolts – A high-security lock with key control adds an increased level of safety to your home by reducing the chance that your house key can be duplicated in an unauthorized fashion.
+
+We are committed to providing an unmatched level of service to our customers, please ask us about our Price Match Guarantee.`,
   },
-  { 
-    fullName: "Sarah Jenkins", 
-    rating: 5, 
-    testimonial: "I lost my house keys late at night and was panicking. Called these guys and they were there so fast. The technician was super friendly and made me feel safe. Thank you so much!" 
+  commercial: {
+    title: "Commercial",
+    heroImage: "/service-bg/commercial.png", 
+    slug: { current: "commercial" }, 
+    description: "Professional security solutions for businesses and offices.",
+    fullText: `Commercial Locksmith Services & Products
+
+Business security is a top priority for any organization. Oscars Lock & Key Services provides a wide range of commercial high-security locks, including un-pickable, do-not-duplicate, push and panic bars.
+
+Commercial Service Offerings:
+
+●High-security deadbolts, locks and key control systems
+●Lock repair, rekeying, replacement and installation
+●Master Key Systems
+●Keyless entry systems
+●Key duplication and replacement
+●Key extraction
+●Door lever locks, closers and hinge installation and repair
+●Door viewers and guards
+●Exit devices
+●File cabinet locks, locking bars and key replacement
+●Showcase, desk and cabinet lock installation, repair and replacement`,
   },
-  { 
-    fullName: "Mike T.", 
-    rating: 5, 
-    testimonial: "Great experience with their safe opening service. I inherited an old safe and couldn't get it open. They opened it without damaging it. True experts." 
+  emergency: {
+    title: "Emergency",
+    heroImage: "/service-bg/emergency.png", 
+    slug: { current: "emergency" }, 
+    description: "24/7 Emergency assistance for lockouts.",
+    fullText: `Quick and Reliable Emergency Locksmith Service
+
+Locked Out? We’ve Got the Key to Your Solution!
+
+Wе knоw hоw ѕtrеѕѕful it is to be lосkеd оut оf уоur home, break or lose your ignition kеу.Wе саn handle аnу tуре оf emergency lосkѕmіth situation.
+
+Our experienced locksmith company like Oscars Lock & Key Services offers 24/7 emergency lockout services, ensuring that you can regain access quickly and efficiently.
+
+Our team of professionals operates to minimize damage to your property, by using non-destructive techniques and tools.
+
+Wе оffеr the following emergency locksmith ѕеrvісеѕ:
+
+●Emergency Lосkоut Sеrvісеѕ for Hоmеѕ, Commercial Buildings, and Vеhісlеѕ
+●Lосk Changes аnd Rераіr
+●Re-Keying
+●Kеуlеѕѕ Entry Systems
+●Master Kеу Sуѕtеmѕ
+●Pаnіс Bаr Rераіr аnd Installation
+●Aссеѕѕ Cоntrоl Sуѕtеmѕ
+
+
+Yоu саn соunt оn Oscars Lock & Key Services to get the job dоnе ԛuісklу and еffісіеntlу, and we оffеr the mоѕt competitive rates with a price match guarantee.`,
   },
-  { 
-    fullName: "Emily Chen", 
-    rating: 5, 
-    testimonial: "Fast, reliable, and affordable. I've used them for both my car and my apartment. Best locksmith in town hands down." 
+  mailbox: {
+    title: "Mailbox",
+    heroImage: "/service-bg/mailbox.png", 
+    slug: { current: "mailbox" }, 
+    description: "Mailbox lock replacement and key services.",
+    fullText: `We have changed many mailbox locks for our customers.
+
+We offer fully trained locksmith technicians who have every mailbox lock in stock at all times - so you never have to wait!
+
+Mailboxes are an easy target to break into. Here is why you should protect your mailbox. It’s no secret though that identity fraud has become rife in recent years and one of the easiest ways to get the important data is through mail!
+
+Low cost options are available to increase the security of your mailbox to prevent theft that could lead to something much more costly and serious!`,
+  },
+  safe: {
+    title: "Safe",
+    heroImage: "/service-bg/safe.png", 
+    slug: { current: "safe" }, 
+    description: "Safe opening, repair, and installation.",
+    fullText: `Having issues with your safe? 
+
+We are expert safe locksmiths! 
+
+We have tools and techniques. No matter how complicated a situation you might have!
+Oscars Lock & Key Services technicians are highly trained and have years of experience.
+
+We have worked with many different types of safe locks and know every method to getting your safe opened.
+
+When the technician sees your safe, he determines the best method to gain entry.`,
+  },
+  coupons: {
+    title: "Coupons",
+    heroImage: "/service/coupons.png", 
+    slug: { current: "coupons" }, 
+    description: "Discount coupons for locksmith services.",
+    fullText: "Check here for our latest offers and discounts. We strive to provide affordable locksmith services without compromising on quality.",
+  },
+  gallery: {
+    title: "Gallery",
+    heroImage: "/service/images-regular.svg", 
+    slug: { current: "gallery" }, 
+    description: "Our work gallery.",
+    fullText: "Browse photos of our recent work and see the quality of our craftsmanship.",
   }
-];
+};
 
-export default function Homepage({
-  services,
-  testimonials,
-  slug,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function CityServiceSlugRoute(props: ServiceProps) {
   const router = useRouter();
-  const [phone, setPhone] = useState<string | null>(null);
+  const { service } = props;
+  const { city } = router.query;
+   
+  if (router.isFallback) return <div>Loading...</div>;
+  if (!service) return <div>Loading...</div>;
 
-  useEffect(() => {
-    if (typeof slug === "string") {
-      const phoneNumber = getCityPhone(slug);
-      setPhone(phoneNumber);
-    }
-  }, [slug]);
-
-  // Capitalize first letter of city for title
-  const cityTitle = slug ? slug.charAt(0).toUpperCase() + slug.slice(1) : "";
+  const isExcludedPage = ['gallery', 'coupons', 'coupon'].includes(service.slug.current);
 
   return (
-    <>
-      <Head>
-        <title>Oscars Lock & Key Services in {cityTitle}</title>
-        <meta name="description" content={`Professional Locksmith services in ${cityTitle}`} />
-      </Head>
-      <GoogleScript />
-      <HomepageWrapper>
-        <Slider phone={phone} />
-        <WhiteBackgroundContainer>
-          <div className="flex flex-col items-center">
-            <div className="lg:flex xl:align-top lg:space-x-4 space-y-2 lg:space-y-0 justify-center align-middle mx-0">
-              <div className="flex flex-col mx-0 w-auto 2xl:max-w-[65%] xl:max-w-[80%]">
-                
-                {/* --- FIX: Pass 'services' directly. DO NOT SORT IT. --- */}
-                <CityServicesGrid services={services} slug={slug} />
-                {/* ----------------------------------------------------- */}
+    <Page
+      title={service.title}
+      description={service.description}
+      isService
+      imgURL={service.heroImage}
+    >
+      <ServiceContainer>
+        <PhoneBtn phone="(800) 687- 0480" />
+        <div className="lg:flex xl:align-top lg:space-x-0 pl-5 xl:px-5 md:space-y-0 space-y-2 lg:space-y-0 max-w-[1250px]">
+          <div className="flex-1 pr-0 md:pr-8">
+             <div className="mb-8">
+               <button 
+                 onClick={() => router.push(city ? `/${city}` : "/")} 
+                 className="mb-10 px-10 py-4 bg-[#0a3161] text-white text-2xl rounded-lg shadow-md hover:bg-[#15233e] transition-all transform hover:scale-105 font-bold flex items-center font-serif"
+               >
+                 ← Home
+               </button>
+               
+               <StyledPageTitle>{service.title}</StyledPageTitle>
+               <StyledPageDescription>{service.description}</StyledPageDescription>
+               
+               <StyledFullText>
+                 {service.fullText}
+               </StyledFullText>
 
-                {phone && <PhoneBtn phone={phone} />}
-                <About />
-              </div>
-              <PaymentBox>
-                <PaymentContainer><img src="/payment.png" /></PaymentContainer>
-                {phone && <PhoneBtn phone={phone} />}
-                <TextBubble />
-                <img src="/logos/oscar-logo.png" className="w-[25rem] ml-0" />
-              </PaymentBox>
-            </div>
-            <MapContainer>
-              <OurTeam testimonials={testimonials} />
-              {phone && <PhoneBtn phone={phone} />}
-              <PhotoSlider />
-            </MapContainer>
+               {/* --- CTA COMPONENT (TOP HEADLINE ONLY) --- */}
+               {!isExcludedPage && (
+                 <div style={{ marginBottom: '10px', marginTop: '40px' }}>
+                   <Cta />
+                 </div>
+               )}
+               {/* ---------------------------------- */}
+
+             </div>
+             <div className="mt-8">
+             </div>
           </div>
-        </WhiteBackgroundContainer>
-        <DarkerBackgroundContainer>
-          <Cta />
-          <button onClick={() => router.push(`/${slug}/coupons`)} className="bg-[#751318] text-2xl px-32 py-2 text-white mx-auto">
-            FOR COUPONS CLICK HERE
-          </button>
-        </DarkerBackgroundContainer>
-      </HomepageWrapper>
-    </>
+          <PaymentBox>
+            <PaymentContainer><img src="/payment.png" alt="Accepted Payments" /></PaymentContainer>
+            <PhoneBtn phone="(800) 687- 0480" />
+            <TextBubble />
+            <img src="/logos/oscar-logo.png" className="w-[25rem] ml-0" alt="Logo" />
+          </PaymentBox>
+        </div>
+        
+        <ServiceCTA />
+        <PhoneBtn phone="(800) 687- 0480" />
+        
+        {/* BUTTON */}
+        <button 
+          onClick={() => router.push("/coupons")} 
+          className="bg-[#751318] text-xl md:text-2xl px-8 md:px-32 py-3 text-white mx-auto block mt-8 hover:bg-[#5e0a0a] transition-colors font-bold rounded-md shadow-md font-serif w-11/12 md:w-auto"
+        >
+          FOR COUPONS CLICK HERE
+        </button>
+
+        {/* --- BOTTOM TEXT (AFTER BUTTON - LARGE SIZE) --- */}
+        {!isExcludedPage && (
+          <BottomText>
+            Don't Wait, Reach Out To Oscars Lock & Key Services!
+          </BottomText>
+        )}
+        {/* -------------------------------- */}
+
+      </ServiceContainer>
+    </Page>
   );
 }
 
-// ... Styles ...
-const HomepageWrapper = styled.div`max-width: 100vw; background-color: white; overflow: hidden; & > :last-child { margin-bottom: 2rem; }`;
-export const PaymentContainer = styled.div`display: flex; justify-content: start; margin-top: -3.5rem; align-items: start; img { margin-bottom: auto; padding: 0; } ${media("<largeDesktop")} { margin-top: 0rem; }`;
-export const PaymentBox = styled.div`display: flex; flex-direction: column; align-items: center; margin: 0 0; ${media(">=largeDesktop")} { width: 30%; } ${media("<=phone")} { margin: 0 2rem; }`;
-const DarkerBackgroundContainer = styled.div`background: rgb(251, 251, 253); display: flex; max-width: 100vw; overflow: hidden; flex-direction: column; justify-content: center;`;
-export const WhiteBackgroundContainer = styled.div`background: rgb(255, 255, 255); display: flex; flex-direction: column; justify-content: center; max-width: 100vw; overflow: hidden; padding: 0 10rem; padding-top: 5rem; & > *:not(:first-child) { margin-top: 3rem; } ${media("<=phone")} { padding: 0 0; } ${media(">largeDesktop")} { align-items: center; margin: 0 auto; } @media (min-width: 375px) and (max-width: 640px) { padding: 0 0; } @media (min-width: 2240px) { width: 60vw; margin: 0 auto; } @media (min-width: 1440px) { width: 100vw; margin: 0 auto; }`;
-export const MapContainer = styled.div`display: flex; flex-direction: row; max-width: 60vw; align-items: center; padding: 0 0rem; justify-content: space-between; align-items: center; ${media("<tablet")} { flex-direction: column; } @media (min-width: 375px) and (max-width: 640px) { padding: 0 0; } @media (max-width: 1440px) and (min-width: 1024px) { max-width: 90vw; } @media (min-width: 1280px) { max-width: 1190px; overflow: hidden; } @media (min-width: 1280px) and (max-width: 2652px) { padding: 0 3rem; padding-left: 5rem; } @media (max-width: 1440px) and (min-width: 768px) { width: 1506px; }`;
-
-export async function getServerSideProps(ctx: any) {
-  const { params = {} } = ctx;
-  const slug = params.city;
-  const reserved = ["privacy-policy", "terms-conditions", "price", "gallery", "services", "safe", "commercial", "mailbox", "emergency", "residential", "coupons", "lock-repair", "automotive"];
-  
-  if (reserved.includes(slug)) {
-    return { props: { slug, posts: [], services: STATIC_SERVICES, testimonials: STATIC_TESTIMONIALS } };
+export const getServerSideProps: GetServerSideProps<ServiceProps, Query> = async (ctx) => {
+  const { draftMode = false, params = {} } = ctx;
+  const slug = params.slug as string; 
+  const service = STATIC_SERVICES_DATA[slug];
+   
+  if (service) {
+    return { props: { service, draftMode, token: "" } };
   }
-  const isPresent = cityData.hcms_cities.some((city) => city.subdomain === slug);
-  if (!isPresent) return { notFound: true };
 
-  return {
-    props: {
-      slug,
-      posts: [],
-      services: STATIC_SERVICES, // Return static list directly
-      testimonials: STATIC_TESTIMONIALS,
-    },
+  return { 
+    props: { 
+      service: STATIC_SERVICES_DATA['residential'], 
+      draftMode, 
+      token: "" 
+    } 
   };
-}
+};
