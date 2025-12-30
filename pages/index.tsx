@@ -14,24 +14,24 @@ import PhoneBtn from "@/components/PhoneBtn";
 import ServicesGrid from "@/components/ServicesGrid";
 import GoogleScript from "@/components/Script";
 
-// --- THE FINAL, FORCED LIST (Exact Order of Icons) ---
+// --- THE FINAL, FORCED LIST ---
 const STATIC_SERVICES = [
-  { title: "Residential", slug: { current: "residential" } }, // 1. House Icon
-  { title: "Commercial", slug: { current: "commercial" } },   // 2. Building Icon
-  { title: "Automotive", slug: { current: "automotive" } },   // 3. Car Icon
-  { title: "Emergency", slug: { current: "emergency" } },     // 4. Clock Icon
-  { title: "Mailbox", slug: { current: "mailbox" } },         // 5. Envelope Icon
-  { title: "Safe", slug: { current: "safe" } },               // 6. Lock Icon
-  { title: "Gallery", slug: { current: "gallery" } },         // 7. Photo Icon
-  { title: "Coupons", slug: { current: "coupons" } },         // 8. Ticket Icon
+  { title: "Residential", slug: { current: "residential" } }, 
+  { title: "Commercial", slug: { current: "commercial" } },   
+  { title: "Automotive", slug: { current: "automotive" } },   
+  { title: "Emergency", slug: { current: "emergency" } },     
+  { title: "Mailbox", slug: { current: "mailbox" } },         
+  { title: "Safe", slug: { current: "safe" } },               
+  { title: "Gallery", slug: { current: "gallery" } },         
+  { title: "Coupons", slug: { current: "coupons" } },         
 ];
 
-// --- RESTORED REVIEWS (Hardcoded so they always show up) ---
+// --- TESTIMONIALS (Fixed "Oscar's" -> "Oscars") ---
 const STATIC_TESTIMONIALS = [
   { 
     fullName: "Jennifer M.", 
     rating: 5, 
-    testimonial: "Oscar's Lock & Key saved the day! I was locked out of my car with my groceries melting in the heat. They arrived in 20 minutes and got me back on the road instantly. Highly recommended!" 
+    testimonial: "Oscars Lock & Key saved the day! I was locked out of my car with my groceries melting in the heat. They arrived in 20 minutes and got me back on the road instantly. Highly recommended!" 
   },
   { 
     fullName: "David R.", 
@@ -75,10 +75,7 @@ export default function Homepage({
           <div className="flex flex-col items-center">
             <div className="lg:flex xl:align-top lg:space-x-4 space-y-2 lg:space-y-0 justify-center align-middle mx-0">
               <div className="flex flex-col mx-0 w-auto 2xl:max-w-[65%] xl:max-w-[80%]">
-                
-                {/* --- GRID (Passed directly, NO sorting) --- */}
                 <ServicesGrid services={services} />
-                
                 <PhoneBtn phone={phone} />
                 <About />
               </div>
@@ -96,26 +93,58 @@ export default function Homepage({
             </MapContainer>
           </div>
         </WhiteBackgroundContainer>
+        
+        {/* --- BOTTOM CTA SECTION --- */}
         <DarkerBackgroundContainer>
+          {/* 1. HEADLINE TEXT */}
           <Cta />
-          <button onClick={() => router.push(`/coupons`)} className="bg-[#751318] text-2xl px-32 py-2 text-white mx-auto">
+          
+          {/* 2. CALL BUTTON */}
+          <div style={{ marginBottom: '2rem' }}>
+            <PhoneBtn phone={phone} />
+          </div>
+
+          {/* 3. COUPON BUTTON */}
+          <button 
+            onClick={() => router.push(`/coupons`)} 
+            className="bg-[#751318] text-xl md:text-2xl px-8 md:px-32 py-3 text-white mx-auto rounded-md shadow-md font-bold font-serif w-11/12 md:w-auto"
+          >
             FOR COUPONS CLICK HERE
           </button>
+
+          {/* 4. LARGE BOTTOM TEXT (MATCHING OTHERS) */}
+          <BottomText>
+            Don't Wait, Reach Out To Oscars Lock & Key Services!
+          </BottomText>
+
         </DarkerBackgroundContainer>
       </HomepageWrapper>
     </>
   );
 }
 
+const BottomText = styled.p`
+   font-family: "Times New Roman", serif;
+   font-size: 2.8rem; /* Large Size */
+   font-weight: 700;
+   text-align: center;
+   color: #0A3161; 
+   margin-top: 3rem; 
+   margin-bottom: 4rem; 
+
+   ${media("<=tablet")} {
+    font-size: 2rem;
+  }
+`;
+
 const HomepageWrapper = styled.div`max-width: 100vw; background-color: white; overflow: hidden; & > :last-child { margin-bottom: 2rem; }`;
 export const PaymentContainer = styled.div`display: flex; justify-content: start; margin-top: -3.5rem; align-items: start; img { margin-bottom: auto; padding: 0; } ${media("<largeDesktop")} { margin-top: 0rem; }`;
 export const PaymentBox = styled.div`display: flex; flex-direction: column; align-items: center; margin: 0 0; ${media(">=largeDesktop")} { width: 30%; } ${media("<=phone")} { margin: 0 2rem; }`;
-const DarkerBackgroundContainer = styled.div`background: rgb(251, 251, 253); display: flex; max-width: 100vw; overflow: hidden; flex-direction: column; justify-content: center;`;
+const DarkerBackgroundContainer = styled.div`background: rgb(251, 251, 253); display: flex; max-width: 100vw; overflow: hidden; flex-direction: column; justify-content: center; align-items: center;`;
 export const WhiteBackgroundContainer = styled.div`background: rgb(255, 255, 255); display: flex; flex-direction: column; justify-content: center; max-width: 100vw; overflow: hidden; padding: 0 10rem; padding-top: 5rem; & > *:not(:first-child) { margin-top: 3rem; } ${media("<=phone")} { padding: 0 0; } ${media(">largeDesktop")} { align-items: center; margin: 0 auto; } @media (min-width: 375px) and (max-width: 640px) { padding: 0 0; } @media (min-width: 2240px) { width: 60vw; margin: 0 auto; } @media (min-width: 1440px) { width: 100vw; margin: 0 auto; }`;
 export const MapContainer = styled.div`display: flex; flex-direction: row; max-width: 60vw; align-items: center; padding: 0 0rem; justify-content: space-between; align-items: center; ${media("<tablet")} { flex-direction: column; } @media (min-width: 375px) and (max-width: 640px) { padding: 0 0; } @media (max-width: 1440px) and (min-width: 1024px) { max-width: 90vw; } @media (min-width: 1280px) { max-width: 1190px; overflow: hidden; } @media (min-width: 1280px) and (max-width: 2652px) { padding: 0 3rem; padding-left: 5rem; } @media (max-width: 1440px) and (min-width: 768px) { width: 1506px; }`;
 
 export async function getServerSideProps(ctx: any) {
-  // Return the static data immediately
   return {
     props: {
       services: STATIC_SERVICES, 
