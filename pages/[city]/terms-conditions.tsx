@@ -1,13 +1,12 @@
 import React from "react";
 import Head from "next/head";
 import styled from "styled-components";
-import GoogleScript from "@/components/Script";
 import { media } from "@/utils/media";
 import TextBubble from "@/components/TextBubble";
 import PhoneBtn from "@/components/PhoneBtn";
 import NextLink from "next/link";
 
-export default function PrivacyPolicy() {
+export default function TermsConditions() {
   const phoneDisplay = "(800) 687-0480";
   const phoneLink = "tel:8006870480";
   const cityNameDisplay = "Need a Local Locksmith?";
@@ -15,8 +14,8 @@ export default function PrivacyPolicy() {
   return (
     <>
       <Head>
-        <title>Privacy Policy | Oscars Lock & Key Services</title>
-        <meta name="description" content="Privacy Policy for Oscars Lock & Key Services" />
+        <title>Terms and Conditions | Oscars Lock & Key Services</title>
+        <meta name="description" content="Terms and Conditions for Oscars Lock & Key Services" />
       </Head>
       
       {/* Hide any extra floating elements */}
@@ -27,7 +26,7 @@ export default function PrivacyPolicy() {
           display: none !important;
         }
       `}</style>
-
+      
       {/* --- EXACT NAVBAR FROM MAIN SITE --- */}
       <StickyWrapper>
         <div className="w-screen bg-white">
@@ -35,20 +34,18 @@ export default function PrivacyPolicy() {
             <Content>
               <NextLink className="max-h-52" href="/" passHref>
                 <LogoWrapper>
-                  <div className="relative w-32 h-20 sm:w-44 sm:h-24 md:w-56 md:h-36 lg:w-72 lg:h-48">
-                    <img
-                      src="/logos/LOGO.png"
-                      alt="logo"
-                      style={{ width: '100%', height: '100%', objectFit: 'contain' }}
-                    />
-                  </div>
+                  <img
+                    src="/logos/LOGO.png"
+                    alt="logo"
+                    style={{ width: 'auto', height: '100%', maxHeight: '4rem', objectFit: 'contain' }}
+                  />
                 </LogoWrapper>
               </NextLink>
               <p className="var hidden md:block text-[33px]">
                 {cityNameDisplay}
               </p>
               <div className="flex flex-col space-y-2">
-                <p className="block md:hidden text-[12px]">
+                <p className="block md:hidden text-[10px]">
                   {cityNameDisplay}
                 </p>
                 <div>
@@ -80,64 +77,43 @@ export default function PrivacyPolicy() {
           
           {/* LEFT: TEXT */}
           <LeftColumn>
-            <PageTitle>Privacy Policy</PageTitle>
-            <PageSubTitle>Oscars Lock & Key Services Privacy Policy</PageSubTitle>
+            <PageTitle>Terms and Conditions</PageTitle>
+            <PageSubTitle>Oscars Lock & Key services Terms and Conditions</PageSubTitle>
 
             <TextContent>
-              <IntroText>Last Updated 2024. This privacy policy is effective immediately.</IntroText>
+              <SectionHeader>1. Terms</SectionHeader>
+              <p>By accessing this web site, you are agreeing to be bound by these web site Terms and Conditions of Use, all applicable laws and regulations, and agree that you are responsible for compliance with any applicable local laws. If you do not agree with any of these terms, you are prohibited from using or accessing this site. The materials contained in this web site are protected by applicable copyright and trade mark law.</p>
 
-              <SectionHeader>Introduction</SectionHeader>
-              <p>At Oscars Lock & Key Services (the "Company" or "We"), we respect your privacy and are committed to protecting it through our compliance with this policy.</p>
-              <p>This policy describes the types of information we may collect from you or that you may provide when you visit this website (our "Website") and our practices for collecting, using, maintaining, protecting and disclosing that information.</p>
+              <SectionHeader>2. Use License</SectionHeader>
+              <p>Permission is granted to temporarily download one copy of the materials (information or software) on Oscars Lock & Key Services' website for personal, non-commercial transitory viewing only. This is the grant of a license, not a transfer of title, and under this license you may not:</p>
+              <ul>
+                  <li>modify or copy the materials;</li>
+                  <li>use the materials for any commercial purpose, or for any public display (commercial or non-commercial);</li>
+                  <li>attempt to decompile or reverse engineer any software contained on Oscars Lock & Key Services' website;</li>
+                  <li>remove any copyright or other proprietary notations from the materials; or</li>
+                  <li>transfer the materials to another person or "mirror" the materials on any other server.</li>
+              </ul>
+              <p>This license shall automatically terminate if you violate any of these restrictions and may be terminated by Oscars Lock & Key Services at any time. Upon terminating your viewing of these materials or upon the termination of this license, you must destroy any downloaded materials in your possession whether in electronic or printed format.</p>
+
+              <SectionHeader>3. Disclaimer</SectionHeader>
+              <p>The materials on Oscars Lock & Key Services' website are provided "as is". Oscars Lock & Key Services makes no warranties, expressed or implied, and hereby disclaims and negates all other warranties, including without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights. Further, Oscars Lock & Key Services does not warrant or make any representations concerning the accuracy, likely results, or reliability of the use of the materials on its Internet web site or otherwise relating to such materials or on any sites linked to this site.</p>
+
+              <SectionHeader>4. Limitations</SectionHeader>
+              <p>In no event shall Oscars Lock & Key Services or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption,) arising out of the use or inability to use the materials on Oscars Lock & Key Services' Internet site, even if Oscars Lock & Key Services or Oscars Lock & Key Services' authorized representative has been notified orally or in writing of the possibility of such damage. Because some jurisdictions do not allow limitations on implied warranties, or limitations of liability for consequential or incidental damages, these limitations may not apply to you.</p>
+
+              <SectionHeader>5. Revisions and Errata</SectionHeader>
+              <p>The materials appearing on Oscars Lock & Key Services' website could include technical, typographical, or photographic errors. Oscars Lock & Key Services does not warrant that any of the materials on its web site are accurate, complete, or current. Oscars Lock & Key Services may make changes to the materials contained on its web site at any time without notice. Oscars Lock & Key Services does not, however, make any commitment to update the materials.</p>
+
+              <SectionHeader>6. Links</SectionHeader>
+              <p>Oscars Lock & Key Services has not reviewed all of the sites linked to its Internet web site and is not responsible for the contents of any such linked site. The inclusion of any link does not imply endorsement by Oscars Lock & Key Services of the site. Use of any such linked web site is at the user's own risk.</p>
+
+              <SectionHeader>7. Site Terms of Use Modifications</SectionHeader>
+              <p>Oscars Lock & Key Services may revise these terms of use for its web site at any time without notice. By using this web site you are agreeing to be bound by the then current version of these Terms and Conditions of Use.</p>
+
+              <SectionHeader>8. Governing Law</SectionHeader>
+              <p>Any claim relating to Oscars Lock & Key Services' website shall be governed by the laws of the State of Massachusetts without regard to its conflict of law provisions.</p>
               
-              <p>This policy applies to information we collect:</p>
-              <ul>
-                  <li>On this Website.</li>
-                  <li>In email, text and other electronic messages between you and this Website.</li>
-                  <li>Through mobile and desktop applications you download from this Website, which provide dedicated non-browser-based interaction between you and this Website.</li>
-                  <li>When you interact with our advertising and applications on third-party websites and services, if those applications or advertising include links to this policy.</li>
-              </ul>
-
-              <p>It does not apply to information collected by:</p>
-              <ul>
-                  <li>us offline or through any other means, including on any other website operated by Company or any third party (including our affiliates and subsidiaries); or</li>
-                  <li>any third party (including our affiliates and subsidiaries), including through any application or content (including advertising) that may link to or be accessible from or on the Website.</li>
-              </ul>
-
-              <p>Please read this policy carefully to understand our policies and practices regarding your information and how we will treat it. If you do not agree with our policies and practices, your choice is not to use our Website. By accessing or using this Website, you agree to this privacy policy. This policy may change from time to time. Your continued use of this Website after we make changes is deemed to be acceptance of those changes, so please check the policy periodically for updates.</p>
-
-              <SectionHeader>Children Under the Age of 13</SectionHeader>
-              <p>Our Website is not intended for children under 13 years of age. No one under age 13 may provide any personal information to or on the Website. We do not knowingly collect personal information from children under 13. If you are under 13, do not use or provide any information on this Website or on or through any of its features/register on the Website, make any purchases through the Website, use any of the interactive or public comment features of this Website or provide any information about yourself to us, including your name, address, telephone number, e-mail address or any screen name or user name you may use. If we learn we have collected or received personal information from a child under 13 without verification of parental consent, we will delete that information. If you believe we might have any information from or about a child under 13, please contact us via our contact us link.</p>
-
-              <SectionHeader>Information We Collect About You and How We Collect It</SectionHeader>
-              <p>We collect several types of information from and about users of our Website, including information:</p>
-              <ul>
-                  <li>by which you may be personally identified, such as name, postal address, email address, telephone number or ANY OTHER INFORMATION THE WEBSITE COLLECTS THAT IS DEFINED AS PERSONAL OR PERSONALLY IDENTIFIABLE INFORMATION UNDER AN APPLICABLE LAW ("personal information")</li>
-                  <li>that is about you but individually does not identify you, and/or</li>
-                  <li>about your internet connection, the equipment you use to access our Website and usage details.</li>
-              </ul>
-
-              <p>We collect this information:</p>
-              <ul>
-                  <li>Directly from you when you provide it to us.</li>
-                  <li>Automatically as you navigate through the site. Information collected automatically may include usage details, IP addresses and information collected through cookies, web beacons and other tracking technologies.</li>
-                  <li>From third parties, for example, our business partners.</li>
-              </ul>
-
-              <SectionHeader>Information You Provide to Us</SectionHeader>
-              <p>The information we collect on or through our Website may include:</p>
-              <ul>
-                  <li>Information that you provide by filling in forms on our Website. This includes information provided at the time of registering to use our Website, subscribing to our service, posting material or requesting further services. We may also ask you for information when you report a problem with our Website.</li>
-                  <li>Records and copies of your correspondence (including email addresses), if you contact us.</li>
-                  <li>Your responses to surveys that we might ask you to complete for research purposes.</li>
-                  <li>Details of transactions you carry out through our Website and of the fulfillment of your orders. You may be required to provide financial information before placing an order through our Website.</li>
-                  <li>Your search queries on the Website.</li>
-              </ul>
-
-              <CouponBox>
-                  <h3>Take a Look At Our Coupons - You Might Qualify For a Discount!</h3>
-                  <a href="/coupons">FOR COUPONS CLICK HERE</a>
-              </CouponBox>
+              <p><strong>General Terms and Conditions applicable to Use of a Web Site.</strong></p>
             </TextContent>
           </LeftColumn>
 
@@ -159,11 +135,26 @@ export default function PrivacyPolicy() {
 
         </ContentRow>
       </MainWrapper>
+
+      {/* --- FOOTER --- */}
+      <FooterWrapper>
+        <FooterContent>
+          <p>© 2024 Oscars Lock & Key Services. All rights reserved.</p>
+          <FooterLinks>
+            <a href="/">Home</a>
+            <a href="/about">About</a>
+            <a href="/services">Services</a>
+            <a href="/contact">Contact</a>
+            <a href="/privacy-policy">Privacy Policy</a>
+            <a href="/terms-conditions">Terms & Conditions</a>
+          </FooterLinks>
+        </FooterContent>
+      </FooterWrapper>
     </>
   );
 }
 
-// --- NAVBAR STYLES (EXACT FROM NAVBAR COMPONENT) ---
+// --- NAVBAR STYLES ---
 
 const StickyWrapper = styled.div`
   position: sticky;
@@ -179,19 +170,19 @@ const NavbarContainer = styled.div`
   top: 0;
   z-index: 1000;
   display: flex;
-  padding: 1rem 20px;
+  padding: 0.5rem 90px;
   width: 100%;
   max-width: 1550px;
+  max-height: 5rem;
   margin: 0 auto;
   background-color: #fff;
   
   ${media("<=tablet")} {
-    padding: 0.8rem 10px;
+    padding: 0.5rem 1rem;
   }
   
   @media (min-width: 1440px) {
     max-width: 1430px;
-    padding: 1.5rem 90px;
   }
   
   @media (min-width: 1535px) and (max-width: 2652px) {
@@ -213,16 +204,16 @@ const Content = styled.div`
 
   svg {
     color: #751318;
-    width: 30px;
+    width: 20px;
     margin-right: 4px;
     
     @media (max-width: 1040px) {
-      width: 18px;
+      width: 16px;
       margin-right: 3px;
     }
     
     @media (max-width: 425px) {
-      width: 14px;
+      width: 12px;
       margin-right: 2px;
     }
   }
@@ -230,18 +221,18 @@ const Content = styled.div`
   span {
     display: flex;
     align-items: center;
-    font-size: 3rem;
+    font-size: 2rem;
     
     @media (max-width: 1040px) {
-      font-size: 1.8rem;
+      font-size: 1.4rem;
     }
     
     @media (max-width: 869px) {
-      font-size: 1.2rem;
+      font-size: 1rem;
     }
     
     @media (max-width: 425px) {
-      font-size: 0.9rem;
+      font-size: 0.8rem;
     }
   }
 
@@ -256,18 +247,18 @@ const Content = styled.div`
 
   .phone {
     color: #751318;
-    font-size: 3rem;
+    font-size: 2rem;
     
     @media (max-width: 1040px) {
-      font-size: 1.8rem;
+      font-size: 1.4rem;
     }
     
     @media (max-width: 869px) {
-      font-size: 1.2rem;
+      font-size: 0.9rem;
     }
     
-    @media (max-width: 425px) {
-      font-size: 0.9rem;
+    @media (max-width: 305px) {
+      font-size: 0.8rem;
     }
   }
 
@@ -373,14 +364,6 @@ const PageSubTitle = styled.h2`
   }
 `;
 
-const IntroText = styled.p`
-  font-family: ${targetFont};
-  font-size: 18px;
-  color: #0A3161;
-  margin-bottom: 24px;
-  font-weight: bold;
-`;
-
 const TextContent = styled.div`
   font-family: ${targetFont};
   font-size: 18px;
@@ -415,44 +398,50 @@ const SectionHeader = styled.h3`
   font-weight: 700;
 `;
 
-const CouponBox = styled.div`
-  margin-top: 80px;
-  border-top: 2px solid #e5e7eb;
-  padding-top: 60px;
+// --- FOOTER STYLES ---
+
+const FooterWrapper = styled.footer`
+  background: #15233e;
+  color: white;
+  padding: 40px 20px;
+  margin-top: 60px;
+`;
+
+const FooterContent = styled.div`
+  max-width: 1300px;
+  margin: 0 auto;
   text-align: center;
 
-  h3 {
-    color: #0A3161;
-    font-size: 2.2rem;
-    font-weight: bold;
-    margin-bottom: 30px;
-    line-height: 1.3;
-    
-    ${media("<=tablet")} {
-      font-size: 1.6rem;
-    }
-    
-    ${media("<=phone")} {
-      font-size: 1.1rem;
+  p {
+    margin-bottom: 20px;
+    font-size: 1rem;
+    color: white;
+  }
+`;
+
+const FooterLinks = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+
+  a {
+    color: white;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: opacity 0.3s;
+
+    &:hover {
+      opacity: 0.7;
+      text-decoration: underline;
     }
   }
 
-  a {
-    display: inline-block;
-    background: #751318;
-    color: white;
-    padding: 20px 50px;
-    font-size: 1.5rem;
-    font-weight: bold;
-    text-decoration: none;
-    border-radius: 4px;
-    transition: background 0.3s;
-
-    &:hover { background: #5e0a0a; }
+  ${media("<=phone")} {
+    gap: 15px;
     
-    ${media("<=phone")} {
-      padding: 15px 30px;
-      font-size: 1.2rem;
+    a {
+      font-size: 0.85rem;
     }
   }
 `;
