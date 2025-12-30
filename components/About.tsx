@@ -39,12 +39,11 @@ const About = () => {
             </div>
 
             <div className="flex space-x-2 lg:align-middle">
-              {/* REMOVED extra padding/margins here to maximize width */}
               <div className="flex flex-col space-y-4 w-full xl:ml-24 mobile-list-container">
                 <h1>Are you looking for</h1>
                 {list.map((text: string, i: number) => (
                   <div className="flex space-x-2 items-center" key={text}>
-                    {/* UPDATED: Bigger Logos (w-7 h-7) that don't shrink */}
+                    {/* Keep original logo size */}
                     <img className="w-7 h-7 md:w-10 md:h-10 object-contain flex-shrink-0" src="/logos/LOGO-bullet.png" />
                     
                     {/* Logic for the 3rd item vs others */}
@@ -64,29 +63,23 @@ const About = () => {
 
 export default About;
 
-// --- OPTIMIZED LIST TEXT COMPONENT ---
+// --- OPTIMIZED LIST TEXT COMPONENT WITH LARGER FONT ---
 const ListText = styled.p<{ $isThirdItem?: boolean }>`
-  font-size: 17px;
+  /* INCREASED from 17px to 24px for much better visibility */
+  font-size: 24px;
   margin: 0;
+  line-height: 1.4;
+  font-weight: 400;
   
   ${media("<=tablet")} {
-    /* 1. MAX SIZE TRICK: Use Viewport Width (vw) */
-    /* 3.6vw calculates to ~13-14px on average phones, but ensures it fits */
-    font-size: 3.6vw !important; 
-    
-    /* 2. Squeeze letters slightly to fit more text */
-    letter-spacing: -0.5px; 
+    /* Use viewport width for responsive sizing */
+    font-size: 4vw !important; 
+    letter-spacing: -0.3px; 
     line-height: 1.3;
-    
-    /* 3. Safety: prevents page overflow */
     flex: 1;
     min-width: 0; 
     width: 100%;
-
-    /* 4. Logic: 3rd item wraps, others are single line */
     white-space: ${(props) => (props.$isThirdItem ? "normal" : "nowrap")} !important;
-    
-    /* Optional: If screens are TINY (like Galaxy Fold), allow swipe instead of breaking layout */
     overflow-x: ${(props) => (props.$isThirdItem ? "visible" : "auto")};
     &::-webkit-scrollbar { display: none; }
   }
@@ -102,7 +95,6 @@ const Wrapper = styled.div`
   display: flex;
   ${media("<=desktop")} {
     flex-direction: column;
-    /* REDUCED PADDING: Changed 2rem to 1rem to give text more space */
     padding: 4rem 1rem; 
     padding-top: 0rem;
   }
@@ -157,7 +149,7 @@ const Description = styled.span`
     
     ${media("<=tablet")} {
       text-align: center; 
-      font-size: 2.5rem; /* Adjusted slightly to match new padding */
+      font-size: 2.5rem;
     }
   }
 
@@ -170,18 +162,17 @@ const Description = styled.span`
 
   ${media("<=tablet")} {
     font-size: 14px;
-    margin: 5rem 0; /* Removed side margins */
+    margin: 5rem 0;
     text-align: left; 
     
     .mobile-list-container {
       align-items: flex-start; 
-      padding: 0; /* Removed padding to maximize width */
+      padding: 0;
       width: 100%;
     }
   }
 `;
 
-// --- Other Components (Unchanged) ---
 const Title = styled.h1`
   font-size: 52px;
   text-align: left;
@@ -192,6 +183,7 @@ const Title = styled.h1`
     font-size: 28px;
   }
 `;
+
 const PaymentContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -205,6 +197,7 @@ const PaymentContainer = styled.div`
     border-left: none;
   }
 `;
+
 const SubTitle = styled.h2`
   font-size: 32px;
   text-align: center;
@@ -219,6 +212,7 @@ const SubTitle = styled.h2`
     margin-bottom: 3rem;
   }
 `;
+
 const Row = styled.div`
   margin: 5rem 1rem;
   display: flex;
