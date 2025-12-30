@@ -9,6 +9,7 @@ import TextBubble from "@/components/TextBubble";
 import ServiceCTA from "@/views/HomePage/ServiceCTA";
 import PhoneBtn from "@/components/PhoneBtn";
 import { media } from "@/utils/media";
+import Cta from "@/views/HomePage/Cta"; 
 
 interface ServiceProps extends SharedPageProps {
   service: any;
@@ -29,7 +30,7 @@ const StyledPageTitle = styled.h1`
   font-size: 4.8rem;
   font-weight: 700;
   margin-bottom: 2rem;
-  color: #0A3161; /* Dark Blue */
+  color: #0A3161;
   line-height: 1.1;
 
   ${media("<=tablet")} {
@@ -42,7 +43,7 @@ const StyledPageDescription = styled.p`
   font-size: 2.4rem;
   font-weight: 600;
   margin-bottom: 3rem;
-  color: #0A3161; /* Dark Blue */
+  color: #0A3161;
   opacity: 0.9;
 
   ${media("<=tablet")} {
@@ -54,7 +55,7 @@ const StyledFullText = styled.div`
   font-family: "Times New Roman", serif;
   font-size: 2rem;
   line-height: 1.8;
-  color: #0A3161; /* Dark Blue */
+  color: #0A3161;
   white-space: pre-line;
 
   ${media("<=tablet")} {
@@ -62,7 +63,21 @@ const StyledFullText = styled.div`
   }
 `;
 
-// --------------------------------------------------
+// --- INCREASED FONT SIZE HERE ---
+const BottomText = styled.p`
+   font-family: "Times New Roman", serif;
+   font-size: 2.8rem; /* Increased from 2rem */
+   font-weight: 700;
+   text-align: center;
+   color: #0A3161; 
+   margin-top: 3rem; 
+   margin-bottom: 4rem; 
+
+   ${media("<=tablet")} {
+    font-size: 2rem;
+  }
+`;
+// --------------------------------
 
 const STATIC_SERVICES_LIST = [
   { title: "Residential", slug: { current: "residential" } },
@@ -227,7 +242,6 @@ export default function ServiceSlugRoute(props: ServiceProps) {
   if (router.isFallback) return <div>Loading...</div>;
   if (!service) return <div>Loading...</div>;
 
-  // Check if we are on a blocked page (Gallery or Coupons)
   const isExcludedPage = ['gallery', 'coupons', 'coupon'].includes(service.slug.current);
 
   return (
@@ -242,7 +256,6 @@ export default function ServiceSlugRoute(props: ServiceProps) {
         <div className="lg:flex xl:align-top lg:space-x-0 pl-5 xl:px-5 md:space-y-0 space-y-2 lg:space-y-0 max-w-[1250px]">
           <div className="flex-1 pr-0 md:pr-8">
              <div className="mb-8">
-               {/* Back Button: Reduced padding for mobile */}
                <button 
                  onClick={() => router.push("/")} 
                  className="mb-10 px-6 md:px-10 py-4 bg-[#0a3161] text-white text-2xl rounded-lg shadow-md hover:bg-[#15233e] transition-all transform hover:scale-105 font-bold flex items-center font-serif"
@@ -257,15 +270,10 @@ export default function ServiceSlugRoute(props: ServiceProps) {
                  {service.fullText}
                </StyledFullText>
 
-               {/* --- COUPON TEXT (MOVED TO BOTTOM) --- */}
+               {/* --- CTA COMPONENT (TOP HEADLINE ONLY) --- */}
                {!isExcludedPage && (
-                 <div style={{ textAlign: 'center', color: '#0A3161', marginTop: '40px', marginBottom: '10px' }}>
-                   <h2 style={{ fontFamily: '"Times New Roman", serif', fontSize: '2.4rem', fontWeight: 'bold', marginBottom: '10px', lineHeight: '1.2' }}>
-                     Take a Look At Our Coupons - You Might Qualify For a Discount!
-                   </h2>
-                   <p style={{ fontFamily: '"Times New Roman", serif', fontSize: '1.6rem', fontWeight: 'bold', marginTop: '0' }}>
-                     Don't Wait, Reach Out To Oscars Lock & Key Services!
-                   </p>
+                 <div style={{ marginBottom: '10px', marginTop: '40px' }}>
+                   <Cta />
                  </div>
                )}
                {/* ---------------------------------- */}
@@ -283,17 +291,22 @@ export default function ServiceSlugRoute(props: ServiceProps) {
         <ServiceCTA />
         <PhoneBtn phone="(800) 687- 0480" />
         
-        {/* FIX: RESPONSIVE BUTTON 
-            - Changed px-32 to px-8 md:px-32
-            - Added w-11/12 md:w-auto to prevent overflowing screen
-            - Changed text-2xl to text-xl md:text-2xl for mobile
-        */}
+        {/* BUTTON */}
         <button 
           onClick={() => router.push("/coupons")} 
           className="bg-[#751318] text-xl md:text-2xl px-8 md:px-32 py-3 text-white mx-auto block mt-8 hover:bg-[#5e0a0a] transition-colors font-bold rounded-md shadow-md font-serif w-11/12 md:w-auto"
         >
           FOR COUPONS CLICK HERE
         </button>
+
+        {/* --- BOTTOM TEXT (AFTER BUTTON - LARGE SIZE) --- */}
+        {!isExcludedPage && (
+          <BottomText>
+            Don't Wait, Reach Out To Oscars Lock & Key Services!
+          </BottomText>
+        )}
+        {/* -------------------------------- */}
+
       </ServiceContainer>
     </Page>
   );
