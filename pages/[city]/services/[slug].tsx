@@ -99,13 +99,13 @@ const STATIC_SERVICES_DATA: Record<string, any> = {
     description: "Car key replacement and lockout services.",
     fullText: `Lost your car keys? Our on-call automotive locksmith professional will make all keys & remotes on site. We can fix faulty auto ignitions or locks right on the spot.
 
-Oscar’s Lock & Key Services can help you quickly duplicate or replace lost, damaged or stolen electronic car keys and key fobs. We make electronic car keys for hundreds of car makes and models. Our locksmiths have the technical training and equipment that is necessary to provide fast and accurate car key duplication and replacement services. Our fully equipped mobile van comes to your location and offers the ultimate in convenience and time savings.
+Oscars Lock & Key Services can help you quickly duplicate or replace lost, damaged or stolen electronic car keys and key fobs. We make electronic car keys for hundreds of car makes and models. Our locksmiths have the technical training and equipment that is necessary to provide fast and accurate car key duplication and replacement services. Our fully equipped mobile van comes to your location and offers the ultimate in convenience and time savings.
 
 Keys & Remotes for Most Vehicles, Makes & Models
-Oscar’s Lock & Key Services has an extensive stock of base keys, as well as more than 90 auto transponder keys for nearly 200 vehicle models, including cars, vans and trucks. Please call us with any questions regarding your specific vehicle make and model.
+Oscars Lock & Key Services has an extensive stock of base keys, as well as more than 90 auto transponder keys for nearly 200 vehicle models, including cars, vans and trucks. Please call us with any questions regarding your specific vehicle make and model.
 Car Key Replacement & Duplication Services
 
-Oscar’s Lock & Key Services offers the following automotive key services:
+Oscars Lock & Key Services offers the following automotive key services:
 
 ●Transponder (remote and key FOB) replacement
 ●Transponder chip repair, duplication, and replacement
@@ -126,15 +126,15 @@ Oscar’s Lock & Key Services offers the following automotive key services:
     description: "Complete residential locksmith services for your home security.",
     fullText: `Ensuring the security of your home is a top priority
 
-Oscar’s Lock & key Services provides a comprehensive range of residential locksmith services. Our highly skilled licensed locksmith professionals can resolve your locksmith service needs.
+Oscars Lock & key Services provides a comprehensive range of residential locksmith services. Our highly skilled licensed locksmith professionals can resolve your locksmith service needs.
 
 With the support of qualified locksmiths, you can make right decisions and maximize the effectiveness of your security investments. We provide services which include fixing broken locks, installing new hardware, replacing lost keys or making your existing locks work with a different key and a master key.
 
 Common residential lock and key issues we can help you with include:
 
-●Home Lockout Service – Oscar’s Lock & key Services will quickly dispatch an experienced licensed locksmith professional to your home to address the issue.
+●Home Lockout Service – Oscars Lock & key Services will quickly dispatch an experienced licensed locksmith professional to your home to address the issue.
 ●Lock Installation, Replacement, and Repair – We carry a wide range of locks, deadbolts and keys to ensure we're able to provide you with the best products and services when locks break or need to be replaced.
-●Lock Rekeying – Rekeying is an essential service offered by Oscar’s Lock & Key Services that often goes overlooked. It involves changing the internal lock mechanism so that previous keys no longer work and new keys are required for access. Rekeying offers an affordable and efficient alternative to lock replacement and is particularly useful when keys are lost or stolen,or unauthorized access is suspected.
+●Lock Rekeying – Rekeying is an essential service offered by Oscars Lock & Key Services that often goes overlooked. It involves changing the internal lock mechanism so that previous keys no longer work and new keys are required for access. Rekeying offers an affordable and efficient alternative to lock replacement and is particularly useful when keys are lost or stolen,or unauthorized access is suspected.
 ●A master Key System – A Master key system allows your access to multiple locks using a single key, while individual keys only open specific locks.
 ●High-Security Locks & Deadbolts – A high-security lock with key control adds an increased level of safety to your home by reducing the chance that your house key can be duplicated in an unauthorized fashion.
 
@@ -147,7 +147,7 @@ We are committed to providing an unmatched level of service to our customers, pl
     description: "Professional security solutions for businesses and offices.",
     fullText: `Commercial Locksmith Services & Products
 
-Business security is a top priority for any organization. Oscar’s Lock & Key Services provides a wide range of commercial high-security locks, including un-pickable, do-not-duplicate, push and panic bars.
+Business security is a top priority for any organization. Oscars Lock & Key Services provides a wide range of commercial high-security locks, including un-pickable, do-not-duplicate, push and panic bars.
 
 Commercial Service Offerings:
 
@@ -174,7 +174,7 @@ Locked Out? We’ve Got the Key to Your Solution!
 
 Wе knоw hоw ѕtrеѕѕful it is to be lосkеd оut оf уоur home, break or lose your ignition kеу.Wе саn handle аnу tуре оf emergency lосkѕmіth situation.
 
-Our experienced locksmith company like Oscar’s Lock & Key Services offers 24/7 emergency lockout services, ensuring that you can regain access quickly and efficiently.
+Our experienced locksmith company like Oscars Lock & Key Services offers 24/7 emergency lockout services, ensuring that you can regain access quickly and efficiently.
 
 Our team of professionals operates to minimize damage to your property, by using non-destructive techniques and tools.
 
@@ -189,7 +189,7 @@ Wе оffеr the following emergency locksmith ѕеrvісеѕ:
 ●Aссеѕѕ Cоntrоl Sуѕtеmѕ
 
 
-Yоu саn соunt оn Oscar’s Lock & Key Services to get the job dоnе ԛuісklу and еffісіеntlу, and we оffеr the mоѕt competitive rates with a price match guarantee.`,
+Yоu саn соunt оn Oscars Lock & Key Services to get the job dоnе ԛuісklу and еffісіеntlу, and we оffеr the mоѕt competitive rates with a price match guarantee.`,
   },
   mailbox: {
     title: "Mailbox",
@@ -214,7 +214,7 @@ Low cost options are available to increase the security of your mailbox to preve
 We are expert safe locksmiths! 
 
 We have tools and techniques. No matter how complicated a situation you might have!
-Oscar’s Lock & Key Services technicians are highly trained and have years of experience.
+Oscars Lock & Key Services technicians are highly trained and have years of experience.
 
 We have worked with many different types of safe locks and know every method to getting your safe opened.
 
@@ -268,9 +268,16 @@ export default function CityServiceSlugRoute(props: ServiceProps) {
                  ← Home
                </button>
                
-               {/* --- START: NEW COUPON TEXT BLOCK (MOVED TO TOP) --- */}
+               <StyledPageTitle>{service.title}</StyledPageTitle>
+               <StyledPageDescription>{service.description}</StyledPageDescription>
+               
+               <StyledFullText>
+                 {service.fullText}
+               </StyledFullText>
+
+               {/* --- NEW COUPON TEXT BLOCK (MOVED TO BOTTOM) --- */}
                {!isExcludedPage && (
-                 <div style={{ textAlign: 'center', color: '#0A3161', marginBottom: '30px' }}>
+                 <div style={{ textAlign: 'center', color: '#0A3161', marginTop: '40px', marginBottom: '10px' }}>
                    <h2 style={{ fontFamily: '"Times New Roman", serif', fontSize: '2.4rem', fontWeight: 'bold', marginBottom: '10px', lineHeight: '1.2' }}>
                      Take a Look At Our Coupons - You Might Qualify For a Discount!
                    </h2>
@@ -280,13 +287,6 @@ export default function CityServiceSlugRoute(props: ServiceProps) {
                  </div>
                )}
                {/* --- END: NEW COUPON TEXT BLOCK --- */}
-               
-               <StyledPageTitle>{service.title}</StyledPageTitle>
-               <StyledPageDescription>{service.description}</StyledPageDescription>
-               
-               <StyledFullText>
-                 {service.fullText}
-               </StyledFullText>
 
              </div>
              <div className="mt-8">
@@ -302,7 +302,16 @@ export default function CityServiceSlugRoute(props: ServiceProps) {
         
         <ServiceCTA />
         <PhoneBtn phone="(800) 687- 0480" />
-        <button onClick={() => router.push("/coupons")} className="bg-[#751318] text-2xl px-32 py-3 text-white mx-auto block mt-8 hover:bg-[#5e0a0a] transition-colors font-bold rounded-md shadow-md font-serif">
+        
+        {/* FIX: RESPONSIVE BUTTON 
+            - Changed px-32 to px-8 md:px-32
+            - Added w-11/12 md:w-auto to prevent overflowing screen
+            - Changed text-2xl to text-xl md:text-2xl for mobile
+        */}
+        <button 
+          onClick={() => router.push("/coupons")} 
+          className="bg-[#751318] text-xl md:text-2xl px-8 md:px-32 py-3 text-white mx-auto block mt-8 hover:bg-[#5e0a0a] transition-colors font-bold rounded-md shadow-md font-serif w-11/12 md:w-auto"
+        >
           FOR COUPONS CLICK HERE
         </button>
       </ServiceContainer>
