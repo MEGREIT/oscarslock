@@ -45,7 +45,7 @@ export default function TermsConditions() {
                 {cityNameDisplay}
               </p>
               <div className="flex flex-col space-y-2">
-                <p className="block md:hidden text-[10px]">
+                <p className="block md:hidden text-[12px]">
                   {cityNameDisplay}
                 </p>
                 <div>
@@ -78,7 +78,6 @@ export default function TermsConditions() {
           {/* LEFT: TEXT */}
           <LeftColumn>
             <PageTitle>Terms and Conditions</PageTitle>
-            <PageSubTitle>Oscars Lock & Key services Terms and Conditions</PageSubTitle>
 
             <TextContent>
               <SectionHeader>1. Terms</SectionHeader>
@@ -275,7 +274,7 @@ const LogoWrapper = styled.div`
   cursor: pointer;
 `;
 
-// --- PAGE CONTENT STYLES ---
+// --- PAGE CONTENT STYLES (UPDATED TO MATCH SERVICE PAGES) ---
 
 const MainWrapper = styled.div`
   background: white;
@@ -335,60 +334,137 @@ const LogoImage = styled.div`
 `;
 
 const PageTitle = styled.h1`
-  font-size: 5rem;
+  font-family: "Times New Roman", serif;
+  font-size: 3rem;
   color: #0A3161;
-  font-weight: bold;
+  font-weight: 700;
   text-align: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 20px;
+  line-height: 1.1;
   
   ${media("<=tablet")} {
-    font-size: 3rem;
+    font-size: 2.4rem;
   }
 `;
 
 const PageSubTitle = styled.h2`
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 1.8rem;
-  color: #0A3161;
-  font-weight: 600;
+  color: #1e4d8b;
+  font-weight: 700;
   text-align: center;
   margin-top: 0;
-  margin-bottom: 2rem;
+  margin-bottom: 1.2rem;
+  line-height: 1.3;
   
+  ${media("<=tablet")} {
+    font-size: 1.6rem;
+  }
+`;
+
+const TextContent = styled.div`
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.6rem;
+  line-height: 1.6;
+  color: #1e4d8b;
+
+  p { 
+    margin-bottom: 1rem;
+    margin-top: 0;
+    color: #1e4d8b;
+  }
+
+  strong {
+    font-weight: 700;
+    color: #1e4d8b;
+  }
+  
+  ul { 
+    margin-bottom: 0.8rem;
+    margin-top: 0;
+    padding-left: 1.8rem;
+    list-style: none;
+    color: #1e4d8b;
+  }
+  
+  li { 
+    margin-bottom: 1rem;
+    padding-left: 1.8rem;
+    position: relative;
+    color: #1e4d8b;
+    line-height: 1.6;
+  }
+
+  li::before {
+    content: "●";
+    position: absolute;
+    left: 0;
+    color: #1e4d8b;
+    font-weight: 700;
+  }
+
   ${media("<=tablet")} {
     font-size: 1.4rem;
   }
 `;
 
-const TextContent = styled.div`
-  font-size: 18px;
-  line-height: 1.6;
-  color: #0A3161;
+const SectionHeader = styled.h3`
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.8rem;
+  color: #1e4d8b;
+  font-weight: 700;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
+  border-bottom: 2px solid #e5e7eb;
+  padding-bottom: 10px;
 
-  p { 
-    margin-bottom: 24px;
-    color: #0A3161;
-  }
-  
-  ul { 
-    margin-bottom: 24px; 
-    padding-left: 30px; 
-    color: #0A3161;
-  }
-  
-  li { 
-    margin-bottom: 10px;
-    color: #0A3161;
+  ${media("<=tablet")} {
+    font-size: 1.6rem;
   }
 `;
 
-const SectionHeader = styled.h3`
-  font-size: 1.5rem;
-  color: #751318;
-  border-bottom: 2px solid #e5e7eb;
-  padding-bottom: 10px;
-  margin-top: 40px;
-  margin-bottom: 20px;
-  font-weight: 700;
+const CouponBox = styled.div`
+  margin-top: 80px;
+  border-top: 2px solid #e5e7eb;
+  padding-top: 60px;
+  text-align: center;
+
+  h3 {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #1e4d8b;
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 30px;
+    line-height: 1.3;
+    
+    ${media("<=tablet")} {
+      font-size: 1.8rem;
+    }
+    
+    ${media("<=phone")} {
+      font-size: 1.6rem;
+    }
+  }
+
+  a {
+    display: inline-block;
+    background: #751318;
+    color: white;
+    padding: 15px 50px;
+    font-size: 1.4rem;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background 0.3s;
+
+    &:hover { background: #5e0a0a; }
+    
+    ${media("<=phone")} {
+      padding: 12px 30px;
+      font-size: 1.2rem;
+    }
+  }
 `;
 
 // --- FOOTER STYLES ---
