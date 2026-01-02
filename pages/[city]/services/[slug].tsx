@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { SharedPageProps } from "../../_app"; 
 import styled from "styled-components";
 import { GetServerSideProps } from "next";
@@ -10,10 +10,11 @@ import ServiceCTA from "@/views/HomePage/ServiceCTA";
 import PhoneBtn from "@/components/PhoneBtn";
 import { media } from "@/utils/media";
 import Cta from "@/views/HomePage/Cta"; 
-import { getCityPhone } from "@/utils/getCityPhone"; // IMPORTED THIS UTILITY
+import { getCityPhone } from "@/utils/getCityPhone"; // Utility import
 
 interface ServiceProps extends SharedPageProps {
   service: any;
+  phone: string; // Added phone to props
 }
 
 interface Query {
@@ -285,32 +286,16 @@ When the technician sees your safe, he determines the best method to gain entry.
 
 export default function ServiceSlugRoute(props: ServiceProps) {
   const router = useRouter();
-  const { service } = props;
-  
-  // --- PHONE LOGIC ---
-  // Default to 800 number, then update if city found
-  const [phone, setPhone] = useState("(800) 687- 0480");
-
-  useEffect(() => {
-    // Get city from router.query (folder structure is [city]/services/[slug])
-    if (router.isReady && router.query.city) {
-       const cityParam = Array.isArray(router.query.city) ? router.query.city[0] : router.query.city;
-       
-       // Call the utility function to get the number for this specific city
-       if (cityParam) {
-         const cityPhone = getCityPhone(cityParam);
-         if (cityPhone) {
-           setPhone(cityPhone);
-         }
-       }
-    }
-  }, [router.isReady, router.query.city]);
-  // -------------------
+  const { service, phone } = props; // DESTUCTURE PHONE FROM PROPS
    
   if (router.isFallback) return <div>Loading...</div>;
   if (!service) return <div>Loading...</div>;
 
   const isExcludedPage = ['gallery', 'coupons', 'coupon'].includes(service.slug.current);
+
+  // Fallback for home link if city param isn't ready in router (though usually it is if using SSR phone)
+  const citySlug = router.query.city as string;
+  const homeLink = citySlug ? `/${citySlug}` : "/";
 
   return (
     <Page
@@ -320,14 +305,14 @@ export default function ServiceSlugRoute(props: ServiceProps) {
       imgURL={service.heroImage}
     >
       <ServiceContainer>
-        {/* Pass DYNAMIC PHONE here */}
+        {/* Pass SERVER-SIDE PHONE here */}
         <PhoneBtn phone={phone} />
         
         <div className="lg:flex xl:align-top lg:space-x-0 pl-5 xl:px-5 md:space-y-0 space-y-2 lg:space-y-0 max-w-[1250px]">
           <div className="flex-1 pr-0 md:pr-8">
              <div className="mb-8">
                <button 
-                 onClick={() => router.push("/")} 
+                 onClick={() => router.push(homeLink)} 
                  className="mb-10 px-6 md:px-10 py-4 bg-[#0a3161] text-white text-2xl rounded-lg shadow-md hover:bg-[#15233e] transition-all transform hover:scale-105 font-bold flex items-center font-serif"
                >
                  ← Home
@@ -378,7 +363,7 @@ export default function ServiceSlugRoute(props: ServiceProps) {
           </div>
           <PaymentBox>
             <PaymentContainer><img src="/payment.png" alt="Accepted Payments" /></PaymentContainer>
-            {/* Pass DYNAMIC PHONE here */}
+            {/* Pass SERVER-SIDE PHONE here */}
             <PhoneBtn phone={phone} />
             <TextBubble />
             <img src="/logos/oscar-logo.png" className="w-[25rem] ml-0" alt="Logo" />
@@ -386,7 +371,7 @@ export default function ServiceSlugRoute(props: ServiceProps) {
         </div>
 
         <ServiceCTA />
-        {/* Pass DYNAMIC PHONE here */}
+        {/* Pass SERVER-SIDE PHONE here */}
         <PhoneBtn phone={phone} />
         
         {/* BUTTON */}
@@ -413,17 +398,37 @@ export default function ServiceSlugRoute(props: ServiceProps) {
 export const getServerSideProps: GetServerSideProps<ServiceProps, Query> = async (ctx) => {
   const { draftMode = false, params = {} } = ctx;
   const slug = params.slug as string;
+  const city = params.city as string; // GET CITY FROM PARAMS
   const service = STATIC_SERVICES_DATA[slug];
+
+  // --- SERVER SIDE PHONE LOGIC ---
+  // Default phone number
+  let phone = "(800) 687- 0480";
+  
+  // Attempt to get city specific phone
+  if (city) {
+    try {
+      const cityPhone = getCityPhone(city);
+      if (cityPhone) {
+        phone = cityPhone;
+      }
+    } catch (error) {
+      console.error("Error fetching city phone:", error);
+    }
+  }
+  // -------------------------------
    
   if (service) {
-    return { props: { service, draftMode, token: "" } };
+    // Pass 'phone' to the component props
+    return { props: { service, draftMode, token: "", phone } };
   }
 
   return { 
     props: { 
       service: STATIC_SERVICES_DATA['residential'], 
       draftMode, 
-      token: "" 
+      token: "",
+      phone // Pass phone here too
     } 
   };
 };
