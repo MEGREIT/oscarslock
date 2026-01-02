@@ -94,12 +94,17 @@ export default function Homepage({
           </div>
         </WhiteBackgroundContainer>
         
-        {/* --- BOTTOM SECTION (REMOVED CTA, COUPON TEXT & DON'T WAIT TEXT) --- */}
+        {/* --- BOTTOM SECTION WITH DON'T WAIT TEXT --- */}
         <DarkerBackgroundContainer>
-          {/* Only phone button - no Cta component, no coupon text, no "Don't Wait" text */}
-          <div style={{ marginTop: '2rem', marginBottom: '2rem' }}>
+          {/* Phone button */}
+          <div style={{ marginTop: '2rem', marginBottom: '1rem' }}>
             <PhoneBtn phone={phone} />
           </div>
+          
+          {/* Don't Wait text */}
+          <DontWaitText>
+            Don't Wait, Reach Out To Oscars Lock & Key Services!
+          </DontWaitText>
         </DarkerBackgroundContainer>
       </HomepageWrapper>
     </>
@@ -112,6 +117,20 @@ export const PaymentBox = styled.div`display: flex; flex-direction: column; alig
 const DarkerBackgroundContainer = styled.div`background: rgb(251, 251, 253); display: flex; max-width: 100vw; overflow: hidden; flex-direction: column; justify-content: center; align-items: center;`;
 export const WhiteBackgroundContainer = styled.div`background: rgb(255, 255, 255); display: flex; flex-direction: column; justify-content: center; max-width: 100vw; overflow: hidden; padding: 0 10rem; padding-top: 5rem; & > *:not(:first-child) { margin-top: 3rem; } ${media("<=phone")} { padding: 0 0; } ${media(">largeDesktop")} { align-items: center; margin: 0 auto; } @media (min-width: 375px) and (max-width: 640px) { padding: 0 0; } @media (min-width: 2240px) { width: 60vw; margin: 0 auto; } @media (min-width: 1440px) { width: 100vw; margin: 0 auto; }`;
 export const MapContainer = styled.div`display: flex; flex-direction: row; max-width: 60vw; align-items: center; padding: 0 0rem; justify-content: space-between; align-items: center; ${media("<tablet")} { flex-direction: column; } @media (min-width: 375px) and (max-width: 640px) { padding: 0 0; } @media (max-width: 1440px) and (min-width: 1024px) { max-width: 90vw; } @media (min-width: 1280px) { max-width: 1190px; overflow: hidden; } @media (min-width: 1280px) and (max-width: 2652px) { padding: 0 3rem; padding-left: 5rem; } @media (max-width: 1440px) and (min-width: 768px) { width: 1506px; }`;
+
+const DontWaitText = styled.p`
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 2.2rem;
+  font-weight: 700;
+  text-align: center;
+  color: #1e4d8b;
+  margin-top: 2rem;
+  margin-bottom: 3rem;
+
+  ${media("<=tablet")} {
+    font-size: 1.8rem;
+  }
+`;
 
 export async function getServerSideProps(ctx: any) {
   return {
