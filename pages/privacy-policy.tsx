@@ -354,27 +354,24 @@ const LogoImage = styled.div`
 `;
 
 const PageTitle = styled.h1`
-  font-family: ${targetFont};
-  font-size: 3rem;
+  font-size: 5rem;
   color: #0A3161;
-  font-weight: 800;
+  font-weight: bold;
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 1.5rem;
   
   ${media("<=tablet")} {
-    font-size: 2.2rem;
+    font-size: 3rem;
   }
 `;
 
 const PageSubTitle = styled.h2`
-  font-family: ${targetFont};
   font-size: 1.8rem;
   color: #0A3161;
   font-weight: 600;
   text-align: center;
   margin-top: 0;
-  opacity: 0.9;
-  margin-bottom: 30px;
+  margin-bottom: 2rem;
   
   ${media("<=tablet")} {
     font-size: 1.4rem;
@@ -382,7 +379,6 @@ const PageSubTitle = styled.h2`
 `;
 
 const IntroText = styled.p`
-  font-family: ${targetFont};
   font-size: 18px;
   color: #0A3161;
   margin-bottom: 24px;
@@ -390,7 +386,6 @@ const IntroText = styled.p`
 `;
 
 const TextContent = styled.div`
-  font-family: ${targetFont};
   font-size: 18px;
   line-height: 1.6;
   color: #0A3161;
@@ -413,7 +408,6 @@ const TextContent = styled.div`
 `;
 
 const SectionHeader = styled.h3`
-  font-family: ${targetFont};
   font-size: 1.5rem;
   color: #751318;
   border-bottom: 2px solid #e5e7eb;
@@ -421,48 +415,6 @@ const SectionHeader = styled.h3`
   margin-top: 40px;
   margin-bottom: 20px;
   font-weight: 700;
-`;
-
-const CouponBox = styled.div`
-  margin-top: 80px;
-  border-top: 2px solid #e5e7eb;
-  padding-top: 60px;
-  text-align: center;
-
-  h3 {
-    color: #0A3161;
-    font-size: 2.2rem;
-    font-weight: bold;
-    margin-bottom: 30px;
-    line-height: 1.3;
-    
-    ${media("<=tablet")} {
-      font-size: 1.6rem;
-    }
-    
-    ${media("<=phone")} {
-      font-size: 1.1rem;
-    }
-  }
-
-  a {
-    display: inline-block;
-    background: #751318;
-    color: white;
-    padding: 20px 50px;
-    font-size: 1.5rem;
-    font-weight: bold;
-    text-decoration: none;
-    border-radius: 4px;
-    transition: background 0.3s;
-
-    &:hover { background: #5e0a0a; }
-    
-    ${media("<=phone")} {
-      padding: 15px 30px;
-      font-size: 1.2rem;
-    }
-  }
 `;
 
 // --- FOOTER STYLES ---
