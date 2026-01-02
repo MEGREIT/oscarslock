@@ -75,7 +75,7 @@ export default function TermsConditions() {
       <MainWrapper>
         <ContentRow>
           
-          {/* LEFT: TEXT (FULL WIDTH NOW) */}
+          {/* LEFT: TEXT */}
           <LeftColumn>
             <PageTitle>Terms and Conditions</PageTitle>
 
@@ -115,6 +115,22 @@ export default function TermsConditions() {
               <p><strong>General Terms and Conditions applicable to Use of a Web Site.</strong></p>
             </TextContent>
           </LeftColumn>
+
+          {/* RIGHT: SIDEBAR */}
+          <RightColumn>
+            <SidebarBox>
+              <PaymentImage>
+                <img src="/payment.png" alt="We Accept" />
+              </PaymentImage>
+              
+              <PhoneBtn phone="(800) 687-0480" />
+              <TextBubble />
+
+              <LogoImage>
+                 <img src="/logos/oscar-logo.png" alt="Oscars Lock & Key" />
+              </LogoImage>
+            </SidebarBox>
+          </RightColumn>
 
         </ContentRow>
       </MainWrapper>
@@ -271,6 +287,7 @@ const ContentRow = styled.div`
   max-width: 1300px;
   width: 100%;
   display: flex;
+  gap: 60px;
 
   ${media("<=largeDesktop")} {
     flex-direction: column;
@@ -278,8 +295,7 @@ const ContentRow = styled.div`
 `;
 
 const LeftColumn = styled.div`
-  flex: 1;
-  width: 100%;
+  flex: 3;
 `;
 
 const RightColumn = styled.div`
@@ -388,13 +404,13 @@ const TextContent = styled.div`
   }
 
   ${media("<=tablet")} {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
   }
 `;
 
 const SectionHeader = styled.h3`
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   color: #1e4d8b;
   font-weight: 700;
   margin-top: 1.5rem;
@@ -404,7 +420,7 @@ const SectionHeader = styled.h3`
   padding-bottom: 10px;
 
   ${media("<=tablet")} {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
   }
 `;
 
