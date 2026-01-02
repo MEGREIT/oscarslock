@@ -277,8 +277,6 @@ const LogoWrapper = styled.div`
 
 // --- PAGE CONTENT STYLES ---
 
-const targetFont = 'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif';
-
 const MainWrapper = styled.div`
   background: white;
   padding: 40px 20px;
@@ -337,27 +335,24 @@ const LogoImage = styled.div`
 `;
 
 const PageTitle = styled.h1`
-  font-family: ${targetFont};
-  font-size: 3rem;
+  font-size: 5rem;
   color: #0A3161;
-  font-weight: 800;
+  font-weight: bold;
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 1.5rem;
   
   ${media("<=tablet")} {
-    font-size: 2.2rem;
+    font-size: 3rem;
   }
 `;
 
 const PageSubTitle = styled.h2`
-  font-family: ${targetFont};
   font-size: 1.8rem;
   color: #0A3161;
   font-weight: 600;
   text-align: center;
   margin-top: 0;
-  opacity: 0.9;
-  margin-bottom: 30px;
+  margin-bottom: 2rem;
   
   ${media("<=tablet")} {
     font-size: 1.4rem;
@@ -365,7 +360,6 @@ const PageSubTitle = styled.h2`
 `;
 
 const TextContent = styled.div`
-  font-family: ${targetFont};
   font-size: 18px;
   line-height: 1.6;
   color: #0A3161;
@@ -388,7 +382,6 @@ const TextContent = styled.div`
 `;
 
 const SectionHeader = styled.h3`
-  font-family: ${targetFont};
   font-size: 1.5rem;
   color: #751318;
   border-bottom: 2px solid #e5e7eb;
