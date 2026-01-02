@@ -4,9 +4,9 @@ import styled from "styled-components";
 import Cta from "views/HomePage/Cta";
 import Slider from "components/Slider";
 
-// --- IMPORT CSS (Parent Folder) ---
+// --- IMPORT CSS ---
 import "../style.css"; 
-// ----------------------------------
+// ------------------
 
 import OurTeam from "@/views/AboutPage/OurTeam";
 import { useRouter } from "next/router";
@@ -17,11 +17,10 @@ import PhotoSlider from "@/components/PhotoSlider";
 import CityServicesGrid from "@/components/CityServicesGrid";
 import cityData from "@/utils/cities_data.json";
 import GoogleScript from "@/components/Script";
-import { useEffect, useState } from "react";
-import { getCityPhone } from "@/utils/getCityPhone";
+import { getCityPhone } from "@/utils/getCityPhone"; // Ensure this is imported
 import PhoneBtn from "@/components/PhoneBtn";
 
-// --- STATIC DATA (STRICT ORDER) ---
+// --- STATIC DATA ---
 const STATIC_SERVICES = [
   { title: "Residential", slug: { current: "residential" } },
   { title: "Commercial", slug: { current: "commercial" } },
@@ -33,7 +32,6 @@ const STATIC_SERVICES = [
   { title: "Coupons", slug: { current: "coupons" } },
 ];
 
-// --- REAL REVIEWS (Fixed "Oscars") ---
 const STATIC_TESTIMONIALS = [
   { 
     fullName: "Jennifer M.", 
@@ -66,16 +64,11 @@ export default function Homepage({
   services,
   testimonials,
   slug,
+  phone, // RECEIVE PHONE FROM SERVER SIDE PROPS
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const router = useRouter();
-  const [phone, setPhone] = useState<string | null>(null);
-
-  useEffect(() => {
-    if (typeof slug === "string") {
-      const phoneNumber = getCityPhone(slug);
-      setPhone(phoneNumber);
-    }
-  }, [slug]);
+  
+  // NOTE: We removed the useEffect/useState logic because we are getting 'phone' directly from the server now.
 
   // Capitalize first letter of city for title
   const cityTitle = slug ? slug.charAt(0).toUpperCase() + slug.slice(1) : "";
@@ -88,29 +81,30 @@ export default function Homepage({
       </Head>
       <GoogleScript />
       <HomepageWrapper>
+        {/* Pass Server-Side phone to Slider (which controls Navbar) */}
         <Slider phone={phone} />
+        
         <WhiteBackgroundContainer>
           <div className="flex flex-col items-center">
             <div className="lg:flex xl:align-top lg:space-x-4 space-y-2 lg:space-y-0 justify-center align-middle mx-0">
               <div className="flex flex-col mx-0 w-auto 2xl:max-w-[65%] xl:max-w-[80%]">
                 
-                {/* --- FIX: Pass 'services' directly. DO NOT SORT IT. --- */}
                 <CityServicesGrid services={services} slug={slug} />
-                {/* ----------------------------------------------------- */}
 
-                {phone && <PhoneBtn phone={phone} />}
+                {/* Use phone directly (it will always have a value) */}
+                <PhoneBtn phone={phone} />
                 <About />
               </div>
               <PaymentBox>
                 <PaymentContainer><img src="/payment.png" /></PaymentContainer>
-                {phone && <PhoneBtn phone={phone} />}
+                <PhoneBtn phone={phone} />
                 <TextBubble />
                 <img src="/logos/oscar-logo.png" className="w-[25rem] ml-0" />
               </PaymentBox>
             </div>
             <MapContainer>
               <OurTeam testimonials={testimonials} />
-              {phone && <PhoneBtn phone={phone} />}
+              <PhoneBtn phone={phone} />
               <PhotoSlider />
             </MapContainer>
           </div>
@@ -121,12 +115,12 @@ export default function Homepage({
           {/* 1. HEADLINE TEXT */}
           <Cta />
           
-          {/* 2. CALL BUTTON (Added!) */}
+          {/* 2. CALL BUTTON */}
           <div style={{ marginBottom: '2rem' }}>
-             {phone && <PhoneBtn phone={phone} />}
+             <PhoneBtn phone={phone} />
           </div>
 
-          {/* 3. COUPON BUTTON (Styled Correctly) */}
+          {/* 3. COUPON BUTTON */}
           <button 
             onClick={() => router.push(`/${slug}/coupons`)} 
             className="bg-[#751318] text-xl md:text-2xl px-8 md:px-32 py-3 text-white mx-auto rounded-md shadow-md font-bold font-serif w-11/12 md:w-auto"
@@ -149,7 +143,7 @@ export default function Homepage({
 
 const BottomText = styled.p`
    font-family: "Times New Roman", serif;
-   font-size: 2.8rem; /* Large Size */
+   font-size: 2.8rem; 
    font-weight: 700;
    text-align: center;
    color: #0A3161; 
@@ -179,11 +173,24 @@ export async function getServerSideProps(ctx: any) {
   const isPresent = cityData.hcms_cities.some((city) => city.subdomain === slug);
   if (!isPresent) return { notFound: true };
 
+  // --- SERVER SIDE PHONE LOGIC ---
+  let phone = "(800) 687- 0480";
+  if (slug) {
+     try {
+       const cityPhone = getCityPhone(slug);
+       if (cityPhone) phone = cityPhone;
+     } catch (e) {
+       console.error(e);
+     }
+  }
+  // -------------------------------
+
   return {
     props: {
       slug,
+      phone, // Pass the phone to the page (and _app/Slider)
       posts: [],
-      services: STATIC_SERVICES, // Return static list directly
+      services: STATIC_SERVICES, 
       testimonials: STATIC_TESTIMONIALS,
     },
   };
