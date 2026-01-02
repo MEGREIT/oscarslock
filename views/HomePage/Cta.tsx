@@ -20,16 +20,16 @@ export default function Cta() {
 // --- STYLES ---
 
 const MainHeading = styled.h2`
-  font-family: "Times New Roman", serif;
-  font-size: 3.2rem;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 2.2rem;
   font-weight: 700;
   text-align: center;
-  color: #0A3161; /* Dark Blue */
+  color: #1e4d8b;
   margin-bottom: 0; 
-  line-height: 1.2;
+  line-height: 1.3;
 
   ${media("<=tablet")} {
-    font-size: 2.4rem;
+    font-size: 1.8rem;
     padding: 0 1rem;
   }
 `;
