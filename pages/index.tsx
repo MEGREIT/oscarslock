@@ -94,48 +94,17 @@ export default function Homepage({
           </div>
         </WhiteBackgroundContainer>
         
-        {/* --- BOTTOM CTA SECTION --- */}
+        {/* --- BOTTOM SECTION (REMOVED CTA, COUPON TEXT & DON'T WAIT TEXT) --- */}
         <DarkerBackgroundContainer>
-          {/* 1. HEADLINE TEXT */}
-          <Cta />
-          
-          {/* 2. CALL BUTTON */}
-          <div style={{ marginBottom: '2rem' }}>
+          {/* Only phone button - no Cta component, no coupon text, no "Don't Wait" text */}
+          <div style={{ marginTop: '2rem', marginBottom: '2rem' }}>
             <PhoneBtn phone={phone} />
           </div>
-
-          {/* 3. COUPON BUTTON */}
-          <button 
-            onClick={() => router.push(`/coupons`)} 
-            className="bg-[#751318] text-xl md:text-2xl px-8 md:px-32 py-3 text-white mx-auto rounded-md shadow-md font-bold font-serif w-11/12 md:w-auto"
-          >
-            FOR COUPONS CLICK HERE
-          </button>
-
-          {/* 4. LARGE BOTTOM TEXT (MATCHING OTHERS) */}
-          <BottomText>
-            Don't Wait, Reach Out To Oscars Lock & Key Services!
-          </BottomText>
-
         </DarkerBackgroundContainer>
       </HomepageWrapper>
     </>
   );
 }
-
-const BottomText = styled.p`
-   font-family: "Times New Roman", serif;
-   font-size: 2.8rem; /* Large Size */
-   font-weight: 700;
-   text-align: center;
-   color: #0A3161; 
-   margin-top: 3rem; 
-   margin-bottom: 4rem; 
-
-   ${media("<=tablet")} {
-    font-size: 2rem;
-  }
-`;
 
 const HomepageWrapper = styled.div`max-width: 100vw; background-color: white; overflow: hidden; & > :last-child { margin-bottom: 2rem; }`;
 export const PaymentContainer = styled.div`display: flex; justify-content: start; margin-top: -3.5rem; align-items: start; img { margin-bottom: auto; padding: 0; } ${media("<largeDesktop")} { margin-top: 0rem; }`;
