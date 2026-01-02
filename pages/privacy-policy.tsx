@@ -352,7 +352,7 @@ const LogoImage = styled.div`
 
 const PageTitle = styled.h1`
   font-family: "Times New Roman", serif;
-  font-size: 3rem;
+  font-size: 2rem;
   color: #0A3161;
   font-weight: 700;
   text-align: center;
@@ -360,13 +360,13 @@ const PageTitle = styled.h1`
   line-height: 1.1;
   
   ${media("<=tablet")} {
-    font-size: 2.4rem;
+    font-size: 1.6rem;
   }
 `;
 
 const PageSubTitle = styled.h2`
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 1.8rem;
+  font-size: 1.4rem;
   color: #1e4d8b;
   font-weight: 700;
   text-align: center;
@@ -375,13 +375,13 @@ const PageSubTitle = styled.h2`
   line-height: 1.3;
   
   ${media("<=tablet")} {
-    font-size: 1.6rem;
+    font-size: 1.2rem;
   }
 `;
 
 const IntroText = styled.p`
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 1.4rem;
+  font-size: 1.1rem;
   color: #1e4d8b;
   margin-bottom: 1rem;
   font-weight: 700;
@@ -390,7 +390,7 @@ const IntroText = styled.p`
 
 const TextContent = styled.div`
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 1.4rem;
+  font-size: 1.1rem;
   line-height: 1.6;
   color: #1e4d8b;
 
@@ -425,13 +425,13 @@ const TextContent = styled.div`
   }
 
   ${media("<=tablet")} {
-    font-size: 1.3rem;
+    font-size: 0.9rem;
   }
 `;
 
 const SectionHeader = styled.h3`
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 1.6rem;
+  font-size: 1.3rem;
   color: #1e4d8b;
   font-weight: 700;
   margin-top: 1.5rem;
@@ -441,7 +441,7 @@ const SectionHeader = styled.h3`
   padding-bottom: 10px;
 
   ${media("<=tablet")} {
-    font-size: 1.4rem;
+    font-size: 1.1rem;
   }
 `;
 
