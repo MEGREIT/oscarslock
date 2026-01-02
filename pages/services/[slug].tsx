@@ -208,8 +208,8 @@ const STATIC_SERVICES_DATA: Record<string, any> = {
 <li><strong>Door lever locks, closers and hinge installation and repair</strong></li>
 <li><strong>Door viewers and guards</strong></li>
 <li><strong>Exit devices</strong></li>
-<li><strong>File cabinet locks, locking bars and key replacement</strong></li>
-<li><strong>Showcase, desk and cabinet lock installation, repair and replacement</strong></li>
+<li><strong>IC Core Locks - Smart Security, Total Control</strong></li>
+<li><strong>Upgrade your security core with IC core locks-where flexibility meets depandable protection</strong></li>
 </ul>`,
   },
   emergency: {
@@ -308,7 +308,6 @@ export default function ServiceSlugRoute(props: ServiceProps) {
                    <Cta />
                  </div>
                )}
-               {/* ---------------------------------- */}
 
              </div>
           </div>
