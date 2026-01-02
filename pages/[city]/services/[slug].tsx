@@ -10,11 +10,11 @@ import ServiceCTA from "@/views/HomePage/ServiceCTA";
 import PhoneBtn from "@/components/PhoneBtn";
 import { media } from "@/utils/media";
 import Cta from "@/views/HomePage/Cta"; 
-import { getCityPhone } from "@/utils/getCityPhone"; // Utility import
+import { getCityPhone } from "@/utils/getCityPhone"; 
 
 interface ServiceProps extends SharedPageProps {
   service: any;
-  phone: string; // Added phone to props
+  phone: string; 
 }
 
 interface Query {
@@ -286,14 +286,14 @@ When the technician sees your safe, he determines the best method to gain entry.
 
 export default function ServiceSlugRoute(props: ServiceProps) {
   const router = useRouter();
-  const { service, phone } = props; // DESTUCTURE PHONE FROM PROPS
+  const { service, phone } = props; 
    
   if (router.isFallback) return <div>Loading...</div>;
   if (!service) return <div>Loading...</div>;
 
   const isExcludedPage = ['gallery', 'coupons', 'coupon'].includes(service.slug.current);
 
-  // Fallback for home link if city param isn't ready in router (though usually it is if using SSR phone)
+  // Fallback for home link
   const citySlug = router.query.city as string;
   const homeLink = citySlug ? `/${citySlug}` : "/";
 
@@ -303,9 +303,11 @@ export default function ServiceSlugRoute(props: ServiceProps) {
       description={service.description}
       isService
       imgURL={service.heroImage}
+      // --- FIX: Pass 'phone' to the Page component here ---
+      phone={phone}
+      // ----------------------------------------------------
     >
       <ServiceContainer>
-        {/* Pass SERVER-SIDE PHONE here */}
         <PhoneBtn phone={phone} />
         
         <div className="lg:flex xl:align-top lg:space-x-0 pl-5 xl:px-5 md:space-y-0 space-y-2 lg:space-y-0 max-w-[1250px]">
@@ -325,15 +327,14 @@ export default function ServiceSlugRoute(props: ServiceProps) {
                  {service.fullText}
                </StyledFullText>
 
-               {/* --- CTA COMPONENT (TOP HEADLINE ONLY) --- */}
+               {/* CTA */}
                {!isExcludedPage && (
                  <div style={{ marginBottom: '10px', marginTop: '40px' }}>
                    <Cta />
                  </div>
                )}
-               {/* ---------------------------------- */}
                
-               {/* --- PRICE LIST SECTION --- */}
+               {/* PRICE LIST */}
                {!isExcludedPage && (
                  <PriceListContainer>
                    <PriceTitle>The Most Popular Services</PriceTitle>
@@ -357,13 +358,11 @@ export default function ServiceSlugRoute(props: ServiceProps) {
                    </Disclaimer>
                  </PriceListContainer>
                )}
-               {/* ---------------------------------- */}
 
              </div>
           </div>
           <PaymentBox>
             <PaymentContainer><img src="/payment.png" alt="Accepted Payments" /></PaymentContainer>
-            {/* Pass SERVER-SIDE PHONE here */}
             <PhoneBtn phone={phone} />
             <TextBubble />
             <img src="/logos/oscar-logo.png" className="w-[25rem] ml-0" alt="Logo" />
@@ -371,10 +370,8 @@ export default function ServiceSlugRoute(props: ServiceProps) {
         </div>
 
         <ServiceCTA />
-        {/* Pass SERVER-SIDE PHONE here */}
         <PhoneBtn phone={phone} />
         
-        {/* BUTTON */}
         <button 
           onClick={() => router.push("/coupons")} 
           className="bg-[#751318] text-xl md:text-2xl px-8 md:px-32 py-3 text-white mx-auto block mt-8 hover:bg-[#5e0a0a] transition-colors font-bold rounded-md shadow-md font-serif w-11/12 md:w-auto"
@@ -382,13 +379,11 @@ export default function ServiceSlugRoute(props: ServiceProps) {
           FOR COUPONS CLICK HERE
         </button>
 
-        {/* --- BOTTOM TEXT (AFTER BUTTON - LARGE SIZE) --- */}
         {!isExcludedPage && (
           <BottomText>
             Don't Wait, Reach Out To Oscars Lock & Key Services!
           </BottomText>
         )}
-        {/* -------------------------------- */}
 
       </ServiceContainer>
     </Page>
@@ -398,14 +393,11 @@ export default function ServiceSlugRoute(props: ServiceProps) {
 export const getServerSideProps: GetServerSideProps<ServiceProps, Query> = async (ctx) => {
   const { draftMode = false, params = {} } = ctx;
   const slug = params.slug as string;
-  const city = params.city as string; // GET CITY FROM PARAMS
+  const city = params.city as string; 
   const service = STATIC_SERVICES_DATA[slug];
 
-  // --- SERVER SIDE PHONE LOGIC ---
-  // Default phone number
   let phone = "(800) 687- 0480";
   
-  // Attempt to get city specific phone
   if (city) {
     try {
       const cityPhone = getCityPhone(city);
@@ -416,10 +408,8 @@ export const getServerSideProps: GetServerSideProps<ServiceProps, Query> = async
       console.error("Error fetching city phone:", error);
     }
   }
-  // -------------------------------
    
   if (service) {
-    // Pass 'phone' to the component props
     return { props: { service, draftMode, token: "", phone } };
   }
 
@@ -428,7 +418,7 @@ export const getServerSideProps: GetServerSideProps<ServiceProps, Query> = async
       service: STATIC_SERVICES_DATA['residential'], 
       draftMode, 
       token: "",
-      phone // Pass phone here too
+      phone 
     } 
   };
 };
