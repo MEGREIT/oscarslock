@@ -14,11 +14,12 @@ import Container from "./Container";
 import Logo from "./Logo";
 import GoogleScript from "./Script";
 
-type NavbarProps = { items: NavItems };
+// Updated type definition to include phone
+type NavbarProps = { items: NavItems; phone?: string; currentCity?: any };
 type ScrollingDirections = "up" | "down" | "none";
 type NavbarContainerProps = { hidden: boolean; transparent: boolean };
 
-// --- 1. UTILS (Kept internal to avoid broken imports) ---
+// --- UTILS ---
 const omitList = [
   "price", "contact", "about", "coupons", "emergency",
   "automotive", "safe", "residential", "mailbox", "commercial",
@@ -36,7 +37,6 @@ export const extractCityFromPath = (path: any) => {
 
 export const getLink = (city: any) => {
   if (!city || city === "") return "/";
-  // List of reserved words
   const reserved = ["privacy-policy", "terms-conditions", "price", "gallery", "services", "safe", "commercial", "mailbox", "emergency", "residential", "coupons", "lock-repair", "automotive", "contact", "about"];
   
   if (reserved.includes(city)) return "/";
@@ -52,15 +52,19 @@ const StickyWrapper = styled.div`
   transition: box-shadow 0.3s ease;
 `;
 
-export default function Navbar({ items, currentCity }: any) {
+// --- UPDATED COMPONENT SIGNATURE ---
+export default function Navbar({ items, currentCity, phone }: NavbarProps) {
   const router = useRouter();
   const currentPath = router.asPath;
   const city = currentCity ? currentCity.subdomain : extractCityFromPath(currentPath);
 
-  // --- HARDCODED PHONE (To stop API Crash) ---
-  const phoneDisplay = "(800) 687-0480";
-  const phoneLink = "tel:8006870480";
-  const cityNameDisplay = "Need a Local Locksmith?"; // Fallback text
+  // --- DYNAMIC PHONE LOGIC ---
+  // Use the passed phone prop, or fallback to default
+  const phoneDisplay = phone || "(800) 687-0480";
+  // Clean string for tel: link (remove non-digits)
+  const phoneLink = `tel:${phoneDisplay.replace(/\D/g, "")}`;
+  
+  const cityNameDisplay = "Need a Local Locksmith?"; 
 
   const [scrollingDirection, setScrollingDirection] =
     useState<ScrollingDirections>("none");
@@ -123,7 +127,6 @@ export default function Navbar({ items, currentCity }: any) {
               </LogoWrapper>
             </NextLink>
             <p className="var hidden md:block text-[33px]">
-               {/* Kept original structure but safely displays text */}
                {cityNameDisplay}
             </p>
             <div className="flex flex-col space-y-2 ">
@@ -140,8 +143,10 @@ export default function Navbar({ items, currentCity }: any) {
                 </svg>
                 <span>
                   <span className="phone mx-0 px-0">{`Call Now: `}</span>
+                  {/* DYNAMIC LINK HERE */}
                   <a href={phoneLink}>
                       <p className=" cursor-pointer text-[#751318]">
+                        {/* DYNAMIC DISPLAY HERE */}
                         {phoneDisplay}
                       </p>
                   </a>
@@ -166,8 +171,7 @@ function NavItem({ href, title, outlined }: SingleNavItem) {
   );
 }
 
-// --- ALL STYLED COMPONENTS KEPT EXACTLY THE SAME ---
-
+// --- STYLED COMPONENTS (No Changes) ---
 const CustomButton = styled(Button)`
   padding: 0.75rem 1.5rem;
   line-height: 1.8;
