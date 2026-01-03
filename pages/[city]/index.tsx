@@ -4,9 +4,9 @@ import styled from "styled-components";
 import Cta from "views/HomePage/Cta";
 import Slider from "components/Slider";
 
-// --- IMPORT CSS ---
+// --- FIX: Correct Import Path (One level up) ---
 import "../style.css"; 
-// ------------------
+// -----------------------------------------------
 
 import OurTeam from "@/views/AboutPage/OurTeam";
 import { useRouter } from "next/router";
@@ -17,7 +17,7 @@ import PhotoSlider from "@/components/PhotoSlider";
 import CityServicesGrid from "@/components/CityServicesGrid";
 import cityData from "@/utils/cities_data.json";
 import GoogleScript from "@/components/Script";
-import { getCityPhone } from "@/utils/getCityPhone"; // Ensure this is imported
+import { getCityPhone } from "@/utils/getCityPhone"; 
 import PhoneBtn from "@/components/PhoneBtn";
 
 // --- STATIC DATA ---
@@ -60,17 +60,14 @@ const STATIC_TESTIMONIALS = [
   }
 ];
 
-export default function Homepage({
+export default function CityHomepage({
   services,
   testimonials,
   slug,
-  phone, // RECEIVE PHONE FROM SERVER SIDE PROPS
+  phone, // <-- RECEIVE PHONE FROM SERVER
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const router = useRouter();
   
-  // NOTE: We removed the useEffect/useState logic because we are getting 'phone' directly from the server now.
-
-  // Capitalize first letter of city for title
   const cityTitle = slug ? slug.charAt(0).toUpperCase() + slug.slice(1) : "";
 
   return (
@@ -81,7 +78,7 @@ export default function Homepage({
       </Head>
       <GoogleScript />
       <HomepageWrapper>
-        {/* Pass Server-Side phone to Slider (which controls Navbar) */}
+        {/* Pass Server Phone to Slider (Fixes Navbar) */}
         <Slider phone={phone} />
         
         <WhiteBackgroundContainer>
@@ -91,7 +88,7 @@ export default function Homepage({
                 
                 <CityServicesGrid services={services} slug={slug} />
 
-                {/* Use phone directly (it will always have a value) */}
+                {/* Body Button */}
                 <PhoneBtn phone={phone} />
                 <About />
               </div>
@@ -110,17 +107,13 @@ export default function Homepage({
           </div>
         </WhiteBackgroundContainer>
         
-        {/* --- BOTTOM CTA SECTION --- */}
         <DarkerBackgroundContainer>
-          {/* 1. HEADLINE TEXT */}
           <Cta />
           
-          {/* 2. CALL BUTTON */}
           <div style={{ marginBottom: '2rem' }}>
              <PhoneBtn phone={phone} />
           </div>
 
-          {/* 3. COUPON BUTTON */}
           <button 
             onClick={() => router.push(`/${slug}/coupons`)} 
             className="bg-[#751318] text-xl md:text-2xl px-8 md:px-32 py-3 text-white mx-auto rounded-md shadow-md font-bold font-serif w-11/12 md:w-auto"
@@ -128,7 +121,6 @@ export default function Homepage({
             FOR COUPONS CLICK HERE
           </button>
 
-          {/* 4. LARGE BOTTOM TEXT */}
           <BottomText>
             Don't Wait, Reach Out To Oscars Lock & Key Services!
           </BottomText>
@@ -140,7 +132,6 @@ export default function Homepage({
 }
 
 // ... Styles ...
-
 const BottomText = styled.p`
    font-family: "Times New Roman", serif;
    font-size: 2.8rem; 
@@ -183,12 +174,12 @@ export async function getServerSideProps(ctx: any) {
        console.error(e);
      }
   }
-  // -------------------------------
+  // ------------------------------
 
   return {
     props: {
       slug,
-      phone, // Pass the phone to the page (and _app/Slider)
+      phone, // PASS PHONE TO PAGE
       posts: [],
       services: STATIC_SERVICES, 
       testimonials: STATIC_TESTIMONIALS,
