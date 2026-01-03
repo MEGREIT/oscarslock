@@ -12,8 +12,7 @@ import Script from "next/script";
 import Router, { useRouter } from "next/router";
 import dynamic from "next/dynamic";
 
-// --- 1. DYNAMIC IMPORTS (The Secret Fix) ---
-// We DO NOT import anything at the top. We only load them if needed.
+// --- 1. DYNAMIC IMPORTS ---
 const GlobalStyle = dynamic(() => import("components/GlobalStyles").then(mod => mod.GlobalStyle), { ssr: false });
 const Navbar = dynamic(() => import("components/Navbar"), { ssr: false });
 const Footer = dynamic(() => import("components/Footer"), { ssr: false });
@@ -23,7 +22,6 @@ const CookieBanner = dynamic(() => import("@/components/CookieBanner"), { ssr: f
 const CallUsNowBtn = dynamic(() => import("@/components/CallUsNowBtn"), { ssr: false });
 const Spinner = dynamic(() => import("components/Spinner"), { ssr: false });
 
-// Context needs special handling, we wrap it in the MainLayout dynamically
 import { NewsletterModalContextProvider } from "contexts/newsletter-modal.context";
 import { useNewsletterModalContext } from "contexts/newsletter-modal.context";
 
@@ -35,7 +33,6 @@ const navItems = [
 ];
 
 // --- 2. SAFE LAYOUT (For Policy Pages ONLY) ---
-// Pure HTML/CSS. No Imports. No Sanity. No Crash.
 const SafeLayout = ({ children }: { children: React.ReactNode }) => (
   <div className="font-sans flex flex-col min-h-screen">
     <div className="bg-white p-4 shadow-md text-center">
@@ -43,11 +40,9 @@ const SafeLayout = ({ children }: { children: React.ReactNode }) => (
         <img src="/logos/oscar-logo.png" alt="Logo" className="h-12 inline-block" />
       </a>
     </div>
-
     <main className="flex-1">
       {children}
     </main>
-
     <div className="bg-[#15233e] text-white p-8 text-center">
       <p>© 2024 Oscar's Lock & Key Services.</p>
       <div className="mt-4 space-x-4">
@@ -60,12 +55,11 @@ const SafeLayout = ({ children }: { children: React.ReactNode }) => (
 );
 
 // --- 3. MAIN SITE LAYOUT (Original) ---
-// We load all the heavy stuff HERE, so it never touches the Policy pages.
-const MainSiteLayout = ({ children }: { children: React.ReactNode }) => {
+// UPDATE: Added 'phone' prop here
+const MainSiteLayout = ({ children, phone }: { children: React.ReactNode, phone?: string }) => {
   const [closestCity, setClosestCity] = useState<any | null>(null);
 
   const Modals = () => {
-    // We handle the modal logic safely here
     try {
       const { isModalOpened, setIsModalOpened } = useNewsletterModalContext();
       return isModalOpened ? <NewsletterModal onClose={() => setIsModalOpened(false)} /> : null;
@@ -80,7 +74,8 @@ const MainSiteLayout = ({ children }: { children: React.ReactNode }) => {
       <NewsletterModalContextProvider>
         <NavigationDrawer items={navItems}>
           <Modals />
-          <Navbar items={navItems} currentCity={closestCity} />
+          {/* PASS PHONE TO NAVBAR HERE */}
+          <Navbar items={navItems} currentCity={closestCity} phone={phone} /> 
           {children}
           <CookieBanner />
           <CallUsNowBtn />
@@ -96,7 +91,9 @@ function MyApp({ Component, pageProps }: AppProps) {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  // CHECK: Is this a policy page?
+  // EXTRACT PHONE FROM PAGE PROPS (Passed from getServerSideProps)
+  const { phone } = pageProps; 
+
   const isPolicyPage = router.pathname === '/privacy-policy' || router.pathname === '/terms-conditions';
 
   useEffect(() => {
@@ -131,23 +128,20 @@ function MyApp({ Component, pageProps }: AppProps) {
         `}
       </Script>
 
-      {/* NO GlobalStyle Here! It is moved inside MainSiteLayout */}
-      
       {loading ? (
         <div className="h-screen w-screen flex items-center justify-center">
-           {/* Simple loading text if Spinner fails */}
            <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-red-700"></div>
         </div>
       ) : (
         <>
           {isPolicyPage ? (
-  // Just render the component directly without SafeLayout
-  <Component {...pageProps} />
-) : (
-  <MainSiteLayout>
-    <Component {...pageProps} />
-  </MainSiteLayout>
-)}
+            <Component {...pageProps} />
+          ) : (
+            // PASS PHONE TO MAIN LAYOUT
+            <MainSiteLayout phone={phone}>
+              <Component {...pageProps} />
+            </MainSiteLayout>
+          )}
         </>
       )}
     </>
