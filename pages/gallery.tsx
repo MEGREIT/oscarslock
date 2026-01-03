@@ -10,12 +10,11 @@ import dynamic from "next/dynamic";
 import Cta from "@/views/HomePage/Cta";
 import PhoneBtn from "@/components/PhoneBtn";
 
-
 const priceList = [
   {
     title: "Service Call",
     amount: 35,
-    description: "Basic fee for the technician’s visit and initial assessment.",
+    description: "Basic fee for the technician's visit and initial assessment.",
   },
   {
     title: "Lockout Service",
@@ -75,19 +74,13 @@ const priceList = [
 
 const Gallery = () => {
   const router = useRouter();
+  
   return (
     <WhiteBackgroundContainer>
-      <div className="lg:flex xl:align-top lg:space-x-0 pl-5 xl:px-5 space-y-2 lg:space-y-0 my-8 xl:max-w-[1190px] w-full justify-between">
+      <div className="pl-5 xl:px-5 my-8 xl:max-w-[1190px] w-full">
         <GalleryComponent />
-        <PaymentBox>
-          <PaymentContainer>
-            <img src="/payment.png" />
-          </PaymentContainer>
-          <PhoneBtn phone="(800) 687- 0480" />
-          <TextBubble />
-          <img src="/logos/oscar-logo.png" className="w-[25rem] ml-0" />
-        </PaymentBox>
       </div>
+      
       <div className="w-full flex flex-col pb-10">
         <PhoneBtn phone="(800) 687- 0480" />
         <Cta />
@@ -95,7 +88,7 @@ const Gallery = () => {
           onClick={() => {
             router.push("/coupons");
           }}
-          className="text bg-[#751318] text-2xl px-32 py-2 text-white mx-auto"
+          className="bg-[#751318] text-xl md:text-2xl px-8 md:px-32 py-3 text-white mx-auto block mt-8 hover:bg-[#5e0a0a] transition-colors font-bold rounded-md shadow-md font-serif w-11/12 md:w-auto"
         >
           FOR COUPONS CLICK HERE
         </button>
