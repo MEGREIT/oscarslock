@@ -75,7 +75,7 @@ export default function TermsConditions() {
       <MainWrapper>
         <ContentRow>
           
-          {/* LEFT: TEXT */}
+          {/* LEFT: TEXT (FULL WIDTH NOW) */}
           <LeftColumn>
             <PageTitle>Terms and Conditions</PageTitle>
 
@@ -115,22 +115,6 @@ export default function TermsConditions() {
               <p><strong>General Terms and Conditions applicable to Use of a Web Site.</strong></p>
             </TextContent>
           </LeftColumn>
-
-          {/* RIGHT: SIDEBAR */}
-          <RightColumn>
-            <SidebarBox>
-              <PaymentImage>
-                <img src="/payment.png" alt="We Accept" />
-              </PaymentImage>
-              
-              <PhoneBtn phone="(800) 687-0480" />
-              <TextBubble />
-
-              <LogoImage>
-                 <img src="/logos/oscar-logo.png" alt="Oscars Lock & Key" />
-              </LogoImage>
-            </SidebarBox>
-          </RightColumn>
 
         </ContentRow>
       </MainWrapper>
@@ -287,7 +271,6 @@ const ContentRow = styled.div`
   max-width: 1300px;
   width: 100%;
   display: flex;
-  gap: 60px;
 
   ${media("<=largeDesktop")} {
     flex-direction: column;
@@ -295,7 +278,8 @@ const ContentRow = styled.div`
 `;
 
 const LeftColumn = styled.div`
-  flex: 3;
+  flex: 1;
+  width: 100%;
 `;
 
 const RightColumn = styled.div`
@@ -335,7 +319,7 @@ const LogoImage = styled.div`
 
 const PageTitle = styled.h1`
   font-family: "Times New Roman", serif;
-  font-size: 2rem;
+  font-size: 3rem;
   color: #0A3161;
   font-weight: 700;
   text-align: center;
@@ -343,13 +327,13 @@ const PageTitle = styled.h1`
   line-height: 1.1;
   
   ${media("<=tablet")} {
-    font-size: 1.6rem;
+    font-size: 2.4rem;
   }
 `;
 
 const PageSubTitle = styled.h2`
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 1.4rem;
+  font-size: 1.8rem;
   color: #1e4d8b;
   font-weight: 700;
   text-align: center;
@@ -358,13 +342,13 @@ const PageSubTitle = styled.h2`
   line-height: 1.3;
   
   ${media("<=tablet")} {
-    font-size: 1.2rem;
+    font-size: 1.6rem;
   }
 `;
 
 const TextContent = styled.div`
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 1.1rem;
+  font-size: 1.4rem;
   line-height: 1.6;
   color: #1e4d8b;
 
@@ -404,13 +388,13 @@ const TextContent = styled.div`
   }
 
   ${media("<=tablet")} {
-    font-size: 0.9rem;
+    font-size: 1.2rem;
   }
 `;
 
 const SectionHeader = styled.h3`
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 1.3rem;
+  font-size: 1.8rem;
   color: #1e4d8b;
   font-weight: 700;
   margin-top: 1.5rem;
@@ -420,7 +404,7 @@ const SectionHeader = styled.h3`
   padding-bottom: 10px;
 
   ${media("<=tablet")} {
-    font-size: 1.1rem;
+    font-size: 1.6rem;
   }
 `;
 
