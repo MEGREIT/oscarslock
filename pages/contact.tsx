@@ -5,30 +5,35 @@ import FormSection from "views/ContactPage/FormSection";
 import InformationSection from "views/ContactPage/InformationSection";
 import MapSection from "views/ContactPage/MapSection";
 import Divider from "components/Divider";
-// --- FIXED IMPORT ---
-// We use "./index" because contact.tsx and index.tsx are in the same folder
 import { PaymentBox, PaymentContainer } from "./index"; 
-// --------------------
 import TextBubble from "@/components/TextBubble";
 import ServiceCTA from "@/views/HomePage/ServiceCTA";
 import { useRouter } from "next/router";
 
-// --- THE FIX: Aggressively force the background to fit ---
+// --- UPDATED: Make image wider and fill better ---
 const MobileFixWrapper = styled.div`
   width: 100%;
 
-  ${media("<=tablet")} {
-    /* Target the Page wrapper */
-    & > div {
-      /* Target the Hero/Header section inside the Page */
-      & > div:first-child {
-        /* "100% 100%" forces the image to stretch to fill the area. 
-           It ensures 0% cut-off. */
-        background-size: 100% 100% !important;
-        background-position: center center !important;
-        background-repeat: no-repeat !important;
-        
-        /* Ensure there is enough height to see the image */
+  /* Target the Page wrapper */
+  & > div {
+    /* Target the Hero/Header section inside the Page */
+    & > div:first-child {
+      /* Make image cover the full width and height properly */
+      background-size: cover !important;
+      background-position: center center !important;
+      background-repeat: no-repeat !important;
+      /* Increase height for better visibility */
+      min-height: 400px !important;
+      width: 100% !important;
+      
+      ${media("<=tablet")} {
+        min-height: 350px !important;
+        /* Ensure full width on mobile */
+        width: 100vw !important;
+        margin-left: calc(-50vw + 50%) !important;
+      }
+      
+      ${media("<=phone")} {
         min-height: 300px !important;
       }
     }
@@ -38,6 +43,7 @@ const MobileFixWrapper = styled.div`
 
 export default function ContactPage() {
   const router = useRouter();
+  
   return (
     <MobileFixWrapper>
       <Page imgURL="/contact.jpg" title="Contact Us" description="">
@@ -54,6 +60,7 @@ export default function ContactPage() {
             <img src="/logos/oscar-logo.png" className="w-[25rem] ml-0" />
           </PaymentBox>
         </div>
+        
         <div className="flex flex-col justify-center space-y-10">
           <ServiceCTA />
           <button
@@ -73,6 +80,7 @@ export default function ContactPage() {
 const ContactContainer = styled.div`
   display: flex;
   flex-direction: column;
+
   ${media("<=tablet")} {
     flex-direction: column;
   }
