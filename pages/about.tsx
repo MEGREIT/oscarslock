@@ -124,15 +124,16 @@ const TopSection = styled.div`
   }
 `;
 
+// --- TITLE INCREASED MORE ---
 const PageTitle = styled.h1`
-  font-size: 2rem;
+  font-size: 4.5rem; /* Increased to 4.5rem */
   font-weight: 700;
   margin-bottom: 1.5rem;
   text-align: center;
   color: #0A3161;
 
   ${media("<=tablet")} {
-    font-size: 1.6rem;
+    font-size: 3rem; /* Increased to 3rem */
   }
 `;
 
