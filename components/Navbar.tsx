@@ -14,8 +14,7 @@ import Container from "./Container";
 import Logo from "./Logo";
 import GoogleScript from "./Script";
 
-// Updated type definition to include phone
-type NavbarProps = { items: NavItems; phone?: string; currentCity?: any };
+type NavbarProps = { items: NavItems; phone?: string; currentCity?: any; navbarTitle?: string };
 type ScrollingDirections = "up" | "down" | "none";
 type NavbarContainerProps = { hidden: boolean; transparent: boolean };
 
@@ -52,19 +51,16 @@ const StickyWrapper = styled.div`
   transition: box-shadow 0.3s ease;
 `;
 
-// --- UPDATED COMPONENT SIGNATURE ---
-export default function Navbar({ items, currentCity, phone }: NavbarProps) {
+// --- COMPONENT ---
+export default function Navbar({ items, currentCity, phone, navbarTitle }: NavbarProps) {
   const router = useRouter();
   const currentPath = router.asPath;
   const city = currentCity ? currentCity.subdomain : extractCityFromPath(currentPath);
 
-  // --- DYNAMIC PHONE LOGIC ---
-  // Use the passed phone prop, or fallback to default
   const phoneDisplay = phone || "(800) 687-0480";
-  // Clean string for tel: link (remove non-digits)
   const phoneLink = `tel:${phoneDisplay.replace(/\D/g, "")}`;
   
-  const cityNameDisplay = "Need a Local Locksmith?"; 
+  const cityNameDisplay = navbarTitle || "Need a Local Locksmith?";
 
   const [scrollingDirection, setScrollingDirection] =
     useState<ScrollingDirections>("none");
@@ -126,11 +122,14 @@ export default function Navbar({ items, currentCity, phone }: NavbarProps) {
                 <Logo />
               </LogoWrapper>
             </NextLink>
-            <p className="var hidden md:block text-[33px]">
+            
+            {/* FIX: ADDED font-bold TO MATCH IMAGE */}
+            <p className="var hidden md:block text-[33px] font-bold">
                {cityNameDisplay}
             </p>
+            
             <div className="flex flex-col space-y-2 ">
-              <p className="block md:hidden text-[14px]">
+              <p className="block md:hidden text-[14px] font-bold">
                  {cityNameDisplay}
               </p>
               <div>
@@ -143,10 +142,8 @@ export default function Navbar({ items, currentCity, phone }: NavbarProps) {
                 </svg>
                 <span>
                   <span className="phone mx-0 px-0">{`Call Now: `}</span>
-                  {/* DYNAMIC LINK HERE */}
                   <a href={phoneLink}>
                       <p className=" cursor-pointer text-[#751318]">
-                        {/* DYNAMIC DISPLAY HERE */}
                         {phoneDisplay}
                       </p>
                   </a>
@@ -171,7 +168,7 @@ function NavItem({ href, title, outlined }: SingleNavItem) {
   );
 }
 
-// --- STYLED COMPONENTS (No Changes) ---
+// ... Styles (Same as before) ...
 const CustomButton = styled(Button)`
   padding: 0.75rem 1.5rem;
   line-height: 1.8;
@@ -255,6 +252,7 @@ const NavbarContainer = styled.div<NavbarContainerProps>`
   ${media("<=tablet")} { padding: 2rem 1rem; }
   @media (min-width: 1440px) { max-width: 1430px; }
   @media (min-width: 1535px) and (max-width: 2652px) { max-width: 1380px; }
+  @media (max-width: 550px) { padding: 0.5rem 10px; }
 `;
 
 const Content = styled(Container)`
