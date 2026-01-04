@@ -12,7 +12,6 @@ import Script from "next/script";
 import Router, { useRouter } from "next/router";
 import dynamic from "next/dynamic";
 
-// --- 1. DYNAMIC IMPORTS ---
 const GlobalStyle = dynamic(() => import("components/GlobalStyles").then(mod => mod.GlobalStyle), { ssr: false });
 const Navbar = dynamic(() => import("components/Navbar"), { ssr: false });
 const Footer = dynamic(() => import("components/Footer"), { ssr: false });
@@ -32,7 +31,6 @@ const navItems = [
   { title: "Contact", href: "/contact" },
 ];
 
-// --- 2. SAFE LAYOUT (For Policy Pages ONLY) ---
 const SafeLayout = ({ children }: { children: React.ReactNode }) => (
   <div className="font-sans flex flex-col min-h-screen">
     <div className="bg-white p-4 shadow-md text-center">
@@ -54,9 +52,8 @@ const SafeLayout = ({ children }: { children: React.ReactNode }) => (
   </div>
 );
 
-// --- 3. MAIN SITE LAYOUT (Original) ---
-// UPDATE: Added 'phone' prop here
-const MainSiteLayout = ({ children, phone }: { children: React.ReactNode, phone?: string }) => {
+// FIX: Added 'navbarTitle' prop here
+const MainSiteLayout = ({ children, phone, navbarTitle }: { children: React.ReactNode, phone?: string, navbarTitle?: string }) => {
   const [closestCity, setClosestCity] = useState<any | null>(null);
 
   const Modals = () => {
@@ -74,8 +71,8 @@ const MainSiteLayout = ({ children, phone }: { children: React.ReactNode, phone?
       <NewsletterModalContextProvider>
         <NavigationDrawer items={navItems}>
           <Modals />
-          {/* PASS PHONE TO NAVBAR HERE */}
-          <Navbar items={navItems} currentCity={closestCity} phone={phone} /> 
+          {/* FIX: Passing 'navbarTitle' to Navbar */}
+          <Navbar items={navItems} currentCity={closestCity} phone={phone} navbarTitle={navbarTitle} /> 
           {children}
           <CookieBanner />
           <CallUsNowBtn />
@@ -86,13 +83,12 @@ const MainSiteLayout = ({ children, phone }: { children: React.ReactNode, phone?
   );
 };
 
-// --- 4. APP COMPONENT ---
 function MyApp({ Component, pageProps }: AppProps) {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  // EXTRACT PHONE FROM PAGE PROPS (Passed from getServerSideProps)
-  const { phone } = pageProps; 
+  // FIX: Extracting 'navbarTitle' from pageProps
+  const { phone, navbarTitle } = pageProps; 
 
   const isPolicyPage = router.pathname === '/privacy-policy' || router.pathname === '/terms-conditions';
 
@@ -137,8 +133,8 @@ function MyApp({ Component, pageProps }: AppProps) {
           {isPolicyPage ? (
             <Component {...pageProps} />
           ) : (
-            // PASS PHONE TO MAIN LAYOUT
-            <MainSiteLayout phone={phone}>
+            // FIX: Passing 'navbarTitle' to Layout
+            <MainSiteLayout phone={phone} navbarTitle={navbarTitle}>
               <Component {...pageProps} />
             </MainSiteLayout>
           )}
