@@ -1,20 +1,24 @@
 import React from "react";
-import { SharedPageProps } from "../../_app"; 
+// FIX: Adjusted import path to reach _app.tsx correctly
+import { SharedPageProps } from "../../../_app"; 
 import styled from "styled-components";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import Page from "@/components/Page";
-import { PaymentBox, PaymentContainer, WhiteBackgroundContainer } from "..";
+// FIX: Adjusted import to reach the City Index page components
+import { PaymentBox, PaymentContainer, WhiteBackgroundContainer } from "../..";
 import TextBubble from "@/components/TextBubble";
 import ServiceCTA from "@/views/HomePage/ServiceCTA";
 import PhoneBtn from "@/components/PhoneBtn";
 import { media } from "@/utils/media";
 import Cta from "@/views/HomePage/Cta"; 
 import { getCityPhone } from "@/utils/getCityPhone"; 
+import cityData from "@/utils/cities_data.json"; // Import Data for Title Logic
 
 interface ServiceProps extends SharedPageProps {
   service: any;
   phone: string; 
+  navbarTitle: string;
 }
 
 interface Query {
@@ -127,17 +131,6 @@ const Disclaimer = styled.p`
 `;
 
 // --------------------------------------------------
-
-const STATIC_SERVICES_LIST = [
-  { title: "Residential", slug: { current: "residential" } },
-  { title: "Commercial", slug: { current: "commercial" } },
-  { title: "Automotive", slug: { current: "automotive" } },
-  { title: "Emergency", slug: { current: "emergency" } },
-  { title: "Mailbox", slug: { current: "mailbox" } },
-  { title: "Safe", slug: { current: "safe" } },
-  { title: "Gallery", slug: { current: "gallery" } },
-  { title: "Coupons", slug: { current: "coupons" } },
-];
 
 const STATIC_SERVICES_DATA: Record<string, any> = {
   automotive: {
@@ -286,7 +279,7 @@ When the technician sees your safe, he determines the best method to gain entry.
 
 export default function ServiceSlugRoute(props: ServiceProps) {
   const router = useRouter();
-  const { service, phone } = props; 
+  const { service, phone, navbarTitle } = props; // DESTUCTURE PHONE & TITLE
    
   if (router.isFallback) return <div>Loading...</div>;
   if (!service) return <div>Loading...</div>;
@@ -303,11 +296,13 @@ export default function ServiceSlugRoute(props: ServiceProps) {
       description={service.description}
       isService
       imgURL={service.heroImage}
-      // --- FIX: Pass 'phone' to the Page component here ---
+      // --- FIX: Pass phone & navbarTitle to Page (for Navbar) ---
       phone={phone}
-      // ----------------------------------------------------
+      navbarTitle={navbarTitle}
+      // ----------------------------------------------------------
     >
       <ServiceContainer>
+        {/* Pass PHONE to Body Button */}
         <PhoneBtn phone={phone} />
         
         <div className="lg:flex xl:align-top lg:space-x-0 pl-5 xl:px-5 md:space-y-0 space-y-2 lg:space-y-0 max-w-[1250px]">
@@ -396,21 +391,36 @@ export const getServerSideProps: GetServerSideProps<ServiceProps, Query> = async
   const city = params.city as string; 
   const service = STATIC_SERVICES_DATA[slug];
 
+  // --- SERVER SIDE PHONE & CITY TITLE LOGIC ---
   let phone = "(800) 687- 0480";
-  
+  let navbarTitle = "Need a Local Locksmith?"; // Default
+
   if (city) {
     try {
+      // 1. Phone
       const cityPhone = getCityPhone(city);
       if (cityPhone) {
         phone = cityPhone;
       }
+      
+      // 2. Navbar Title (City + State)
+      const cityObj = cityData.hcms_cities.find((c) => c.subdomain === city);
+      
+      if (cityObj && cityObj.city) {
+         // Use the exact string from JSON: e.g., "Cambridge MA"
+         navbarTitle = cityObj.city;
+      } else {
+         // Fallback
+         navbarTitle = city.charAt(0).toUpperCase() + city.slice(1);
+      }
     } catch (error) {
-      console.error("Error fetching city phone:", error);
+      console.error("Error fetching city phone/title:", error);
     }
   }
+  // ------------------------------------------
    
   if (service) {
-    return { props: { service, draftMode, token: "", phone } };
+    return { props: { service, draftMode, token: "", phone, navbarTitle } };
   }
 
   return { 
@@ -418,7 +428,8 @@ export const getServerSideProps: GetServerSideProps<ServiceProps, Query> = async
       service: STATIC_SERVICES_DATA['residential'], 
       draftMode, 
       token: "",
-      phone 
+      phone,
+      navbarTitle 
     } 
   };
 };
