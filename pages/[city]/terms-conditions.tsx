@@ -2,23 +2,20 @@ import React from "react";
 import Head from "next/head";
 import styled from "styled-components";
 import { media } from "@/utils/media";
-import TextBubble from "@/components/TextBubble";
-import PhoneBtn from "@/components/PhoneBtn";
 import NextLink from "next/link";
 import { GetServerSideProps } from "next";
 import { getCityPhone } from "@/utils/getCityPhone"; 
 import cityData from "@/utils/cities_data.json";
 
-// --- 1. ADD INTERFACE ---
-interface CityTermsProps {
+// --- INTERFACE ---
+interface TermsProps {
   phone: string;
   navbarTitle: string;
 }
 
-export default function TermsConditions({ phone, navbarTitle }: CityTermsProps) {
-  // --- 2. USE DYNAMIC DATA ---
+export default function TermsConditions({ phone, navbarTitle }: TermsProps) {
+  // --- DYNAMIC DATA (Replaces Hardcoded Strings) ---
   const phoneDisplay = phone || "(800) 687-0480";
-  // Clean link
   const phoneLink = `tel:${phoneDisplay.replace(/\D/g, "")}`;
   const cityNameDisplay = navbarTitle || "Need a Local Locksmith?";
 
@@ -38,7 +35,7 @@ export default function TermsConditions({ phone, navbarTitle }: CityTermsProps) 
         }
       `}</style>
       
-      {/* --- EXACT NAVBAR FROM MAIN SITE (Now Dynamic) --- */}
+      {/* --- EXACT NAVBAR FROM YOUR CODE (Now Dynamic) --- */}
       <StickyWrapper>
         <div className="w-screen bg-white">
           <NavbarContainer>
@@ -53,13 +50,13 @@ export default function TermsConditions({ phone, navbarTitle }: CityTermsProps) 
                 </LogoWrapper>
               </NextLink>
               
-              {/* DYNAMIC CITY INITIAL */}
-              <p className="var hidden md:block text-[33px] font-bold">
+              {/* DYNAMIC CITY TITLE */}
+              <p className="var hidden md:block text-[33px]">
                 {cityNameDisplay}
               </p>
               
               <div className="flex flex-col space-y-2">
-                <p className="block md:hidden text-[12px] font-bold">
+                <p className="block md:hidden text-[12px]">
                   {cityNameDisplay}
                 </p>
                 <div>
@@ -72,7 +69,7 @@ export default function TermsConditions({ phone, navbarTitle }: CityTermsProps) 
                   </svg>
                   <span>
                     <span className="phone mx-0 px-0">{`Call Now: `}</span>
-                    {/* DYNAMIC PHONE */}
+                    {/* DYNAMIC PHONE LINK */}
                     <a href={phoneLink}>
                       <p className="cursor-pointer text-[#751318]">
                         {phoneDisplay}
@@ -86,11 +83,9 @@ export default function TermsConditions({ phone, navbarTitle }: CityTermsProps) 
         </div>
       </StickyWrapper>
 
-      {/* --- MAIN CONTENT --- */}
+      {/* --- MAIN CONTENT (UNCHANGED) --- */}
       <MainWrapper>
         <ContentRow>
-          
-          {/* FULL WIDTH TEXT - NO SIDEBAR */}
           <LeftColumn>
             <PageTitle>Terms and Conditions</PageTitle>
 
@@ -130,7 +125,6 @@ export default function TermsConditions({ phone, navbarTitle }: CityTermsProps) 
               <p><strong>General Terms and Conditions applicable to Use of a Web Site.</strong></p>
             </TextContent>
           </LeftColumn>
-
         </ContentRow>
       </MainWrapper>
 
@@ -152,7 +146,7 @@ export default function TermsConditions({ phone, navbarTitle }: CityTermsProps) 
   );
 }
 
-// --- 3. SERVER SIDE LOGIC ---
+// --- SERVER SIDE LOGIC (Fetches correct City/Phone) ---
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const { params = {} } = ctx;
   const city = params.city as string;
@@ -162,9 +156,11 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
   if (city) {
     try {
+      // 1. Get Phone
       const cityPhone = getCityPhone(city);
       if (cityPhone) phone = cityPhone;
 
+      // 2. Get Navbar Title
       const cityObj = cityData.hcms_cities.find((c) => c.subdomain === city);
       if (cityObj && cityObj.city) {
          navbarTitle = cityObj.city;
@@ -179,7 +175,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   return { props: { phone, navbarTitle } };
 };
 
-// --- NAVBAR STYLES (EXACT FROM NAVBAR COMPONENT) ---
+// --- YOUR EXACT STYLES (UNCHANGED) ---
 
 const StickyWrapper = styled.div`
   position: sticky;
@@ -300,8 +296,6 @@ const LogoWrapper = styled.div`
   cursor: pointer;
 `;
 
-// --- PAGE CONTENT STYLES (UPDATED TO MATCH SERVICE PAGES) ---
-
 const MainWrapper = styled.div`
   background: white;
   padding: 40px 20px;
@@ -321,41 +315,6 @@ const LeftColumn = styled.div`
   width: 100%;
 `;
 
-const RightColumn = styled.div`
-  flex: 1;
-  min-width: 300px;
-  ${media("<=tablet")} { min-width: 100%; }
-`;
-
-const SidebarBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: sticky;
-  top: 20px;
-`;
-
-const PaymentImage = styled.div`
-  width: 100%;
-  max-width: 250px;
-  margin-bottom: 10px;
-  
-  img {
-    width: 100%;
-    height: auto;
-  }
-`;
-
-const LogoImage = styled.div`
-  width: 150px;
-  margin-top: 20px;
-  
-  img {
-    width: 100%;
-    height: auto;
-  }
-`;
-
 const PageTitle = styled.h1`
   font-family: "Times New Roman", serif;
   font-size: 2rem;
@@ -367,21 +326,6 @@ const PageTitle = styled.h1`
   
   ${media("<=tablet")} {
     font-size: 1.6rem;
-  }
-`;
-
-const PageSubTitle = styled.h2`
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 1.4rem;
-  color: #1e4d8b;
-  font-weight: 700;
-  text-align: center;
-  margin-top: 0;
-  margin-bottom: 1.2rem;
-  line-height: 1.3;
-  
-  ${media("<=tablet")} {
-    font-size: 1.2rem;
   }
 `;
 
@@ -441,51 +385,6 @@ const SectionHeader = styled.h3`
     font-size: 1.1rem;
   }
 `;
-
-const CouponBox = styled.div`
-  margin-top: 80px;
-  border-top: 2px solid #e5e7eb;
-  padding-top: 60px;
-  text-align: center;
-
-  h3 {
-    font-family: Arial, Helvetica, sans-serif;
-    color: #1e4d8b;
-    font-size: 2.2rem;
-    font-weight: 700;
-    margin-bottom: 30px;
-    line-height: 1.3;
-    
-    ${media("<=tablet")} {
-      font-size: 1.8rem;
-    }
-    
-    ${media("<=phone")} {
-      font-size: 1.6rem;
-    }
-  }
-
-  a {
-    display: inline-block;
-    background: #751318;
-    color: white;
-    padding: 15px 50px;
-    font-size: 1.4rem;
-    font-weight: bold;
-    text-decoration: none;
-    border-radius: 4px;
-    transition: background 0.3s;
-
-    &:hover { background: #5e0a0a; }
-    
-    ${media("<=phone")} {
-      padding: 12px 30px;
-      font-size: 1.2rem;
-    }
-  }
-`;
-
-// --- FOOTER STYLES ---
 
 const FooterWrapper = styled.footer`
   background: #15233e;
