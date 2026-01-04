@@ -5,17 +5,28 @@ import { media } from "@/utils/media";
 import TextBubble from "@/components/TextBubble";
 import PhoneBtn from "@/components/PhoneBtn";
 import NextLink from "next/link";
+import { GetServerSideProps } from "next";
+import { getCityPhone } from "@/utils/getCityPhone"; 
+import cityData from "@/utils/cities_data.json";
 
-export default function TermsConditions() {
-  const phoneDisplay = "(800) 687-0480";
-  const phoneLink = "tel:8006870480";
-  const cityNameDisplay = "Need a Local Locksmith?";
+// --- 1. ADD INTERFACE ---
+interface CityTermsProps {
+  phone: string;
+  navbarTitle: string;
+}
+
+export default function TermsConditions({ phone, navbarTitle }: CityTermsProps) {
+  // --- 2. USE DYNAMIC DATA ---
+  const phoneDisplay = phone || "(800) 687-0480";
+  // Clean link
+  const phoneLink = `tel:${phoneDisplay.replace(/\D/g, "")}`;
+  const cityNameDisplay = navbarTitle || "Need a Local Locksmith?";
 
   return (
     <>
       <Head>
-        <title>Terms and Conditions | Oscars Lock & Key Services</title>
-        <meta name="description" content="Terms and Conditions for Oscars Lock & Key Services" />
+        <title>Terms and Conditions - {cityNameDisplay} | Oscars Lock & Key Services</title>
+        <meta name="description" content={`Terms and Conditions for Oscars Lock & Key Services in ${cityNameDisplay}`} />
       </Head>
       
       {/* Hide any extra floating elements */}
@@ -27,7 +38,7 @@ export default function TermsConditions() {
         }
       `}</style>
       
-      {/* --- EXACT NAVBAR FROM MAIN SITE --- */}
+      {/* --- EXACT NAVBAR FROM MAIN SITE (Now Dynamic) --- */}
       <StickyWrapper>
         <div className="w-screen bg-white">
           <NavbarContainer>
@@ -41,11 +52,14 @@ export default function TermsConditions() {
                   />
                 </LogoWrapper>
               </NextLink>
-              <p className="var hidden md:block text-[33px]">
+              
+              {/* DYNAMIC CITY INITIAL */}
+              <p className="var hidden md:block text-[33px] font-bold">
                 {cityNameDisplay}
               </p>
+              
               <div className="flex flex-col space-y-2">
-                <p className="block md:hidden text-[10px]">
+                <p className="block md:hidden text-[12px] font-bold">
                   {cityNameDisplay}
                 </p>
                 <div>
@@ -58,6 +72,7 @@ export default function TermsConditions() {
                   </svg>
                   <span>
                     <span className="phone mx-0 px-0">{`Call Now: `}</span>
+                    {/* DYNAMIC PHONE */}
                     <a href={phoneLink}>
                       <p className="cursor-pointer text-[#751318]">
                         {phoneDisplay}
@@ -75,10 +90,9 @@ export default function TermsConditions() {
       <MainWrapper>
         <ContentRow>
           
-          {/* LEFT: TEXT */}
+          {/* FULL WIDTH TEXT - NO SIDEBAR */}
           <LeftColumn>
             <PageTitle>Terms and Conditions</PageTitle>
-            <PageSubTitle>Oscars Lock & Key services Terms and Conditions</PageSubTitle>
 
             <TextContent>
               <SectionHeader>1. Terms</SectionHeader>
@@ -117,22 +131,6 @@ export default function TermsConditions() {
             </TextContent>
           </LeftColumn>
 
-          {/* RIGHT: SIDEBAR */}
-          <RightColumn>
-            <SidebarBox>
-              <PaymentImage>
-                <img src="/payment.png" alt="We Accept" />
-              </PaymentImage>
-              
-              <PhoneBtn phone="(800) 687-0480" />
-              <TextBubble />
-
-              <LogoImage>
-                 <img src="/logos/oscar-logo.png" alt="Oscars Lock & Key" />
-              </LogoImage>
-            </SidebarBox>
-          </RightColumn>
-
         </ContentRow>
       </MainWrapper>
 
@@ -154,7 +152,34 @@ export default function TermsConditions() {
   );
 }
 
-// --- NAVBAR STYLES ---
+// --- 3. SERVER SIDE LOGIC ---
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const { params = {} } = ctx;
+  const city = params.city as string;
+
+  let phone = "(800) 687- 0480";
+  let navbarTitle = "Need a Local Locksmith?";
+
+  if (city) {
+    try {
+      const cityPhone = getCityPhone(city);
+      if (cityPhone) phone = cityPhone;
+
+      const cityObj = cityData.hcms_cities.find((c) => c.subdomain === city);
+      if (cityObj && cityObj.city) {
+         navbarTitle = cityObj.city;
+      } else {
+         navbarTitle = city.charAt(0).toUpperCase() + city.slice(1);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  return { props: { phone, navbarTitle } };
+};
+
+// --- NAVBAR STYLES (EXACT FROM NAVBAR COMPONENT) ---
 
 const StickyWrapper = styled.div`
   position: sticky;
@@ -275,9 +300,7 @@ const LogoWrapper = styled.div`
   cursor: pointer;
 `;
 
-// --- PAGE CONTENT STYLES ---
-
-const targetFont = 'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif';
+// --- PAGE CONTENT STYLES (UPDATED TO MATCH SERVICE PAGES) ---
 
 const MainWrapper = styled.div`
   background: white;
@@ -291,14 +314,11 @@ const ContentRow = styled.div`
   width: 100%;
   display: flex;
   gap: 60px;
-
-  ${media("<=largeDesktop")} {
-    flex-direction: column;
-  }
 `;
 
 const LeftColumn = styled.div`
-  flex: 3;
+  flex: 1;
+  width: 100%;
 `;
 
 const RightColumn = styled.div`
@@ -337,65 +357,132 @@ const LogoImage = styled.div`
 `;
 
 const PageTitle = styled.h1`
-  font-family: ${targetFont};
-  font-size: 3rem;
+  font-family: "Times New Roman", serif;
+  font-size: 2rem;
   color: #0A3161;
-  font-weight: 800;
+  font-weight: 700;
   text-align: center;
   margin-bottom: 20px;
+  line-height: 1.1;
   
   ${media("<=tablet")} {
-    font-size: 2.2rem;
+    font-size: 1.6rem;
   }
 `;
 
 const PageSubTitle = styled.h2`
-  font-family: ${targetFont};
-  font-size: 1.8rem;
-  color: #0A3161;
-  font-weight: 600;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.4rem;
+  color: #1e4d8b;
+  font-weight: 700;
   text-align: center;
   margin-top: 0;
-  opacity: 0.9;
-  margin-bottom: 30px;
+  margin-bottom: 1.2rem;
+  line-height: 1.3;
   
   ${media("<=tablet")} {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
   }
 `;
 
 const TextContent = styled.div`
-  font-family: ${targetFont};
-  font-size: 18px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.1rem;
   line-height: 1.6;
-  color: #0A3161;
+  color: #1e4d8b;
 
   p { 
-    margin-bottom: 24px;
-    color: #0A3161;
+    margin-bottom: 1rem;
+    margin-top: 0;
+    color: #1e4d8b;
   }
   
   ul { 
-    margin-bottom: 24px; 
-    padding-left: 30px; 
-    color: #0A3161;
+    margin-bottom: 0.8rem;
+    margin-top: 0;
+    padding-left: 1.8rem;
+    list-style: none;
+    color: #1e4d8b;
   }
   
   li { 
-    margin-bottom: 10px;
-    color: #0A3161;
+    margin-bottom: 1rem;
+    padding-left: 1.8rem;
+    position: relative;
+    color: #1e4d8b;
+    line-height: 1.6;
+  }
+
+  li::before {
+    content: "●";
+    position: absolute;
+    left: 0;
+    color: #1e4d8b;
+    font-weight: 700;
+  }
+
+  ${media("<=tablet")} {
+    font-size: 0.9rem;
   }
 `;
 
 const SectionHeader = styled.h3`
-  font-family: ${targetFont};
-  font-size: 1.5rem;
-  color: #751318;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.3rem;
+  color: #1e4d8b;
+  font-weight: 700;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
   border-bottom: 2px solid #e5e7eb;
   padding-bottom: 10px;
-  margin-top: 40px;
-  margin-bottom: 20px;
-  font-weight: 700;
+
+  ${media("<=tablet")} {
+    font-size: 1.1rem;
+  }
+`;
+
+const CouponBox = styled.div`
+  margin-top: 80px;
+  border-top: 2px solid #e5e7eb;
+  padding-top: 60px;
+  text-align: center;
+
+  h3 {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #1e4d8b;
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 30px;
+    line-height: 1.3;
+    
+    ${media("<=tablet")} {
+      font-size: 1.8rem;
+    }
+    
+    ${media("<=phone")} {
+      font-size: 1.6rem;
+    }
+  }
+
+  a {
+    display: inline-block;
+    background: #751318;
+    color: white;
+    padding: 15px 50px;
+    font-size: 1.4rem;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background 0.3s;
+
+    &:hover { background: #5e0a0a; }
+    
+    ${media("<=phone")} {
+      padding: 12px 30px;
+      font-size: 1.2rem;
+    }
+  }
 `;
 
 // --- FOOTER STYLES ---
