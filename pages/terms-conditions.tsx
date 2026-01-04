@@ -5,17 +5,28 @@ import { media } from "@/utils/media";
 import TextBubble from "@/components/TextBubble";
 import PhoneBtn from "@/components/PhoneBtn";
 import NextLink from "next/link";
+import { GetServerSideProps } from "next";
+import { getCityPhone } from "@/utils/getCityPhone"; 
+import cityData from "@/utils/cities_data.json";
 
-export default function TermsConditions() {
-  const phoneDisplay = "(800) 687-0480";
-  const phoneLink = "tel:8006870480";
-  const cityNameDisplay = "Need a Local Locksmith?";
+// --- 1. ADD INTERFACE ---
+interface CityTermsProps {
+  phone: string;
+  navbarTitle: string;
+}
+
+export default function TermsConditions({ phone, navbarTitle }: CityTermsProps) {
+  // --- 2. USE DYNAMIC DATA ---
+  const phoneDisplay = phone || "(800) 687-0480";
+  // Clean link
+  const phoneLink = `tel:${phoneDisplay.replace(/\D/g, "")}`;
+  const cityNameDisplay = navbarTitle || "Need a Local Locksmith?";
 
   return (
     <>
       <Head>
-        <title>Terms and Conditions | Oscars Lock & Key Services</title>
-        <meta name="description" content="Terms and Conditions for Oscars Lock & Key Services" />
+        <title>Terms and Conditions - {cityNameDisplay} | Oscars Lock & Key Services</title>
+        <meta name="description" content={`Terms and Conditions for Oscars Lock & Key Services in ${cityNameDisplay}`} />
       </Head>
       
       {/* Hide any extra floating elements */}
@@ -27,7 +38,7 @@ export default function TermsConditions() {
         }
       `}</style>
       
-      {/* --- EXACT NAVBAR FROM MAIN SITE --- */}
+      {/* --- EXACT NAVBAR FROM MAIN SITE (Now Dynamic) --- */}
       <StickyWrapper>
         <div className="w-screen bg-white">
           <NavbarContainer>
@@ -41,11 +52,14 @@ export default function TermsConditions() {
                   />
                 </LogoWrapper>
               </NextLink>
-              <p className="var hidden md:block text-[33px]">
+              
+              {/* DYNAMIC CITY INITIAL */}
+              <p className="var hidden md:block text-[33px] font-bold">
                 {cityNameDisplay}
               </p>
+              
               <div className="flex flex-col space-y-2">
-                <p className="block md:hidden text-[12px]">
+                <p className="block md:hidden text-[12px] font-bold">
                   {cityNameDisplay}
                 </p>
                 <div>
@@ -58,6 +72,7 @@ export default function TermsConditions() {
                   </svg>
                   <span>
                     <span className="phone mx-0 px-0">{`Call Now: `}</span>
+                    {/* DYNAMIC PHONE */}
                     <a href={phoneLink}>
                       <p className="cursor-pointer text-[#751318]">
                         {phoneDisplay}
@@ -136,6 +151,33 @@ export default function TermsConditions() {
     </>
   );
 }
+
+// --- 3. SERVER SIDE LOGIC ---
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const { params = {} } = ctx;
+  const city = params.city as string;
+
+  let phone = "(800) 687- 0480";
+  let navbarTitle = "Need a Local Locksmith?";
+
+  if (city) {
+    try {
+      const cityPhone = getCityPhone(city);
+      if (cityPhone) phone = cityPhone;
+
+      const cityObj = cityData.hcms_cities.find((c) => c.subdomain === city);
+      if (cityObj && cityObj.city) {
+         navbarTitle = cityObj.city;
+      } else {
+         navbarTitle = city.charAt(0).toUpperCase() + city.slice(1);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  return { props: { phone, navbarTitle } };
+};
 
 // --- NAVBAR STYLES (EXACT FROM NAVBAR COMPONENT) ---
 
@@ -352,11 +394,6 @@ const TextContent = styled.div`
   p { 
     margin-bottom: 1rem;
     margin-top: 0;
-    color: #1e4d8b;
-  }
-
-  strong {
-    font-weight: 700;
     color: #1e4d8b;
   }
   
