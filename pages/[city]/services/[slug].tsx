@@ -1,29 +1,63 @@
 import React from "react";
-import { SharedPageProps } from "../../_app"; 
 import styled from "styled-components";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import Page from "@/components/Page";
-import { PaymentBox, PaymentContainer, WhiteBackgroundContainer } from "..";
 import TextBubble from "@/components/TextBubble";
 import ServiceCTA from "@/views/HomePage/ServiceCTA";
 import PhoneBtn from "@/components/PhoneBtn";
 import { media } from "@/utils/media";
 import Cta from "@/views/HomePage/Cta"; 
+import { getCityPhone } from "@/utils/getCityPhone"; 
+import cityData from "@/utils/cities_data.json";
 
-interface ServiceProps extends SharedPageProps {
+// --- INTERFACES ---
+interface ServiceProps {
   service: any;
+  phone: string; 
+  navbarTitle: string;
 }
 
-interface Query {
-  [key: string]: string;
-}
+// --- LOCAL STYLES ---
+const WhiteBackgroundContainer = styled.div`
+  background: rgb(255, 255, 255);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 100vw;
+  overflow: hidden;
+  padding: 0 10rem;
+  padding-top: 0rem;
+  & > *:not(:first-child) { margin-top: 3rem; }
+  ${media("<=tablet")} { padding: 0 2rem; }
+  ${media("<=phone")} { padding: 0 1.5rem; }
+  ${media(">largeDesktop")} { align-items: center; margin: 0 auto; }
+  @media (min-width: 1440px) { width: 100vw; margin: 0 auto; }
+`;
+
+const PaymentContainer = styled.div`
+  display: flex;
+  justify-content: start;
+  margin-top: -3.5rem;
+  align-items: start;
+  img { margin-bottom: auto; padding: 0; }
+  ${media("<largeDesktop")} { margin-top: 0rem; }
+`;
+
+const PaymentBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 0;
+  ${media(">=largeDesktop")} { width: 30%; }
+  ${media("<=phone")} { margin: 0 0; }
+`;
 
 const ServiceContainer = styled(WhiteBackgroundContainer)`
   padding-top: 0rem;
 `;
 
-// --- UPDATED STYLES TO MATCH DOCUMENT ---
+// --- UPDATED STYLES WITH BETTER MOBILE RESPONSIVENESS ---
 
 const StyledPageTitle = styled.h1`
   font-family: "Times New Roman", serif;
@@ -31,10 +65,16 @@ const StyledPageTitle = styled.h1`
   font-weight: 700;
   margin-bottom: 2rem;
   color: #0A3161;
-  line-height: 1.1;
+  line-height: 1.2;
 
   ${media("<=tablet")} {
-    font-size: 2.4rem;
+    font-size: 2.8rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  ${media("<=phone")} {
+    font-size: 2.6rem;
+    margin-bottom: 1.5rem;
   }
 `;
 
@@ -42,19 +82,25 @@ const StyledPageDescription = styled.p`
   font-family: Arial, Helvetica, sans-serif;
   font-size: 1.8rem;
   font-weight: 700;
-  margin-bottom: 1.2rem;
+  margin-bottom: 1.5rem;
   color: #1e4d8b;
-  line-height: 1.3;
+  line-height: 1.5;
 
   ${media("<=tablet")} {
-    font-size: 1.6rem;
+    font-size: 1.8rem;
+    margin-bottom: 1.2rem;
+  }
+  
+  ${media("<=phone")} {
+    font-size: 1.7rem;
+    margin-bottom: 1.2rem;
   }
 `;
 
 const StyledFullText = styled.div`
   font-family: Arial, Helvetica, sans-serif;
   font-size: 1.6rem;
-  line-height: 1.6;
+  line-height: 1.7;
   color: #1e4d8b;
 
   /* Bold text stays same color */
@@ -69,9 +115,9 @@ const StyledFullText = styled.div`
     font-size: 2rem;
     font-weight: 700;
     color: #1e4d8b;
-    margin-top: 1.5rem;
-    margin-bottom: 0.5rem;
-    line-height: 1.3;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    line-height: 1.4;
   }
 
   h3 {
@@ -79,24 +125,24 @@ const StyledFullText = styled.div`
     font-size: 1.8rem;
     font-weight: 700;
     color: #1e4d8b;
-    margin-top: 1.5rem;
-    margin-bottom: 0.5rem;
-    line-height: 1.3;
+    margin-top: 1.8rem;
+    margin-bottom: 0.8rem;
+    line-height: 1.4;
   }
 
   /* Bullet list styling */
   ul {
     list-style: none;
     padding-left: 0;
-    margin: 0.8rem 0;
+    margin: 1.2rem 0;
   }
 
   li {
-    padding-left: 1.8rem;
+    padding-left: 2rem;
     position: relative;
-    margin-bottom: 1rem;
+    margin-bottom: 1.2rem;
     color: #1e4d8b;
-    line-height: 1.6;
+    line-height: 1.7;
     font-weight: 400;
   }
 
@@ -108,10 +154,10 @@ const StyledFullText = styled.div`
     font-weight: 700;
   }
 
-  /* Paragraph spacing - tight like the original */
+  /* Paragraph spacing */
   p {
     margin-top: 0;
-    margin-bottom: 1rem;
+    margin-bottom: 1.2rem;
   }
 
   /* First paragraph after heading - no top margin */
@@ -120,7 +166,51 @@ const StyledFullText = styled.div`
   }
 
   ${media("<=tablet")} {
-    font-size: 1.4rem;
+    font-size: 1.6rem;
+    line-height: 1.7;
+    
+    h2 {
+      font-size: 2rem;
+      margin-top: 1.8rem;
+      margin-bottom: 0.8rem;
+    }
+    
+    h3 {
+      font-size: 1.8rem;
+      margin-top: 1.5rem;
+      margin-bottom: 0.8rem;
+    }
+    
+    li {
+      margin-bottom: 1.2rem;
+    }
+  }
+
+  ${media("<=phone")} {
+    font-size: 1.6rem;
+    line-height: 1.7;
+    
+    h2 {
+      font-size: 1.9rem;
+      margin-top: 1.8rem;
+      margin-bottom: 0.8rem;
+    }
+    
+    h3 {
+      font-size: 1.7rem;
+      margin-top: 1.5rem;
+      margin-bottom: 0.8rem;
+    }
+    
+    li {
+      padding-left: 2rem;
+      margin-bottom: 1.2rem;
+      font-size: 1.6rem;
+    }
+    
+    p {
+      margin-bottom: 1.2rem;
+    }
   }
 `;
 
@@ -134,21 +224,20 @@ const BottomText = styled.p`
   margin-bottom: 4rem;
 
   ${media("<=tablet")} {
-    font-size: 1.8rem;
+    font-size: 2rem;
+    margin-top: 2.5rem;
+    margin-bottom: 3rem;
+  }
+  
+  ${media("<=phone")} {
+    font-size: 1.9rem;
+    margin-top: 2rem;
+    margin-bottom: 2.5rem;
+    padding: 0 1rem;
   }
 `;
 
-const STATIC_SERVICES_LIST = [
-  { title: "Residential", slug: { current: "residential" } },
-  { title: "Commercial", slug: { current: "commercial" } },
-  { title: "Automotive", slug: { current: "automotive" } },
-  { title: "Emergency", slug: { current: "emergency" } },
-  { title: "Mailbox", slug: { current: "mailbox" } },
-  { title: "Safe", slug: { current: "safe" } },
-  { title: "Gallery", slug: { current: "gallery" } },
-  { title: "Coupons", slug: { current: "coupons" } },
-];
-
+// --- DATA ---
 const STATIC_SERVICES_DATA: Record<string, any> = {
   automotive: {
     title: "Automotive",
@@ -208,8 +297,8 @@ const STATIC_SERVICES_DATA: Record<string, any> = {
 <li><strong>Door lever locks, closers and hinge installation and repair</strong></li>
 <li><strong>Door viewers and guards</strong></li>
 <li><strong>Exit devices</strong></li>
-<li><strong>File cabinet locks, locking bars and key replacement</strong></li>
-<li><strong>Showcase, desk and cabinet lock installation, repair and replacement</strong></li>
+<li><strong>IC Core Locks - Smart Security, Total Control</strong></li>
+<li><strong>Upgrade your security with IC core locks-where flexibility meets dependable protection</strong></li>
 </ul>`,
   },
   emergency: {
@@ -269,14 +358,19 @@ const STATIC_SERVICES_DATA: Record<string, any> = {
   }
 };
 
+// --- COMPONENT ---
 export default function ServiceSlugRoute(props: ServiceProps) {
   const router = useRouter();
-  const { service } = props;
+  const { service, phone, navbarTitle } = props;
    
   if (router.isFallback) return <div>Loading...</div>;
   if (!service) return <div>Loading...</div>;
 
   const isExcludedPage = ['gallery', 'coupons', 'coupon'].includes(service.slug.current);
+
+  // Smart Home Link logic
+  const citySlug = router.query.city as string;
+  const homeLink = citySlug ? `/${citySlug}` : "/";
 
   return (
     <Page
@@ -284,14 +378,17 @@ export default function ServiceSlugRoute(props: ServiceProps) {
       description={service.description}
       isService
       imgURL={service.heroImage}
+      phone={phone}
+      navbarTitle={navbarTitle}
     >
       <ServiceContainer>
-        <PhoneBtn phone="(800) 687- 0480" />
-        <div className="lg:flex xl:align-top lg:space-x-0 px-5 md:space-y-0 space-y-2 lg:space-y-0 w-full max-w-[1250px] mx-auto">
-          <div className="flex-1 w-full">
-             <div className="mb-8 w-full">
+        <PhoneBtn phone={phone} />
+        
+        <div className="lg:flex xl:align-top lg:space-x-0 pl-5 xl:px-5 md:space-y-0 space-y-2 lg:space-y-0 max-w-[1250px]">
+          <div className="flex-1 pr-0 md:pr-8">
+             <div className="mb-8">
                <button 
-                 onClick={() => router.push("/")} 
+                 onClick={() => router.push(homeLink)} 
                  className="mb-10 px-6 md:px-10 py-4 bg-[#0a3161] text-white text-2xl rounded-lg shadow-md hover:bg-[#15233e] transition-all transform hover:scale-105 font-bold flex items-center font-serif"
                >
                  Home
@@ -314,14 +411,14 @@ export default function ServiceSlugRoute(props: ServiceProps) {
           </div>
           <PaymentBox>
             <PaymentContainer><img src="/payment.png" alt="Accepted Payments" /></PaymentContainer>
-            <PhoneBtn phone="(800) 687- 0480" />
+            <PhoneBtn phone={phone} />
             <TextBubble />
             <img src="/logos/oscar-logo.png" className="w-[25rem] ml-0" alt="Logo" />
           </PaymentBox>
         </div>
 
         <ServiceCTA />
-        <PhoneBtn phone="(800) 687- 0480" />
+        <PhoneBtn phone={phone} />
         
         {/* BUTTON */}
         <button 
@@ -337,27 +434,52 @@ export default function ServiceSlugRoute(props: ServiceProps) {
             Don't Wait, Reach Out To Oscars Lock & Key Services!
           </BottomText>
         )}
-        {/* -------------------------------- */}
+        {/* ---------------------------------- */}
 
       </ServiceContainer>
     </Page>
   );
 }
 
-export const getServerSideProps: GetServerSideProps<ServiceProps, Query> = async (ctx) => {
-  const { draftMode = false, params = {} } = ctx;
+// --- SERVER SIDE PROPS ---
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const { params = {} } = ctx;
   const slug = params.slug as string;
+  const city = params.city as string; 
   const service = STATIC_SERVICES_DATA[slug];
+
+  // --- SERVER SIDE PHONE & CITY TITLE LOGIC ---
+  let phone = "(800) 687- 0480";
+  let navbarTitle = "Need a Local Locksmith?"; 
+
+  if (city) {
+    try {
+      const cityPhone = getCityPhone(city);
+      if (cityPhone) {
+        phone = cityPhone;
+      }
+      
+      const cityObj = cityData.hcms_cities.find((c) => c.subdomain === city);
+      
+      if (cityObj && cityObj.city) {
+         navbarTitle = cityObj.city;
+      } else {
+         navbarTitle = city.charAt(0).toUpperCase() + city.slice(1);
+      }
+    } catch (error) {
+      console.error("Error fetching city data:", error);
+    }
+  }
    
   if (service) {
-    return { props: { service, draftMode, token: "" } };
+    return { props: { service, phone, navbarTitle } };
   }
 
   return { 
     props: { 
       service: STATIC_SERVICES_DATA['residential'], 
-      draftMode, 
-      token: "" 
+      phone,
+      navbarTitle 
     } 
   };
 };
