@@ -3,11 +3,7 @@ import Head from "next/head";
 import styled from "styled-components";
 import Cta from "views/HomePage/Cta";
 import Slider from "components/Slider";
-
-// --- FIX: Correct Import Path (One level up) ---
 import "../style.css"; 
-// -----------------------------------------------
-
 import OurTeam from "@/views/AboutPage/OurTeam";
 import { useRouter } from "next/router";
 import About from "@/components/About";
@@ -20,7 +16,6 @@ import GoogleScript from "@/components/Script";
 import { getCityPhone } from "@/utils/getCityPhone"; 
 import PhoneBtn from "@/components/PhoneBtn";
 
-// --- STATIC DATA ---
 const STATIC_SERVICES = [
   { title: "Residential", slug: { current: "residential" } },
   { title: "Commercial", slug: { current: "commercial" } },
@@ -33,41 +28,21 @@ const STATIC_SERVICES = [
 ];
 
 const STATIC_TESTIMONIALS = [
-  { 
-    fullName: "Jennifer M.", 
-    rating: 5, 
-    testimonial: "Oscars Lock & Key saved the day! I was locked out of my car with my groceries melting in the heat. They arrived in 20 minutes and got me back on the road instantly. Highly recommended!" 
-  },
-  { 
-    fullName: "David R.", 
-    rating: 5, 
-    testimonial: "Very professional service. We needed to rekey our entire office building after a security concern. The team was efficient, polite, and gave us a great price. Will definitely use them again." 
-  },
-  { 
-    fullName: "Sarah Jenkins", 
-    rating: 5, 
-    testimonial: "I lost my house keys late at night and was panicking. Called these guys and they were there so fast. The technician was super friendly and made me feel safe. Thank you so much!" 
-  },
-  { 
-    fullName: "Mike T.", 
-    rating: 5, 
-    testimonial: "Great experience with their safe opening service. I inherited an old safe and couldn't get it open. They opened it without damaging it. True experts." 
-  },
-  { 
-    fullName: "Emily Chen", 
-    rating: 5, 
-    testimonial: "Fast, reliable, and affordable. I've used them for both my car and my apartment. Best locksmith in town hands down." 
-  }
+  { fullName: "Jennifer M.", rating: 5, testimonial: "Oscars Lock & Key saved the day! I was locked out of my car with my groceries melting in the heat. They arrived in 20 minutes and got me back on the road instantly. Highly recommended!" },
+  { fullName: "David R.", rating: 5, testimonial: "Very professional service. We needed to rekey our entire office building after a security concern. The team was efficient, polite, and gave us a great price. Will definitely use them again." },
+  { fullName: "Sarah Jenkins", rating: 5, testimonial: "I lost my house keys late at night and was panicking. Called these guys and they were there so fast. The technician was super friendly and made me feel safe. Thank you so much!" },
+  { fullName: "Mike T.", rating: 5, testimonial: "Great experience with their safe opening service. I inherited an old safe and couldn't get it open. They opened it without damaging it. True experts." },
+  { fullName: "Emily Chen", rating: 5, testimonial: "Fast, reliable, and affordable. I've used them for both my car and my apartment. Best locksmith in town hands down." }
 ];
 
 export default function CityHomepage({
   services,
   testimonials,
   slug,
-  phone, // <-- RECEIVE PHONE FROM SERVER
+  phone,
+  navbarTitle, // RECEIVE TITLE
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const router = useRouter();
-  
   const cityTitle = slug ? slug.charAt(0).toUpperCase() + slug.slice(1) : "";
 
   return (
@@ -78,17 +53,14 @@ export default function CityHomepage({
       </Head>
       <GoogleScript />
       <HomepageWrapper>
-        {/* Pass Server Phone to Slider (Fixes Navbar) */}
+        {/* Pass Phone to Slider */}
         <Slider phone={phone} />
         
         <WhiteBackgroundContainer>
           <div className="flex flex-col items-center">
             <div className="lg:flex xl:align-top lg:space-x-4 space-y-2 lg:space-y-0 justify-center align-middle mx-0">
               <div className="flex flex-col mx-0 w-auto 2xl:max-w-[65%] xl:max-w-[80%]">
-                
                 <CityServicesGrid services={services} slug={slug} />
-
-                {/* Body Button */}
                 <PhoneBtn phone={phone} />
                 <About />
               </div>
@@ -109,22 +81,13 @@ export default function CityHomepage({
         
         <DarkerBackgroundContainer>
           <Cta />
-          
           <div style={{ marginBottom: '2rem' }}>
              <PhoneBtn phone={phone} />
           </div>
-
-          <button 
-            onClick={() => router.push(`/${slug}/coupons`)} 
-            className="bg-[#751318] text-xl md:text-2xl px-8 md:px-32 py-3 text-white mx-auto rounded-md shadow-md font-bold font-serif w-11/12 md:w-auto"
-          >
+          <button onClick={() => router.push(`/${slug}/coupons`)} className="bg-[#751318] text-xl md:text-2xl px-8 md:px-32 py-3 text-white mx-auto rounded-md shadow-md font-bold font-serif w-11/12 md:w-auto">
             FOR COUPONS CLICK HERE
           </button>
-
-          <BottomText>
-            Don't Wait, Reach Out To Oscars Lock & Key Services!
-          </BottomText>
-
+          <BottomText>Don't Wait, Reach Out To Oscars Lock & Key Services!</BottomText>
         </DarkerBackgroundContainer>
       </HomepageWrapper>
     </>
@@ -132,20 +95,7 @@ export default function CityHomepage({
 }
 
 // ... Styles ...
-const BottomText = styled.p`
-   font-family: "Times New Roman", serif;
-   font-size: 2.8rem; 
-   font-weight: 700;
-   text-align: center;
-   color: #0A3161; 
-   margin-top: 3rem; 
-   margin-bottom: 4rem; 
-
-   ${media("<=tablet")} {
-    font-size: 2rem;
-  }
-`;
-
+const BottomText = styled.p`font-family: "Times New Roman", serif; font-size: 2.8rem; font-weight: 700; text-align: center; color: #0A3161; margin-top: 3rem; margin-bottom: 4rem; ${media("<=tablet")} { font-size: 2rem; }`;
 const HomepageWrapper = styled.div`max-width: 100vw; background-color: white; overflow: hidden; & > :last-child { margin-bottom: 2rem; }`;
 export const PaymentContainer = styled.div`display: flex; justify-content: start; margin-top: -3.5rem; align-items: start; img { margin-bottom: auto; padding: 0; } ${media("<largeDesktop")} { margin-top: 0rem; }`;
 export const PaymentBox = styled.div`display: flex; flex-direction: column; align-items: center; margin: 0 0; ${media(">=largeDesktop")} { width: 30%; } ${media("<=phone")} { margin: 0 2rem; }`;
@@ -164,22 +114,38 @@ export async function getServerSideProps(ctx: any) {
   const isPresent = cityData.hcms_cities.some((city) => city.subdomain === slug);
   if (!isPresent) return { notFound: true };
 
-  // --- SERVER SIDE PHONE LOGIC ---
+  // --- SERVER SIDE LOGIC ---
   let phone = "(800) 687- 0480";
+  let navbarTitle = "Need a Local Locksmith?"; // Default
+
   if (slug) {
      try {
+       // 1. Get Phone
        const cityPhone = getCityPhone(slug);
        if (cityPhone) phone = cityPhone;
+
+       // 2. Get Name (Using the CORRECT key "city" from your JSON)
+       const cityObj = cityData.hcms_cities.find((c) => c.subdomain === slug);
+       
+       if (cityObj && cityObj.city) {
+         // Your JSON has "city": "Cambridge MA", so we use that directly!
+         navbarTitle = cityObj.city;
+       } else {
+         // Fallback if "city" field is missing
+         const formattedSlug = slug.charAt(0).toUpperCase() + slug.slice(1);
+         navbarTitle = formattedSlug;
+       }
      } catch (e) {
-       console.error(e);
+       console.error("Error fetching city details:", e);
      }
   }
-  // ------------------------------
+  // -------------------------
 
   return {
     props: {
       slug,
-      phone, // PASS PHONE TO PAGE
+      phone, 
+      navbarTitle, // PASS TITLE
       posts: [],
       services: STATIC_SERVICES, 
       testimonials: STATIC_TESTIMONIALS,
