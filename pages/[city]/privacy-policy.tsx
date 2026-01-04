@@ -10,28 +10,25 @@ import { GetServerSideProps } from "next";
 import { getCityPhone } from "@/utils/getCityPhone"; 
 import cityData from "@/utils/cities_data.json";
 
-// --- 1. ADD INTERFACE FOR DYNAMIC DATA ---
-interface CityPrivacyProps {
+// --- INTERFACE ---
+interface PrivacyProps {
   phone: string;
   navbarTitle: string;
 }
 
-export default function PrivacyPolicy({ phone, navbarTitle }: CityPrivacyProps) {
-  // --- 2. USE DYNAMIC VARIABLES INSTEAD OF HARDCODED STRINGS ---
+export default function PrivacyPolicy({ phone, navbarTitle }: PrivacyProps) {
+  // --- DYNAMIC DATA ---
   const phoneDisplay = phone || "(800) 687-0480";
-  // Create a clean link (remove dashes/spaces)
   const phoneLink = `tel:${phoneDisplay.replace(/\D/g, "")}`;
   const cityNameDisplay = navbarTitle || "Need a Local Locksmith?";
 
   return (
     <>
       <Head>
-        {/* Dynamic Title for SEO */}
         <title>Privacy Policy - {cityNameDisplay} | Oscars Lock & Key Services</title>
         <meta name="description" content={`Privacy Policy for Oscars Lock & Key Services in ${cityNameDisplay}`} />
       </Head>
       
-      {/* Hide any extra floating elements */}
       <style jsx global>{`
         body::before,
         body > div:not(#__next),
@@ -40,7 +37,7 @@ export default function PrivacyPolicy({ phone, navbarTitle }: CityPrivacyProps) 
         }
       `}</style>
 
-      {/* --- EXACT NAVBAR FROM MAIN SITE (Dynamic Now) --- */}
+      {/* --- NAVBAR --- */}
       <StickyWrapper>
         <div className="w-screen bg-white">
           <NavbarContainer>
@@ -54,14 +51,11 @@ export default function PrivacyPolicy({ phone, navbarTitle }: CityPrivacyProps) 
                   />
                 </LogoWrapper>
               </NextLink>
-              
-              {/* DYNAMIC CITY TITLE */}
-              <p className="var hidden md:block text-[33px] font-bold">
+              <p className="var hidden md:block text-[33px]">
                 {cityNameDisplay}
               </p>
-              
               <div className="flex flex-col space-y-2">
-                <p className="block md:hidden text-[10px] font-bold">
+                <p className="block md:hidden text-[12px]">
                   {cityNameDisplay}
                 </p>
                 <div>
@@ -74,7 +68,6 @@ export default function PrivacyPolicy({ phone, navbarTitle }: CityPrivacyProps) 
                   </svg>
                   <span>
                     <span className="phone mx-0 px-0">{`Call Now: `}</span>
-                    {/* DYNAMIC PHONE LINK */}
                     <a href={phoneLink}>
                       <p className="cursor-pointer text-[#751318]">
                         {phoneDisplay}
@@ -88,11 +81,9 @@ export default function PrivacyPolicy({ phone, navbarTitle }: CityPrivacyProps) 
         </div>
       </StickyWrapper>
 
-      {/* --- MAIN CONTENT --- */}
+      {/* --- MAIN CONTENT (UNCHANGED) --- */}
       <MainWrapper>
         <ContentRow>
-          
-          {/* FULL WIDTH TEXT - NO SIDEBAR */}
           <LeftColumn>
             <PageTitle>Privacy Policy</PageTitle>
 
@@ -170,7 +161,7 @@ export default function PrivacyPolicy({ phone, navbarTitle }: CityPrivacyProps) 
   );
 }
 
-// --- 3. SERVER SIDE LOGIC (Copy-Paste this at the bottom) ---
+// --- SERVER SIDE LOGIC ---
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const { params = {} } = ctx;
   const city = params.city as string;
@@ -180,9 +171,11 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
   if (city) {
     try {
+      // 1. Get Phone
       const cityPhone = getCityPhone(city);
       if (cityPhone) phone = cityPhone;
 
+      // 2. Get Navbar Title
       const cityObj = cityData.hcms_cities.find((c) => c.subdomain === city);
       if (cityObj && cityObj.city) {
          navbarTitle = cityObj.city;
@@ -197,8 +190,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   return { props: { phone, navbarTitle } };
 };
 
-// --- NAVBAR STYLES (EXACT FROM NAVBAR COMPONENT) ---
-
+// --- STYLES ---
 const StickyWrapper = styled.div`
   position: sticky;
   top: 0;
@@ -318,8 +310,6 @@ const LogoWrapper = styled.div`
   cursor: pointer;
 `;
 
-// --- PAGE CONTENT STYLES (UPDATED TO MATCH SERVICE PAGES) ---
-
 const MainWrapper = styled.div`
   background: white;
   padding: 40px 20px;
@@ -339,41 +329,6 @@ const LeftColumn = styled.div`
   width: 100%;
 `;
 
-const RightColumn = styled.div`
-  flex: 1;
-  min-width: 300px;
-  ${media("<=tablet")} { min-width: 100%; }
-`;
-
-const SidebarBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: sticky;
-  top: 20px;
-`;
-
-const PaymentImage = styled.div`
-  width: 100%;
-  max-width: 250px;
-  margin-bottom: 10px;
-  
-  img {
-    width: 100%;
-    height: auto;
-  }
-`;
-
-const LogoImage = styled.div`
-  width: 150px;
-  margin-top: 20px;
-  
-  img {
-    width: 100%;
-    height: auto;
-  }
-`;
-
 const PageTitle = styled.h1`
   font-family: "Times New Roman", serif;
   font-size: 2rem;
@@ -386,30 +341,6 @@ const PageTitle = styled.h1`
   ${media("<=tablet")} {
     font-size: 1.6rem;
   }
-`;
-
-const PageSubTitle = styled.h2`
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 1.4rem;
-  color: #1e4d8b;
-  font-weight: 700;
-  text-align: center;
-  margin-top: 0;
-  margin-bottom: 1.2rem;
-  line-height: 1.3;
-  
-  ${media("<=tablet")} {
-    font-size: 1.2rem;
-  }
-`;
-
-const IntroText = styled.p`
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 1.1rem;
-  color: #1e4d8b;
-  margin-bottom: 1rem;
-  font-weight: 700;
-  margin-top: 0;
 `;
 
 const TextContent = styled.div`
@@ -469,51 +400,6 @@ const SectionHeader = styled.h3`
   }
 `;
 
-const CouponBox = styled.div`
-  margin-top: 80px;
-  border-top: 2px solid #e5e7eb;
-  padding-top: 60px;
-  text-align: center;
-
-  h3 {
-    font-family: Arial, Helvetica, sans-serif;
-    color: #1e4d8b;
-    font-size: 2.2rem;
-    font-weight: 700;
-    margin-bottom: 30px;
-    line-height: 1.3;
-    
-    ${media("<=tablet")} {
-      font-size: 1.8rem;
-    }
-    
-    ${media("<=phone")} {
-      font-size: 1.6rem;
-    }
-  }
-
-  a {
-    display: inline-block;
-    background: #751318;
-    color: white;
-    padding: 15px 50px;
-    font-size: 1.4rem;
-    font-weight: bold;
-    text-decoration: none;
-    border-radius: 4px;
-    transition: background 0.3s;
-
-    &:hover { background: #5e0a0a; }
-    
-    ${media("<=phone")} {
-      padding: 12px 30px;
-      font-size: 1.2rem;
-    }
-  }
-`;
-
-// --- FOOTER STYLES ---
-
 const FooterWrapper = styled.footer`
   background: #15233e;
   color: white;
@@ -529,6 +415,7 @@ const FooterContent = styled.div`
   p {
     margin-bottom: 20px;
     font-size: 1rem;
+    color: white;
   }
 `;
 
