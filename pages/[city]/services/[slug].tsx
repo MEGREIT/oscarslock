@@ -1,35 +1,60 @@
 import React from "react";
-// FIX: Adjusted import path to reach _app.tsx correctly
-import { SharedPageProps } from "../../../_app"; 
 import styled from "styled-components";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import Page from "@/components/Page";
-// FIX: Adjusted import to reach the City Index page components
-import { PaymentBox, PaymentContainer, WhiteBackgroundContainer } from "../..";
 import TextBubble from "@/components/TextBubble";
 import ServiceCTA from "@/views/HomePage/ServiceCTA";
 import PhoneBtn from "@/components/PhoneBtn";
 import { media } from "@/utils/media";
 import Cta from "@/views/HomePage/Cta"; 
 import { getCityPhone } from "@/utils/getCityPhone"; 
-import cityData from "@/utils/cities_data.json"; // Import Data for Title Logic
+import cityData from "@/utils/cities_data.json";
 
-interface ServiceProps extends SharedPageProps {
+// --- INTERFACES ---
+interface ServiceProps {
   service: any;
   phone: string; 
   navbarTitle: string;
 }
 
-interface Query {
-  [key: string]: string;
-}
+// --- LOCAL STYLES (To avoid import issues) ---
+const WhiteBackgroundContainer = styled.div`
+  background: rgb(255, 255, 255);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 100vw;
+  overflow: hidden;
+  padding: 0 10rem;
+  padding-top: 0rem; /* Adjusted for Service Page */
+  & > *:not(:first-child) { margin-top: 3rem; }
+  ${media("<=phone")} { padding: 0 0; }
+  ${media(">largeDesktop")} { align-items: center; margin: 0 auto; }
+  @media (min-width: 1440px) { width: 100vw; margin: 0 auto; }
+`;
+
+const PaymentContainer = styled.div`
+  display: flex;
+  justify-content: start;
+  margin-top: -3.5rem;
+  align-items: start;
+  img { margin-bottom: auto; padding: 0; }
+  ${media("<largeDesktop")} { margin-top: 0rem; }
+`;
+
+const PaymentBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 0;
+  ${media(">=largeDesktop")} { width: 30%; }
+  ${media("<=phone")} { margin: 0 2rem; }
+`;
 
 const ServiceContainer = styled(WhiteBackgroundContainer)`
   padding-top: 0rem;
 `;
-
-// --- STYLES ---
 
 const StyledPageTitle = styled.h1`
   font-family: "Times New Roman", serif;
@@ -83,7 +108,6 @@ const BottomText = styled.p`
   }
 `;
 
-// --- PRICE LIST STYLES ---
 const PriceListContainer = styled.div`
   margin-top: 4rem;
   margin-bottom: 2rem;
@@ -111,14 +135,8 @@ const PriceItem = styled.div`
   color: #0A3161;
   padding: 0.5rem 0;
   border-bottom: 1px dotted #ccc;
-  
-  &:last-child {
-    border-bottom: none;
-  }
-
-  ${media("<=tablet")} {
-    font-size: 1.6rem;
-  }
+  &:last-child { border-bottom: none; }
+  ${media("<=tablet")} { font-size: 1.6rem; }
 `;
 
 const Disclaimer = styled.p`
@@ -130,136 +148,49 @@ const Disclaimer = styled.p`
   line-height: 1.4;
 `;
 
-// --------------------------------------------------
-
+// --- DATA ---
 const STATIC_SERVICES_DATA: Record<string, any> = {
   automotive: {
     title: "Automotive",
     heroImage: "/service-bg/automotive.png", 
     slug: { current: "automotive" }, 
     description: "Car key replacement and lockout services.",
-    fullText: `Lost your car keys? Our on-call automotive locksmith professional will make all keys & remotes on site. We can fix faulty auto ignitions or locks right on the spot.
-
-Oscars Lock & Key Services can help you quickly duplicate or replace lost, damaged or stolen electronic car keys and key fobs. We make electronic car keys for hundreds of car makes and models. Our locksmiths have the technical training and equipment that is necessary to provide fast and accurate car key duplication and replacement services. Our fully equipped mobile van comes to your location and offers the ultimate in convenience and time savings.
-
-Keys & Remotes for Most Vehicles, Makes & Models
-Oscars Lock & Key Services has an extensive stock of base keys, as well as more than 90 auto transponder keys for nearly 200 vehicle models, including cars, vans and trucks. Please call us with any questions regarding your specific vehicle make and model.
-Car Key Replacement & Duplication Services
-
-Oscars Lock & Key Services offers the following automotive key services:
-
-●Transponder (remote and key FOB) replacement
-●Transponder chip repair, duplication, and replacement
-●Smart and Flip Blade key repair or replacement
-●VIN key copying
-●PROX Car Key duplication and replacement
-●Immobilizer key reprogramming
-●Car remote programming
-●Ignition switch repair and unlocking
-●Broken key removal
-●Car trunk opening
-●High Security Car Key Cutting`,
+    fullText: `Lost your car keys? Our on-call automotive locksmith professional will make all keys & remotes on site. We can fix faulty auto ignitions or locks right on the spot.\n\nOscars Lock & Key Services can help you quickly duplicate or replace lost, damaged or stolen electronic car keys and key fobs. We make electronic car keys for hundreds of car makes and models.\n\nOscars Lock & Key Services offers the following automotive key services:\n●Transponder (remote and key FOB) replacement\n●Transponder chip repair, duplication, and replacement\n●Smart and Flip Blade key repair or replacement\n●VIN key copying\n●PROX Car Key duplication and replacement\n●Immobilizer key reprogramming\n●Car remote programming\n●Ignition switch repair and unlocking\n●Broken key removal\n●Car trunk opening\n●High Security Car Key Cutting`,
   },
   residential: {
     title: "Residential",
     heroImage: "/service-bg/residential.png", 
     slug: { current: "residential" }, 
     description: "Complete residential locksmith services for your home security.",
-    fullText: `Ensuring the security of your home is a top priority
-
-Oscars Lock & key Services provides a comprehensive range of residential locksmith services. Our highly skilled licensed locksmith professionals can resolve your locksmith service needs.
-
-With the support of qualified locksmiths, you can make right decisions and maximize the effectiveness of your security investments. We provide services which include fixing broken locks, installing new hardware, replacing lost keys or making your existing locks work with a different key and a master key.
-
-Common residential lock and key issues we can help you with include:
-
-●Home Lockout Service – Oscars Lock & key Services will quickly dispatch an experienced licensed locksmith professional to your home to address the issue.
-●Lock Installation, Replacement, and Repair – We carry a wide range of locks, deadbolts and keys to ensure we're able to provide you with the best products and services when locks break or need to be replaced.
-●Lock Rekeying – Rekeying is an essential service offered by Oscars Lock & Key Services that often goes overlooked. It involves changing the internal lock mechanism so that previous keys no longer work and new keys are required for access. Rekeying offers an affordable and efficient alternative to lock replacement and is particularly useful when keys are lost or stolen,or unauthorized access is suspected.
-●A master Key System – A Master key system allows your access to multiple locks using a single key, while individual keys only open specific locks.
-●High-Security Locks & Deadbolts – A high-security lock with key control adds an increased level of safety to your home by reducing the chance that your house key can be duplicated in an unauthorized fashion.
-
-We are committed to providing an unmatched level of service to our customers, please ask us about our Price Match Guarantee.`,
+    fullText: `Ensuring the security of your home is a top priority\n\nOscars Lock & key Services provides a comprehensive range of residential locksmith services. Our highly skilled licensed locksmith professionals can resolve your locksmith service needs.\n\nCommon residential lock and key issues we can help you with include:\n●Home Lockout Service\n●Lock Installation, Replacement, and Repair\n●Lock Rekeying\n●A master Key System\n●High-Security Locks & Deadbolts\n\nWe are committed to providing an unmatched level of service to our customers, please ask us about our Price Match Guarantee.`,
   },
   commercial: {
     title: "Commercial",
     heroImage: "/service-bg/commercial.png", 
     slug: { current: "commercial" }, 
     description: "Professional security solutions for businesses and offices.",
-    fullText: `Commercial Locksmith Services & Products
-
-Business security is a top priority for any organization. Oscars Lock & Key Services provides a wide range of commercial high-security locks, including un-pickable, do-not-duplicate, push and panic bars.
-
-Commercial Service Offerings:
-
-●High-security deadbolts, locks and key control systems
-●Lock repair, rekeying, replacement and installation
-●Master Key Systems
-●Keyless entry systems
-●Key duplication and replacement
-●Key extraction
-●Door lever locks, closers and hinge installation and repair
-●Door viewers and guards
-●Exit devices
-●File cabinet locks, locking bars and key replacement
-●Showcase, desk and cabinet lock installation, repair and replacement`,
+    fullText: `Commercial Locksmith Services & Products\n\nBusiness security is a top priority for any organization. Oscars Lock & Key Services provides a wide range of commercial high-security locks, including un-pickable, do-not-duplicate, push and panic bars.\n\nCommercial Service Offerings:\n●High-security deadbolts, locks and key control systems\n●Lock repair, rekeying, replacement and installation\n●Master Key Systems\n●Keyless entry systems\n●Key duplication and replacement\n●Key extraction\n●Door lever locks, closers and hinge installation and repair\n●Door viewers and guards\n●Exit devices\n●File cabinet locks, locking bars and key replacement\n●Showcase, desk and cabinet lock installation, repair and replacement`,
   },
   emergency: {
     title: "Emergency",
     heroImage: "/service-bg/emergency.png", 
     slug: { current: "emergency" }, 
     description: "24/7 Emergency assistance for lockouts.",
-    fullText: `Quick and Reliable Emergency Locksmith Service
-
-Locked Out? We’ve Got the Key to Your Solution!
-
-Wе knоw hоw ѕtrеѕѕful it is to be lосkеd оut оf уоur home, break or lose your ignition kеу.Wе саn handle аnу tуре оf emergency lосkѕmіth situation.
-
-Our experienced locksmith company like Oscars Lock & Key Services offers 24/7 emergency lockout services, ensuring that you can regain access quickly and efficiently.
-
-Our team of professionals operates to minimize damage to your property, by using non-destructive techniques and tools.
-
-Wе оffеr the following emergency locksmith ѕеrvісеѕ:
-
-●Emergency Lосkоut Sеrvісеѕ for Hоmеѕ, Commercial Buildings, and Vеhісlеѕ
-●Lосk Changes аnd Rераіr
-●Re-Keying
-●Kеуlеѕѕ Entry Systems
-●Master Kеу Sуѕtеmѕ
-●Pаnіс Bаr Rераіr аnd Installation
-●Aссеѕѕ Cоntrоl Sуѕtеmѕ
-
-
-Yоu саn соunt оn Oscars Lock & Key Services to get the job dоnе ԛuісklу and еffісіеntlу, and we оffеr the mоѕt competitive rates with a price match guarantee.`,
+    fullText: `Quick and Reliable Emergency Locksmith Service\n\nLocked Out? We’ve Got the Key to Your Solution!\n\nWе knоw hоw ѕtrеѕѕful it is to be lосkеd оut оf уоur home, break or lose your ignition kеу.Wе саn handle аnу tуре оf emergency lосkѕmіth situation.\n\nOur experienced locksmith company like Oscars Lock & Key Services offers 24/7 emergency lockout services, ensuring that you can regain access quickly and efficiently.\n\nWе оffеr the following emergency locksmith ѕеrvісеѕ:\n●Emergency Lосkоut Sеrvісеѕ for Hоmеѕ, Commercial Buildings, and Vеhісlеѕ\n●Lосk Changes аnd Rераіr\n●Re-Keying\n●Kеуlеѕѕ Entry Systems\n●Master Kеу Sуѕtеmѕ\n●Pаnіс Bаr Rераіr аnd Installation\n●Aссеѕѕ Cоntrоl Sуѕtеmѕ`,
   },
   mailbox: {
     title: "Mailbox",
     heroImage: "/service-bg/mailbox.png", 
     slug: { current: "mailbox" }, 
     description: "Mailbox lock replacement and key services.",
-    fullText: `We have changed many mailbox locks for our customers.
-
-We offer fully trained locksmith technicians who have every mailbox lock in stock at all times - so you never have to wait!
-
-Mailboxes are an easy target to break into. Here is why you should protect your mailbox. It’s no secret though that identity fraud has become rife in recent years and one of the easiest ways to get the important data is through mail!
-
-Low cost options are available to increase the security of your mailbox to prevent theft that could lead to something much more costly and serious!`,
+    fullText: `We have changed many mailbox locks for our customers.\n\nWe offer fully trained locksmith technicians who have every mailbox lock in stock at all times - so you never have to wait!\n\nMailboxes are an easy target to break into. Here is why you should protect your mailbox. It’s no secret though that identity fraud has become rife in recent years and one of the easiest ways to get the important data is through mail!`,
   },
   safe: {
     title: "Safe",
     heroImage: "/service-bg/safe.png", 
     slug: { current: "safe" }, 
     description: "Safe opening, repair, and installation.",
-    fullText: `Having issues with your safe? 
-
-We are expert safe locksmiths! 
-
-We have tools and techniques. No matter how complicated a situation you might have!
-Oscars Lock & Key Services technicians are highly trained and have years of experience.
-
-We have worked with many different types of safe locks and know every method to getting your safe opened.
-
-When the technician sees your safe, he determines the best method to gain entry.`,
+    fullText: `Having issues with your safe? We are expert safe locksmiths!\n\nWe have tools and techniques. No matter how complicated a situation you might have!\nOscars Lock & Key Services technicians are highly trained and have years of experience.\n\nWe have worked with many different types of safe locks and know every method to getting your safe opened.`,
   },
   coupons: {
     title: "Coupons",
@@ -277,16 +208,17 @@ When the technician sees your safe, he determines the best method to gain entry.
   }
 };
 
+// --- COMPONENT ---
 export default function ServiceSlugRoute(props: ServiceProps) {
   const router = useRouter();
-  const { service, phone, navbarTitle } = props; // DESTUCTURE PHONE & TITLE
+  const { service, phone, navbarTitle } = props; // DESTRUCTURE PROPS
    
   if (router.isFallback) return <div>Loading...</div>;
   if (!service) return <div>Loading...</div>;
 
   const isExcludedPage = ['gallery', 'coupons', 'coupon'].includes(service.slug.current);
 
-  // Fallback for home link
+  // Smart Home Link logic
   const citySlug = router.query.city as string;
   const homeLink = citySlug ? `/${citySlug}` : "/";
 
@@ -296,13 +228,12 @@ export default function ServiceSlugRoute(props: ServiceProps) {
       description={service.description}
       isService
       imgURL={service.heroImage}
-      // --- FIX: Pass phone & navbarTitle to Page (for Navbar) ---
+      // PASS DATA TO NAVBAR (via Page -> Layout)
       phone={phone}
       navbarTitle={navbarTitle}
-      // ----------------------------------------------------------
     >
       <ServiceContainer>
-        {/* Pass PHONE to Body Button */}
+        {/* Pass Phone to Body Button */}
         <PhoneBtn phone={phone} />
         
         <div className="lg:flex xl:align-top lg:space-x-0 pl-5 xl:px-5 md:space-y-0 space-y-2 lg:space-y-0 max-w-[1250px]">
@@ -343,13 +274,9 @@ export default function ServiceSlugRoute(props: ServiceProps) {
                    <PriceItem><span>Car key (Non-Transponder)</span><span>$155-$205</span></PriceItem>
                    <PriceItem><span>Car key (Transponder)</span><span>$205-$275</span></PriceItem>
                    <PriceItem><span>Car Key (Smart / Prox)</span><span>$285-$465</span></PriceItem>
-                   <PriceItem><span>Car Ignition Lock Cylinder Change / Repair</span><span>$75-$155</span></PriceItem>
                    
                    <Disclaimer>
-                     * Please take into notice that our dispatch team can only give an estimate of the cost for the task, based on the explanation of the situation given by a customer over the phone. The actual complexity or situation may differ in reality, therefore the costs may vary.
-                   </Disclaimer>
-                   <Disclaimer>
-                     * Each of our technicians require payment on the spot when the service is completed. Oscars Lock & Key services LLC accepts all major credit cards, cash, debit cards and business checks as a form of payment. On each completed job customer will get the copy of the original receipt (work order invoice) with detailed description of work performed, warranty and our contact information.
+                     * Please take into notice that our dispatch team can only give an estimate of the cost for the task...
                    </Disclaimer>
                  </PriceListContainer>
                )}
@@ -385,49 +312,48 @@ export default function ServiceSlugRoute(props: ServiceProps) {
   );
 }
 
-export const getServerSideProps: GetServerSideProps<ServiceProps, Query> = async (ctx) => {
-  const { draftMode = false, params = {} } = ctx;
+// --- SERVER SIDE PROPS ---
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const { params = {} } = ctx;
   const slug = params.slug as string;
   const city = params.city as string; 
   const service = STATIC_SERVICES_DATA[slug];
 
-  // --- SERVER SIDE PHONE & CITY TITLE LOGIC ---
+  // --- 1. SERVER SIDE PHONE & CITY TITLE LOGIC ---
   let phone = "(800) 687- 0480";
-  let navbarTitle = "Need a Local Locksmith?"; // Default
+  let navbarTitle = "Need a Local Locksmith?"; 
 
   if (city) {
     try {
-      // 1. Phone
+      // Get Phone
       const cityPhone = getCityPhone(city);
       if (cityPhone) {
         phone = cityPhone;
       }
       
-      // 2. Navbar Title (City + State)
+      // Get Navbar Title (City + State)
+      // We look for the "city" field which looks like "Cambridge MA"
       const cityObj = cityData.hcms_cities.find((c) => c.subdomain === city);
       
       if (cityObj && cityObj.city) {
-         // Use the exact string from JSON: e.g., "Cambridge MA"
          navbarTitle = cityObj.city;
       } else {
-         // Fallback
          navbarTitle = city.charAt(0).toUpperCase() + city.slice(1);
       }
     } catch (error) {
-      console.error("Error fetching city phone/title:", error);
+      console.error("Error fetching city data:", error);
     }
   }
   // ------------------------------------------
    
   if (service) {
-    return { props: { service, draftMode, token: "", phone, navbarTitle } };
+    return { props: { service, phone, navbarTitle } };
   }
 
+  // Fallback to residential if slug invalid
   return { 
     props: { 
       service: STATIC_SERVICES_DATA['residential'], 
-      draftMode, 
-      token: "",
       phone,
       navbarTitle 
     } 
