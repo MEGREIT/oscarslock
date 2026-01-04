@@ -75,7 +75,7 @@ export default function TermsConditions() {
       <MainWrapper>
         <ContentRow>
           
-          {/* LEFT: TEXT */}
+          {/* FULL WIDTH TEXT - NO SIDEBAR */}
           <LeftColumn>
             <PageTitle>Terms and Conditions</PageTitle>
 
@@ -115,22 +115,6 @@ export default function TermsConditions() {
               <p><strong>General Terms and Conditions applicable to Use of a Web Site.</strong></p>
             </TextContent>
           </LeftColumn>
-
-          {/* RIGHT: SIDEBAR */}
-          <RightColumn>
-            <SidebarBox>
-              <PaymentImage>
-                <img src="/payment.png" alt="We Accept" />
-              </PaymentImage>
-              
-              <PhoneBtn phone="(800) 687-0480" />
-              <TextBubble />
-
-              <LogoImage>
-                 <img src="/logos/oscar-logo.png" alt="Oscars Lock & Key" />
-              </LogoImage>
-            </SidebarBox>
-          </RightColumn>
 
         </ContentRow>
       </MainWrapper>
@@ -288,14 +272,11 @@ const ContentRow = styled.div`
   width: 100%;
   display: flex;
   gap: 60px;
-
-  ${media("<=largeDesktop")} {
-    flex-direction: column;
-  }
 `;
 
 const LeftColumn = styled.div`
-  flex: 3;
+  flex: 1;
+  width: 100%;
 `;
 
 const RightColumn = styled.div`
