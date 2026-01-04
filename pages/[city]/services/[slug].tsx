@@ -1,62 +1,29 @@
 import React from "react";
+import { SharedPageProps } from "../../_app"; 
 import styled from "styled-components";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import Page from "@/components/Page";
+import { PaymentBox, PaymentContainer, WhiteBackgroundContainer } from "..";
 import TextBubble from "@/components/TextBubble";
 import ServiceCTA from "@/views/HomePage/ServiceCTA";
 import PhoneBtn from "@/components/PhoneBtn";
 import { media } from "@/utils/media";
 import Cta from "@/views/HomePage/Cta"; 
-import { getCityPhone } from "@/utils/getCityPhone"; 
-import cityData from "@/utils/cities_data.json";
 
-// --- INTERFACES ---
-interface ServiceProps {
+interface ServiceProps extends SharedPageProps {
   service: any;
-  phone: string; 
-  navbarTitle: string;
 }
 
-// --- LOCAL STYLES (To avoid import issues) ---
-const WhiteBackgroundContainer = styled.div`
-  background: rgb(255, 255, 255);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  max-width: 100vw;
-  overflow: hidden;
-  padding: 0 10rem;
-  padding-top: 0rem;
-  & > *:not(:first-child) { margin-top: 3rem; }
-  ${media("<=phone")} { padding: 0 0; }
-  ${media(">largeDesktop")} { align-items: center; margin: 0 auto; }
-  @media (min-width: 1440px) { width: 100vw; margin: 0 auto; }
-`;
-
-const PaymentContainer = styled.div`
-  display: flex;
-  justify-content: start;
-  margin-top: -3.5rem;
-  align-items: start;
-  img { margin-bottom: auto; padding: 0; }
-  ${media("<largeDesktop")} { margin-top: 0rem; }
-`;
-
-const PaymentBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 0 0;
-  ${media(">=largeDesktop")} { width: 30%; }
-  ${media("<=phone")} { margin: 0 2rem; }
-`;
+interface Query {
+  [key: string]: string;
+}
 
 const ServiceContainer = styled(WhiteBackgroundContainer)`
   padding-top: 0rem;
 `;
 
-// --- UPDATED STYLES TO MATCH MAIN SLUG.TSX ---
+// --- UPDATED STYLES TO MATCH DOCUMENT ---
 
 const StyledPageTitle = styled.h1`
   font-family: "Times New Roman", serif;
@@ -171,7 +138,17 @@ const BottomText = styled.p`
   }
 `;
 
-// --- DATA (UPDATED TO MATCH MAIN SLUG.TSX) ---
+const STATIC_SERVICES_LIST = [
+  { title: "Residential", slug: { current: "residential" } },
+  { title: "Commercial", slug: { current: "commercial" } },
+  { title: "Automotive", slug: { current: "automotive" } },
+  { title: "Emergency", slug: { current: "emergency" } },
+  { title: "Mailbox", slug: { current: "mailbox" } },
+  { title: "Safe", slug: { current: "safe" } },
+  { title: "Gallery", slug: { current: "gallery" } },
+  { title: "Coupons", slug: { current: "coupons" } },
+];
+
 const STATIC_SERVICES_DATA: Record<string, any> = {
   automotive: {
     title: "Automotive",
@@ -231,8 +208,8 @@ const STATIC_SERVICES_DATA: Record<string, any> = {
 <li><strong>Door lever locks, closers and hinge installation and repair</strong></li>
 <li><strong>Door viewers and guards</strong></li>
 <li><strong>Exit devices</strong></li>
-<li><strong>IC Core Locks - Smart Security, Total Control</strong></li>
-<li><strong>Upgrade your security with IC core locks-where flexibility meets dependable protection</strong></li>
+<li><strong>File cabinet locks, locking bars and key replacement</strong></li>
+<li><strong>Showcase, desk and cabinet lock installation, repair and replacement</strong></li>
 </ul>`,
   },
   emergency: {
@@ -292,19 +269,14 @@ const STATIC_SERVICES_DATA: Record<string, any> = {
   }
 };
 
-// --- COMPONENT ---
 export default function ServiceSlugRoute(props: ServiceProps) {
   const router = useRouter();
-  const { service, phone, navbarTitle } = props;
+  const { service } = props;
    
   if (router.isFallback) return <div>Loading...</div>;
   if (!service) return <div>Loading...</div>;
 
   const isExcludedPage = ['gallery', 'coupons', 'coupon'].includes(service.slug.current);
-
-  // Smart Home Link logic
-  const citySlug = router.query.city as string;
-  const homeLink = citySlug ? `/${citySlug}` : "/";
 
   return (
     <Page
@@ -312,17 +284,14 @@ export default function ServiceSlugRoute(props: ServiceProps) {
       description={service.description}
       isService
       imgURL={service.heroImage}
-      phone={phone}
-      navbarTitle={navbarTitle}
     >
       <ServiceContainer>
-        <PhoneBtn phone={phone} />
-        
-        <div className="lg:flex xl:align-top lg:space-x-0 pl-5 xl:px-5 md:space-y-0 space-y-2 lg:space-y-0 max-w-[1250px]">
-          <div className="flex-1 pr-0 md:pr-8">
-             <div className="mb-8">
+        <PhoneBtn phone="(800) 687- 0480" />
+        <div className="lg:flex xl:align-top lg:space-x-0 px-5 md:space-y-0 space-y-2 lg:space-y-0 w-full max-w-[1250px] mx-auto">
+          <div className="flex-1 w-full">
+             <div className="mb-8 w-full">
                <button 
-                 onClick={() => router.push(homeLink)} 
+                 onClick={() => router.push("/")} 
                  className="mb-10 px-6 md:px-10 py-4 bg-[#0a3161] text-white text-2xl rounded-lg shadow-md hover:bg-[#15233e] transition-all transform hover:scale-105 font-bold flex items-center font-serif"
                >
                  Home
@@ -345,14 +314,14 @@ export default function ServiceSlugRoute(props: ServiceProps) {
           </div>
           <PaymentBox>
             <PaymentContainer><img src="/payment.png" alt="Accepted Payments" /></PaymentContainer>
-            <PhoneBtn phone={phone} />
+            <PhoneBtn phone="(800) 687- 0480" />
             <TextBubble />
             <img src="/logos/oscar-logo.png" className="w-[25rem] ml-0" alt="Logo" />
           </PaymentBox>
         </div>
 
         <ServiceCTA />
-        <PhoneBtn phone={phone} />
+        <PhoneBtn phone="(800) 687- 0480" />
         
         {/* BUTTON */}
         <button 
@@ -375,45 +344,20 @@ export default function ServiceSlugRoute(props: ServiceProps) {
   );
 }
 
-// --- SERVER SIDE PROPS ---
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const { params = {} } = ctx;
+export const getServerSideProps: GetServerSideProps<ServiceProps, Query> = async (ctx) => {
+  const { draftMode = false, params = {} } = ctx;
   const slug = params.slug as string;
-  const city = params.city as string; 
   const service = STATIC_SERVICES_DATA[slug];
-
-  // --- SERVER SIDE PHONE & CITY TITLE LOGIC ---
-  let phone = "(800) 687- 0480";
-  let navbarTitle = "Need a Local Locksmith?"; 
-
-  if (city) {
-    try {
-      const cityPhone = getCityPhone(city);
-      if (cityPhone) {
-        phone = cityPhone;
-      }
-      
-      const cityObj = cityData.hcms_cities.find((c) => c.subdomain === city);
-      
-      if (cityObj && cityObj.city) {
-         navbarTitle = cityObj.city;
-      } else {
-         navbarTitle = city.charAt(0).toUpperCase() + city.slice(1);
-      }
-    } catch (error) {
-      console.error("Error fetching city data:", error);
-    }
-  }
    
   if (service) {
-    return { props: { service, phone, navbarTitle } };
+    return { props: { service, draftMode, token: "" } };
   }
 
   return { 
     props: { 
       service: STATIC_SERVICES_DATA['residential'], 
-      phone,
-      navbarTitle 
+      draftMode, 
+      token: "" 
     } 
   };
 };
