@@ -2,31 +2,17 @@ import React from "react";
 import Head from "next/head";
 import styled from "styled-components";
 import { media } from "@/utils/media";
-import NextLink from "next/link";
 import { GetServerSideProps } from "next";
 import { getCityPhone } from "@/utils/getCityPhone"; 
 import cityData from "@/utils/cities_data.json";
+import { WhiteBackgroundContainer } from "../index";
 
-// --- INTERFACE ---
 interface PrivacyProps {
-  phone: string;
   navbarTitle: string;
-  city: string; // To build smart links
 }
 
-export default function PrivacyPolicy({ phone, navbarTitle, city }: PrivacyProps) {
-  // --- DYNAMIC DATA ---
-  const phoneDisplay = phone || "(800) 687-0480";
-  const phoneLink = `tel:${phoneDisplay.replace(/\D/g, "")}`;
+export default function PrivacyPolicy({ navbarTitle }: PrivacyProps) {
   const cityNameDisplay = navbarTitle || "Need a Local Locksmith?";
-
-  // --- SMART LINKS (Keeps user in the city) ---
-  const homeLink = city ? `/${city}` : "/";
-  const aboutLink = city ? `/${city}/about` : "/about"; 
-  const servicesLink = city ? `/${city}/services` : "/services";
-  const contactLink = city ? `/${city}/contact` : "/contact";
-  const privacyLink = city ? `/${city}/privacy-policy` : "/privacy-policy";
-  const termsLink = city ? `/${city}/terms-conditions` : "/terms-conditions";
 
   return (
     <>
@@ -34,66 +20,15 @@ export default function PrivacyPolicy({ phone, navbarTitle, city }: PrivacyProps
         <title>Privacy Policy - {cityNameDisplay} | Oscars Lock & Key Services</title>
         <meta name="description" content={`Privacy Policy for Oscars Lock & Key Services in ${cityNameDisplay}`} />
       </Head>
-      
-      <style jsx global>{`
-        body::before,
-        body > div:not(#__next),
-        #__next::before {
-          display: none !important;
-        }
-      `}</style>
 
-      {/* --- NAVBAR --- */}
-      <StickyWrapper>
-        <div className="w-screen bg-white">
-          <NavbarContainer>
-            <Content>
-              {/* SMART HOME LINK */}
-              <NextLink className="max-h-52" href={homeLink} passHref>
-                <LogoWrapper>
-                  <img
-                    src="/logos/LOGO.png"
-                    alt="logo"
-                    style={{ width: 'auto', height: '100%', maxHeight: '4rem', objectFit: 'contain' }}
-                  />
-                </LogoWrapper>
-              </NextLink>
-              
-              <p className="var hidden md:block text-[33px]">
-                {cityNameDisplay}
-              </p>
-              
-              <div className="flex flex-col space-y-2">
-                <p className="block md:hidden text-[12px]">
-                  {cityNameDisplay}
-                </p>
-                <div>
-                  <svg fill="#751318" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                    <path d="M164.9 24.6c-7.7-18.6-28-28.5-47.4-23.2l-88 24C12.1 30.2 0 46 0 64C0 311.4 200.6 512 448 512c18 0 33.8-12.1 38.6-29.5l24-88c5.3-19.4-4.6-39.7-23.2-47.4l-96-40c-16.3-6.8-35.2-2.1-46.3 11.6L304.7 368C234.3 334.7 177.3 277.7 144 207.3L193.3 167c13.7-11.2 18.4-30 11.6-46.3l-40-96z" />
-                  </svg>
-                  <span>
-                    <span className="phone mx-0 px-0">{`Call Now: `}</span>
-                    <a href={phoneLink}>
-                      <p className="cursor-pointer text-[#751318]">
-                        {phoneDisplay}
-                      </p>
-                    </a>
-                  </span>
-                </div>
-              </div>
-            </Content>
-          </NavbarContainer>
-        </div>
-      </StickyWrapper>
-
-      {/* --- MAIN CONTENT --- */}
+      {/* --- CONTENT ONLY (Global Navbar handles the top part) --- */}
       <MainWrapper>
         <ContentRow>
           <LeftColumn>
             <PageTitle>Privacy Policy</PageTitle>
 
             <TextContent>
-              <IntroText>Last Updated 2024. This privacy policy is effective immediately.</IntroText>
+              <IntroText>Last Updated 2025. This privacy policy is effective immediately.</IntroText>
 
               <SectionHeader>Introduction</SectionHeader>
               <p>At Oscars Lock & Key Services (the "Company" or "We"), we respect your privacy and are committed to protecting it through our compliance with this policy.</p>
@@ -146,21 +81,6 @@ export default function PrivacyPolicy({ phone, navbarTitle, city }: PrivacyProps
           </LeftColumn>
         </ContentRow>
       </MainWrapper>
-
-      {/* --- FOOTER WITH SMART LINKS --- */}
-      <FooterWrapper>
-        <FooterContent>
-          <p>© 2024 Oscar's Lock & Key Services. All rights reserved.</p>
-          <FooterLinks>
-            <a href={homeLink}>Home</a>
-            <a href={aboutLink}>About</a>
-            <a href={servicesLink}>Services</a>
-            <a href={contactLink}>Contact</a>
-            <a href={privacyLink}>Privacy Policy</a>
-            <a href={termsLink}>Terms & Conditions</a>
-          </FooterLinks>
-        </FooterContent>
-      </FooterWrapper>
     </>
   );
 }
@@ -175,9 +95,11 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
   if (city) {
     try {
+      // 1. Get Phone
       const cityPhone = getCityPhone(city);
       if (cityPhone) phone = cityPhone;
 
+      // 2. Get Navbar Title
       const cityObj = cityData.hcms_cities.find((c) => c.subdomain === city);
       if (cityObj && cityObj.city) {
          navbarTitle = cityObj.city;
@@ -189,80 +111,11 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     }
   }
 
-  return { props: { phone, navbarTitle, city: city || null } };
+  // Send data to Global Layout
+  return { props: { phone, navbarTitle } };
 };
 
-// --- STYLES (UNCHANGED) ---
-const StickyWrapper = styled.div`
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  background-color: white;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.3s ease;
-`;
-
-const NavbarContainer = styled.div`
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  display: flex;
-  padding: 0.5rem 90px;
-  width: 100%;
-  max-width: 1550px;
-  max-height: 5rem;
-  margin: 0 auto;
-  background-color: #fff;
-  ${media("<=tablet")} { padding: 0.5rem 1rem; }
-  @media (min-width: 1440px) { max-width: 1430px; }
-  @media (min-width: 1535px) and (max-width: 2652px) { max-width: 1380px; }
-`;
-
-const Content = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 0 auto;
-  font-size: 2rem;
-  div { display: flex; }
-  svg {
-    color: #751318;
-    width: 20px;
-    margin-right: 4px;
-    @media (max-width: 1040px) { width: 16px; margin-right: 3px; }
-    @media (max-width: 425px) { width: 12px; margin-right: 2px; }
-  }
-  span {
-    display: flex;
-    align-items: center;
-    font-size: 2rem;
-    @media (max-width: 1040px) { font-size: 1.4rem; }
-    @media (max-width: 869px) { font-size: 1rem; }
-    @media (max-width: 425px) { font-size: 0.8rem; }
-  }
-  .var {
-    margin-right: 1rem;
-    color: #000;
-    @media (max-width: 768px) { margin-right: 0.5rem; }
-  }
-  .phone {
-    color: #751318;
-    font-size: 2rem;
-    @media (max-width: 1040px) { font-size: 1.4rem; }
-    @media (max-width: 869px) { font-size: 0.9rem; }
-    @media (max-width: 305px) { font-size: 0.8rem; }
-  }
-  p { font-weight: 800; }
-`;
-
-const LogoWrapper = styled.div`
-  display: flex;
-  margin-right: auto;
-  text-decoration: none;
-  color: rgb(36, 58, 90);
-  cursor: pointer;
-`;
+// --- STYLES ---
 
 const MainWrapper = styled.div`
   background: white;
@@ -291,7 +144,10 @@ const PageTitle = styled.h1`
   text-align: center;
   margin-bottom: 20px;
   line-height: 1.1;
-  ${media("<=tablet")} { font-size: 1.6rem; }
+  
+  ${media("<=tablet")} {
+    font-size: 1.6rem;
+  }
 `;
 
 const TextContent = styled.div`
@@ -299,11 +155,40 @@ const TextContent = styled.div`
   font-size: 1.1rem;
   line-height: 1.6;
   color: #1e4d8b;
-  p { margin-bottom: 1rem; margin-top: 0; color: #1e4d8b; }
-  ul { margin-bottom: 0.8rem; margin-top: 0; padding-left: 1.8rem; list-style: none; color: #1e4d8b; }
-  li { margin-bottom: 1rem; padding-left: 1.8rem; position: relative; color: #1e4d8b; line-height: 1.6; }
-  li::before { content: "●"; position: absolute; left: 0; color: #1e4d8b; font-weight: 700; }
-  ${media("<=tablet")} { font-size: 0.9rem; }
+
+  p { 
+    margin-bottom: 1rem;
+    margin-top: 0;
+    color: #1e4d8b;
+  }
+  
+  ul { 
+    margin-bottom: 0.8rem;
+    margin-top: 0;
+    padding-left: 1.8rem;
+    list-style: none;
+    color: #1e4d8b;
+  }
+  
+  li { 
+    margin-bottom: 1rem;
+    padding-left: 1.8rem;
+    position: relative;
+    color: #1e4d8b;
+    line-height: 1.6;
+  }
+
+  li::before {
+    content: "●";
+    position: absolute;
+    left: 0;
+    color: #1e4d8b;
+    font-weight: 700;
+  }
+
+  ${media("<=tablet")} {
+    font-size: 0.9rem;
+  }
 `;
 
 const IntroText = styled.p`
@@ -325,37 +210,8 @@ const SectionHeader = styled.h3`
   line-height: 1.3;
   border-bottom: 2px solid #e5e7eb;
   padding-bottom: 10px;
-  ${media("<=tablet")} { font-size: 1.1rem; }
-`;
 
-const FooterWrapper = styled.footer`
-  background: #15233e;
-  color: white;
-  padding: 40px 20px;
-  margin-top: 60px;
-`;
-
-const FooterContent = styled.div`
-  max-width: 1300px;
-  margin: 0 auto;
-  text-align: center;
-  p { margin-bottom: 20px; font-size: 1rem; color: white; }
-`;
-
-const FooterLinks = styled.div`
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 20px;
-  a {
-    color: white;
-    text-decoration: none;
-    font-size: 0.95rem;
-    transition: opacity 0.3s;
-    &:hover { opacity: 0.7; text-decoration: underline; }
-  }
-  ${media("<=phone")} {
-    gap: 15px;
-    a { font-size: 0.85rem; }
+  ${media("<=tablet")} {
+    font-size: 1.1rem;
   }
 `;
