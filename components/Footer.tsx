@@ -27,6 +27,7 @@ export default function Footer({ currentCity }: any) {
   const router = useRouter();
   const currentPath = router.asPath;
   
+  // --- 1. DETERMINE CITY ---
   let city = "";
   if (currentCity && currentCity.subdomain) {
     city = currentCity.subdomain;
@@ -40,15 +41,16 @@ export default function Footer({ currentCity }: any) {
     }
   }
 
+  // --- 2. SMART LINKS (FIXED) ---
   const footerItems: FooterItems = [
     {
       title: "Footer Links",
       items: [
         { title: "Home", href: getLink(city) },
         { title: "About Us", href: city ? `/${city}/about` : "/about" },
-        // These point to the new TSX pages
-        { title: "Privacy Policy", href: "/privacy-policy" },
-        { title: "Terms & Conditions", href: "/terms-conditions" },
+        // FIX: If city exists, use /city/page. Else use global /page.
+        { title: "Privacy Policy", href: city ? `/${city}/privacy-policy` : "/privacy-policy" },
+        { title: "Terms & Conditions", href: city ? `/${city}/terms-conditions` : "/terms-conditions" },
       ],
     },
   ];
@@ -94,10 +96,6 @@ function FooterList({ title, items }: SingleFooterList) {
 function ListItem({ title, href }: SingleFooterListItem) {
   return (
     <ListItemWrapper>
-      {/* FIX: Added <a> tag inside. 
-         Without this, NextLink doesn't know where to attach the 'href', 
-         and it might be falling back to default browser behavior or cached HTML.
-      */}
       <NextLink href={href} passHref legacyBehavior>
         <a>{title}</a>
       </NextLink>
@@ -160,7 +158,7 @@ const ListWrapper = styled.div`
   }
 `;
 
-// --- FIXED CSS IS HERE ---
+// --- CLEANED CSS (Removed Merge Conflicts) ---
 const ListItemWrapper = styled.p`
   font-size: 1.6rem;
   
@@ -168,31 +166,21 @@ const ListItemWrapper = styled.p`
     text-decoration: none;
     margin: 0 auto;
     align-self: center;
-<<<<<<< HEAD
-    color: white !important; 
-    transition: all ease-in-out 0.4s;
-    cursor: pointer;
-    
-=======
     
     /* FORCE WHITE COLOR ALWAYS */
     color: white !important; 
     
     transition: all ease-in-out 0.4s;
+    cursor: pointer;
     
     /* Ensure it stays white even if visited */
->>>>>>> 50433bcede580211275adc752b42118c5a09b8b1
     &:visited {
       color: white !important;
     }
 
     &:hover {
       color: white;
-<<<<<<< HEAD
-      opacity: 0.8; 
-=======
-      opacity: 0.8; /* Optional: Slight dim on hover so they know it's clickable */
->>>>>>> 50433bcede580211275adc752b42118c5a09b8b1
+      opacity: 0.8; /* Slight dim on hover */
     }
   }
 `;
