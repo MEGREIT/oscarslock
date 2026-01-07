@@ -22,7 +22,7 @@ const About = () => {
                 alt="Lock"
               />
               <div className="flex flex-col my-auto text-[17px]">
-                {/* --- NORMAL MISSION/VISION TEXT --- */}
+                {/* --- MISSION/VISION TEXT WITH MATCHING COLOR --- */}
                 <span>{`OUR MISSION – `}</span>
                 Partnering with Oscars Lock & Key Services ensures you receive
                 personalized security solutions tailored to your specific needs.
@@ -131,7 +131,7 @@ const Description = styled.span`
   span {
     font-weight: bold;
     font-size: 2rem;
-    color: #0A3161; 
+    color: #15233e; /* CHANGED FROM #0A3161 TO MATCH "Are you looking for" */
   }
 
   p {
