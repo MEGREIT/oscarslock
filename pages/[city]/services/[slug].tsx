@@ -18,7 +18,7 @@ interface ServiceProps {
   navbarTitle: string;
 }
 
-// --- LOCAL STYLES ---
+// --- LOCAL STYLES (To avoid import issues) ---
 const WhiteBackgroundContainer = styled.div`
   background: rgb(255, 255, 255);
   display: flex;
@@ -29,8 +29,7 @@ const WhiteBackgroundContainer = styled.div`
   padding: 0 10rem;
   padding-top: 0rem;
   & > *:not(:first-child) { margin-top: 3rem; }
-  ${media("<=tablet")} { padding: 0 2rem; }
-  ${media("<=phone")} { padding: 0 1.5rem; }
+  ${media("<=phone")} { padding: 0 0; }
   ${media(">largeDesktop")} { align-items: center; margin: 0 auto; }
   @media (min-width: 1440px) { width: 100vw; margin: 0 auto; }
 `;
@@ -50,14 +49,14 @@ const PaymentBox = styled.div`
   align-items: center;
   margin: 0 0;
   ${media(">=largeDesktop")} { width: 30%; }
-  ${media("<=phone")} { margin: 0 0; }
+  ${media("<=phone")} { margin: 0 2rem; }
 `;
 
 const ServiceContainer = styled(WhiteBackgroundContainer)`
   padding-top: 0rem;
 `;
 
-// --- UPDATED STYLES WITH BETTER MOBILE RESPONSIVENESS ---
+// --- UPDATED STYLES TO MATCH MAIN SLUG.TSX ---
 
 const StyledPageTitle = styled.h1`
   font-family: "Times New Roman", serif;
@@ -65,16 +64,10 @@ const StyledPageTitle = styled.h1`
   font-weight: 700;
   margin-bottom: 2rem;
   color: #0A3161;
-  line-height: 1.2;
+  line-height: 1.1;
 
   ${media("<=tablet")} {
-    font-size: 2.8rem;
-    margin-bottom: 1.5rem;
-  }
-  
-  ${media("<=phone")} {
-    font-size: 2.6rem;
-    margin-bottom: 1.5rem;
+    font-size: 2.4rem;
   }
 `;
 
@@ -82,25 +75,19 @@ const StyledPageDescription = styled.p`
   font-family: Arial, Helvetica, sans-serif;
   font-size: 1.8rem;
   font-weight: 700;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.2rem;
   color: #1e4d8b;
-  line-height: 1.5;
+  line-height: 1.3;
 
   ${media("<=tablet")} {
-    font-size: 1.8rem;
-    margin-bottom: 1.2rem;
-  }
-  
-  ${media("<=phone")} {
-    font-size: 1.7rem;
-    margin-bottom: 1.2rem;
+    font-size: 1.6rem;
   }
 `;
 
 const StyledFullText = styled.div`
   font-family: Arial, Helvetica, sans-serif;
   font-size: 1.6rem;
-  line-height: 1.7;
+  line-height: 1.6;
   color: #1e4d8b;
 
   /* Bold text stays same color */
@@ -115,9 +102,9 @@ const StyledFullText = styled.div`
     font-size: 2rem;
     font-weight: 700;
     color: #1e4d8b;
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-    line-height: 1.4;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
   }
 
   h3 {
@@ -125,24 +112,24 @@ const StyledFullText = styled.div`
     font-size: 1.8rem;
     font-weight: 700;
     color: #1e4d8b;
-    margin-top: 1.8rem;
-    margin-bottom: 0.8rem;
-    line-height: 1.4;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
   }
 
   /* Bullet list styling */
   ul {
     list-style: none;
     padding-left: 0;
-    margin: 1.2rem 0;
+    margin: 0.8rem 0;
   }
 
   li {
-    padding-left: 2rem;
+    padding-left: 1.8rem;
     position: relative;
-    margin-bottom: 1.2rem;
+    margin-bottom: 1rem;
     color: #1e4d8b;
-    line-height: 1.7;
+    line-height: 1.6;
     font-weight: 400;
   }
 
@@ -154,10 +141,10 @@ const StyledFullText = styled.div`
     font-weight: 700;
   }
 
-  /* Paragraph spacing */
+  /* Paragraph spacing - tight like the original */
   p {
     margin-top: 0;
-    margin-bottom: 1.2rem;
+    margin-bottom: 1rem;
   }
 
   /* First paragraph after heading - no top margin */
@@ -166,51 +153,7 @@ const StyledFullText = styled.div`
   }
 
   ${media("<=tablet")} {
-    font-size: 1.6rem;
-    line-height: 1.7;
-    
-    h2 {
-      font-size: 2rem;
-      margin-top: 1.8rem;
-      margin-bottom: 0.8rem;
-    }
-    
-    h3 {
-      font-size: 1.8rem;
-      margin-top: 1.5rem;
-      margin-bottom: 0.8rem;
-    }
-    
-    li {
-      margin-bottom: 1.2rem;
-    }
-  }
-
-  ${media("<=phone")} {
-    font-size: 1.6rem;
-    line-height: 1.7;
-    
-    h2 {
-      font-size: 1.9rem;
-      margin-top: 1.8rem;
-      margin-bottom: 0.8rem;
-    }
-    
-    h3 {
-      font-size: 1.7rem;
-      margin-top: 1.5rem;
-      margin-bottom: 0.8rem;
-    }
-    
-    li {
-      padding-left: 2rem;
-      margin-bottom: 1.2rem;
-      font-size: 1.6rem;
-    }
-    
-    p {
-      margin-bottom: 1.2rem;
-    }
+    font-size: 1.4rem;
   }
 `;
 
@@ -224,20 +167,11 @@ const BottomText = styled.p`
   margin-bottom: 4rem;
 
   ${media("<=tablet")} {
-    font-size: 2rem;
-    margin-top: 2.5rem;
-    margin-bottom: 3rem;
-  }
-  
-  ${media("<=phone")} {
-    font-size: 1.9rem;
-    margin-top: 2rem;
-    margin-bottom: 2.5rem;
-    padding: 0 1rem;
+    font-size: 1.8rem;
   }
 `;
 
-// --- DATA ---
+// --- DATA (UPDATED TO MATCH MAIN SLUG.TSX) ---
 const STATIC_SERVICES_DATA: Record<string, any> = {
   automotive: {
     title: "Automotive",
@@ -434,7 +368,7 @@ export default function ServiceSlugRoute(props: ServiceProps) {
             Don't Wait, Reach Out To Oscars Lock & Key Services!
           </BottomText>
         )}
-        {/* ---------------------------------- */}
+        {/* -------------------------------- */}
 
       </ServiceContainer>
     </Page>
