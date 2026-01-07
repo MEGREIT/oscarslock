@@ -40,7 +40,7 @@ export default function CityHomepage({
   testimonials,
   slug,
   phone,
-  navbarTitle, // RECEIVE TITLE
+  navbarTitle,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const router = useRouter();
   const cityTitle = slug ? slug.charAt(0).toUpperCase() + slug.slice(1) : "";
@@ -80,8 +80,8 @@ export default function CityHomepage({
         </WhiteBackgroundContainer>
         
         <DarkerBackgroundContainer>
-          <Cta />
-          <div style={{ marginBottom: '2rem' }}>
+          {/* REMOVED: <Cta /> component that shows "Take a Look At Our Coupons - You Might Qualify For a Discount!" */}
+          <div style={{ marginBottom: '2rem', marginTop: '2rem' }}>
              <PhoneBtn phone={phone} />
           </div>
           <button onClick={() => router.push(`/${slug}/coupons`)} className="bg-[#751318] text-xl md:text-2xl px-8 md:px-32 py-3 text-white mx-auto rounded-md shadow-md font-bold font-serif w-11/12 md:w-auto">
