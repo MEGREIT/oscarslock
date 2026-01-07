@@ -29,7 +29,7 @@ const WhiteBackgroundContainer = styled.div`
   padding: 0 10rem;
   padding-top: 0rem;
   & > *:not(:first-child) { margin-top: 3rem; }
-  ${media("<=phone")} { padding: 0 0; }
+  ${media("<=phone")} { padding: 0 2rem; }
   ${media(">largeDesktop")} { align-items: center; margin: 0 auto; }
   @media (min-width: 1440px) { width: 100vw; margin: 0 auto; }
 `;
@@ -56,37 +56,45 @@ const ServiceContainer = styled(WhiteBackgroundContainer)`
   padding-top: 0rem;
 `;
 
-// --- UPDATED STYLES TO MATCH MAIN SLUG.TSX ---
+// --- FIXED STYLES FOR MOBILE ---
 
 const StyledPageTitle = styled.h1`
   font-family: "Times New Roman", serif;
-  font-size: 3rem;
+  font-size: 4rem;
   font-weight: 700;
   margin-bottom: 2rem;
   color: #0A3161;
   line-height: 1.1;
 
   ${media("<=tablet")} {
-    font-size: 2.4rem;
+    font-size: 3rem;
+  }
+  
+  ${media("<=phone")} {
+    font-size: 2.5rem;
   }
 `;
 
 const StyledPageDescription = styled.p`
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 1.8rem;
+  font-size: 2rem;
   font-weight: 700;
-  margin-bottom: 1.2rem;
+  margin-bottom: 1.5rem;
   color: #1e4d8b;
-  line-height: 1.3;
+  line-height: 1.4;
 
   ${media("<=tablet")} {
+    font-size: 1.8rem;
+  }
+  
+  ${media("<=phone")} {
     font-size: 1.6rem;
   }
 `;
 
 const StyledFullText = styled.div`
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   line-height: 1.6;
   color: #1e4d8b;
 
@@ -99,21 +107,21 @@ const StyledFullText = styled.div`
   /* Section headings */
   h2 {
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 2rem;
+    font-size: 2.4rem;
     font-weight: 700;
     color: #1e4d8b;
-    margin-top: 1.5rem;
-    margin-bottom: 0.5rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
     line-height: 1.3;
   }
 
   h3 {
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 1.8rem;
+    font-size: 2rem;
     font-weight: 700;
     color: #1e4d8b;
     margin-top: 1.5rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.8rem;
     line-height: 1.3;
   }
 
@@ -121,11 +129,11 @@ const StyledFullText = styled.div`
   ul {
     list-style: none;
     padding-left: 0;
-    margin: 0.8rem 0;
+    margin: 1rem 0;
   }
 
   li {
-    padding-left: 1.8rem;
+    padding-left: 2rem;
     position: relative;
     margin-bottom: 1rem;
     color: #1e4d8b;
@@ -141,10 +149,10 @@ const StyledFullText = styled.div`
     font-weight: 700;
   }
 
-  /* Paragraph spacing - tight like the original */
+  /* Paragraph spacing */
   p {
     margin-top: 0;
-    margin-bottom: 1rem;
+    margin-bottom: 1.2rem;
   }
 
   /* First paragraph after heading - no top margin */
@@ -152,8 +160,34 @@ const StyledFullText = styled.div`
     margin-top: 0;
   }
 
+  /* MOBILE STYLES - BIGGER TEXT */
   ${media("<=tablet")} {
-    font-size: 1.4rem;
+    font-size: 1.6rem;
+    
+    h2 {
+      font-size: 2rem;
+    }
+    
+    h3 {
+      font-size: 1.8rem;
+    }
+  }
+  
+  ${media("<=phone")} {
+    font-size: 1.5rem;
+    
+    h2 {
+      font-size: 1.8rem;
+    }
+    
+    h3 {
+      font-size: 1.6rem;
+    }
+    
+    li {
+      padding-left: 1.5rem;
+      margin-bottom: 0.8rem;
+    }
   }
 `;
 
@@ -167,7 +201,12 @@ const BottomText = styled.p`
   margin-bottom: 4rem;
 
   ${media("<=tablet")} {
+    font-size: 2rem;
+  }
+  
+  ${media("<=phone")} {
     font-size: 1.8rem;
+    padding: 0 1rem;
   }
 `;
 
