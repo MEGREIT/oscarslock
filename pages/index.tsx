@@ -123,7 +123,7 @@ const DontWaitText = styled.p`
   font-size: 2.2rem;
   font-weight: 700;
   text-align: center;
-  color: #1e4d8b;
+  color: #073064ff;
   margin-top: 2rem;
   margin-bottom: 3rem;
 
