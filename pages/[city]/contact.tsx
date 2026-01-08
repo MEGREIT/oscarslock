@@ -18,17 +18,14 @@ interface ContactProps {
 
 export default function ContactPage({ phone, navbarTitle }: ContactProps) {
   const router = useRouter();
-  
-  // Use dynamic title for the Tab/SEO
-  const pageTitleDisplay = navbarTitle ? `Contact Us - ${navbarTitle}` : "Contact Us";
 
   return (
     <MobileFixWrapper>
       <Page 
         imgURL="/contact.jpg" 
-        title={pageTitleDisplay} 
+        title="Contact Us"  // <--- FIXED: Only shows "Contact Us" on the image
         description="Get in touch with us"
-        // Pass these to fix the Navbar
+        // These props update the Top Navbar
         phone={phone}
         navbarTitle={navbarTitle}
       >
@@ -117,7 +114,7 @@ const ContactContainer = styled.div`
   }
 `;
 
-// Define Payment styles locally to prevent "Module not found" error
+// Defined locally to prevent Module Not Found error
 const PaymentContainer = styled.div`
   display: flex;
   justify-content: start;
