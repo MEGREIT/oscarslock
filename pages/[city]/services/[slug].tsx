@@ -84,7 +84,7 @@ const StyledPageDescription = styled.p`
   line-height: 1.4;
 
   ${media("<=tablet")} {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
   }
   
   ${media("<=phone")} {
@@ -160,9 +160,9 @@ const StyledFullText = styled.div`
     margin-top: 0;
   }
 
-  /* MOBILE STYLES - BIGGER TEXT */
+  /* MOBILE STYLES - MATCH MAIN HOMEPAGE */
   ${media("<=tablet")} {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     
     h2 {
       font-size: 2rem;
@@ -174,19 +174,20 @@ const StyledFullText = styled.div`
   }
   
   ${media("<=phone")} {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     
     h2 {
-      font-size: 1.8rem;
+      font-size: 2rem;
     }
     
     h3 {
-      font-size: 1.6rem;
+      font-size: 1.8rem;
     }
     
     li {
       padding-left: 1.5rem;
       margin-bottom: 0.8rem;
+      font-size: 1.4rem;
     }
   }
 `;
