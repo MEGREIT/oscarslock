@@ -21,18 +21,19 @@ const About = () => {
                 src="/handyman.png"
                 alt="Lock"
               />
-              <div className="flex flex-col my-auto text-[17px]">
-                {/* --- MISSION/VISION TEXT WITH MATCHING COLOR --- */}
-                <span>{`OUR MISSION – `}</span>
-                Partnering with Oscars Lock & Key Services ensures you receive
-                personalized security solutions tailored to your specific needs.
-                <br />
-                <br />
-                <span>{`OUR VISION - `}</span>
-                With the support of qualified locksmiths, you can make right
-                decisions and maximize the effictiveness of your security
-                investments.
-                <br />
+              <div className="flex flex-col my-auto">
+                {/* --- MISSION/VISION TEXT WITH SERVICE PAGE STYLING --- */}
+                <MissionVisionText>
+                  <span>{`OUR MISSION – `}</span>
+                  Partnering with Oscars Lock & Key Services ensures you receive
+                  personalized security solutions tailored to your specific needs.
+                  <br />
+                  <br />
+                  <span>{`OUR VISION - `}</span>
+                  With the support of qualified locksmiths, you can make right
+                  decisions and maximize the effictiveness of your security
+                  investments.
+                </MissionVisionText>
                 <br />
                 <br />
               </div>
@@ -63,25 +64,60 @@ const About = () => {
 
 export default About;
 
-// --- OPTIMIZED LIST TEXT COMPONENT WITH LARGER FONT ---
+// --- NEW: MISSION/VISION TEXT STYLED LIKE SERVICE PAGES ---
+const MissionVisionText = styled.div`
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.8rem;
+  line-height: 1.6;
+  color: #1e4d8b;
+  font-weight: 400;
+  
+  span {
+    font-weight: 700;
+    color: #1e4d8b;
+    font-size: 1.8rem;
+  }
+  
+  ${media("<=tablet")} {
+    font-size: 1.6rem;
+    
+    span {
+      font-size: 1.6rem;
+    }
+  }
+  
+  ${media("<=phone")} {
+    font-size: 1.5rem;
+    
+    span {
+      font-size: 1.5rem;
+    }
+  }
+`;
+
+// --- OPTIMIZED LIST TEXT COMPONENT WITH SERVICE PAGE STYLING ---
 const ListText = styled.p<{ $isThirdItem?: boolean }>`
-  /* INCREASED from 17px to 24px for much better visibility */
-  font-size: 24px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.8rem;
+  line-height: 1.6;
+  color: #1e4d8b;
   margin: 0;
-  line-height: 1.4;
   font-weight: 400;
   
   ${media("<=tablet")} {
-    /* Use viewport width for responsive sizing */
-    font-size: 4vw !important; 
+    font-size: 1.6rem;
     letter-spacing: -0.3px; 
-    line-height: 1.3;
+    line-height: 1.4;
     flex: 1;
     min-width: 0; 
     width: 100%;
     white-space: ${(props) => (props.$isThirdItem ? "normal" : "nowrap")} !important;
     overflow-x: ${(props) => (props.$isThirdItem ? "visible" : "auto")};
     &::-webkit-scrollbar { display: none; }
+  }
+  
+  ${media("<=phone")} {
+    font-size: 1.5rem;
   }
 `;
 
@@ -127,37 +163,31 @@ const Description = styled.span`
   text-align: left;
   font-weight: normal;
   font-family: "Times New Roman", sans-serif;
-  
-  span {
-    font-weight: bold;
-    font-size: 2rem;
-    color: #0A3161; /* MISSION/VISION COLOR - KEEPING ORIGINAL */
-  }
-
-  p {
-    font-size: 17px;
-    ${media("<=tablet")} {
-      font-size: 15px; 
-    }
-  }
 
   h1 {
-    font-size: 3.5rem;
+    font-family: "Times New Roman", serif;
+    font-size: 4rem;
     margin-bottom: 2rem;
-    color: #0A3161; /* CHANGED TO MATCH MISSION/VISION COLOR */
-    font-weight: bold;
+    color: #0A3161;
+    font-weight: 700;
+    line-height: 1.1;
     
     ${media("<=tablet")} {
       text-align: center; 
+      font-size: 3rem;
+    }
+    
+    ${media("<=phone")} {
       font-size: 2.5rem;
     }
   }
 
   h2 {
+    font-family: "Times New Roman", serif;
     font-size: 3rem;
     margin-top: 2rem;
-    color: #15233e;
-    font-weight: bold;
+    color: #0A3161;
+    font-weight: 700;
   }
 
   ${media("<=tablet")} {
