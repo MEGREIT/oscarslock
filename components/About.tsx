@@ -131,7 +131,7 @@ const Description = styled.span`
   span {
     font-weight: bold;
     font-size: 2rem;
-    color: #15233e; /* CHANGED FROM #0A3161 TO MATCH "Are you looking for" */
+    color: #0A3161; /* MISSION/VISION COLOR - KEEPING ORIGINAL */
   }
 
   p {
@@ -144,7 +144,7 @@ const Description = styled.span`
   h1 {
     font-size: 3.5rem;
     margin-bottom: 2rem;
-    color: #15233e;
+    color: #0A3161; /* CHANGED TO MATCH MISSION/VISION COLOR */
     font-weight: bold;
     
     ${media("<=tablet")} {
