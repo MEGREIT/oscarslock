@@ -22,7 +22,7 @@ const About = () => {
                 alt="Lock"
               />
               <div className="flex flex-col my-auto">
-                {/* --- MISSION/VISION TEXT WITH SERVICE PAGE STYLING --- */}
+                {/* --- MISSION/VISION TEXT --- */}
                 <MissionVisionText>
                   <span>{`OUR MISSION – `}</span>
                   Partnering with Oscars Lock & Key Services ensures you receive
@@ -64,17 +64,17 @@ const About = () => {
 
 export default About;
 
-// --- NEW: MISSION/VISION TEXT STYLED LIKE SERVICE PAGES ---
+// --- UPDATED: HEADINGS NOW MATCH "Are you looking for" COLOR ---
 const MissionVisionText = styled.div`
   font-family: Arial, Helvetica, sans-serif;
   font-size: 1.8rem;
   line-height: 1.6;
-  color: #1e4d8b;
+  color: #1e4d8b; /* Body text remains lighter blue */
   font-weight: 400;
   
   span {
     font-weight: 700;
-    color: #1e4d8b;
+    color: #0A3161; /* <--- FIXED: Matches 'Are you looking for' color */
     font-size: 1.8rem;
   }
   
@@ -95,7 +95,7 @@ const MissionVisionText = styled.div`
   }
 `;
 
-// --- OPTIMIZED LIST TEXT COMPONENT WITH SERVICE PAGE STYLING ---
+// --- OPTIMIZED LIST TEXT COMPONENT ---
 const ListText = styled.p<{ $isThirdItem?: boolean }>`
   font-family: Arial, Helvetica, sans-serif;
   font-size: 1.8rem;
