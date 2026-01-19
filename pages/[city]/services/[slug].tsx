@@ -28,8 +28,15 @@ export default function ServiceSlugRoute(props: ServiceProps) {
   if (!service) return <div>Loading...</div>;
 
   const isExcludedPage = ['gallery', 'coupons', 'coupon'].includes(service.slug.current);
+  
+  // --- DYNAMIC LINKS LOGIC ---
   const citySlug = router.query.city as string;
+  
+  // 1. Link back to City Home (e.g., /cambridge) or Global Home (/)
   const homeLink = citySlug ? `/${citySlug}` : "/";
+  
+  // 2. Link to City Coupons (e.g., /cambridge/coupons) or Global Coupons (/coupons)
+  const couponsLink = citySlug ? `/${citySlug}/coupons` : "/coupons";
 
   return (
     <>
@@ -61,7 +68,6 @@ export default function ServiceSlugRoute(props: ServiceProps) {
                    Home
                  </button>
                  
-                 {/* UPDATED TO YOUR EXACT STYLES */}
                  <StyledPageTitle>{service.title}</StyledPageTitle>
                  <StyledPageDescription>{service.description}</StyledPageDescription>
                  
@@ -91,12 +97,15 @@ export default function ServiceSlugRoute(props: ServiceProps) {
           <ServiceCTA />
           <PhoneBtn phone={phone} />
           
+          {/* --- FIXED COUPON BUTTON --- */}
+          {/* Now links to couponsLink which contains the city! */}
           <button 
-            onClick={() => router.push("/coupons")} 
+            onClick={() => router.push(couponsLink)} 
             className="bg-[#751318] text-xl md:text-2xl px-8 md:px-32 py-3 text-white mx-auto block mt-8 hover:bg-[#5e0a0a] transition-colors font-bold rounded-md shadow-md font-serif w-11/12 md:w-auto"
           >
             FOR COUPONS CLICK HERE
           </button>
+          {/* --------------------------- */}
 
           {!isExcludedPage && (
             <BottomText>
@@ -118,7 +127,6 @@ const WhiteBackgroundContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   
-  /* LAYOUT FIXES */
   width: 100%; 
   max-width: 100%;
   overflow-x: hidden; 
@@ -129,12 +137,8 @@ const WhiteBackgroundContainer = styled.div`
   
   & > *:not(:first-child) { margin-top: 3rem; }
 
-  /* TABLET */
-  @media (min-width: 768px) {
-    padding: 0 3rem;
-  }
+  @media (min-width: 768px) { padding: 0 3rem; }
 
-  /* DESKTOP */
   @media (min-width: 1280px) {
     padding: 0 10rem;
     align-items: center; 
@@ -146,7 +150,7 @@ const ServiceContainer = styled(WhiteBackgroundContainer)`
   padding-top: 0rem;
 `;
 
-// --- EXACT TEXT STYLES FROM YOUR MAIN PAGE ---
+// --- EXACT TEXT STYLES ---
 
 const StyledPageTitle = styled.h1`
   font-family: "Times New Roman", serif;
@@ -156,9 +160,7 @@ const StyledPageTitle = styled.h1`
   color: #0A3161;
   line-height: 1.1;
 
-  ${media("<=tablet")} {
-    font-size: 2.4rem;
-  }
+  ${media("<=tablet")} { font-size: 2.4rem; }
 `;
 
 const StyledPageDescription = styled.p`
@@ -169,9 +171,7 @@ const StyledPageDescription = styled.p`
   color: #1e4d8b;
   line-height: 1.3;
 
-  ${media("<=tablet")} {
-    font-size: 1.6rem;
-  }
+  ${media("<=tablet")} { font-size: 1.6rem; }
 `;
 
 const StyledFullText = styled.div`
@@ -180,10 +180,7 @@ const StyledFullText = styled.div`
   line-height: 1.6;
   color: #1e4d8b;
 
-  strong {
-    font-weight: 700;
-    color: #1e4d8b;
-  }
+  strong { font-weight: 700; color: #1e4d8b; }
 
   h2 {
     font-family: Arial, Helvetica, sans-serif;
@@ -205,11 +202,7 @@ const StyledFullText = styled.div`
     line-height: 1.3;
   }
 
-  ul {
-    list-style: none;
-    padding-left: 0;
-    margin: 0.8rem 0;
-  }
+  ul { list-style: none; padding-left: 0; margin: 0.8rem 0; }
 
   li {
     padding-left: 1.8rem;
@@ -228,18 +221,10 @@ const StyledFullText = styled.div`
     font-weight: 700;
   }
 
-  p {
-    margin-top: 0;
-    margin-bottom: 1rem;
-  }
+  p { margin-top: 0; margin-bottom: 1rem; }
+  h1 + p, h2 + p, h3 + p { margin-top: 0; }
 
-  h1 + p, h2 + p, h3 + p {
-    margin-top: 0;
-  }
-
-  ${media("<=tablet")} {
-    font-size: 1.4rem;
-  }
+  ${media("<=tablet")} { font-size: 1.4rem; }
 `;
 
 const BottomText = styled.p`
@@ -251,26 +236,15 @@ const BottomText = styled.p`
   margin-top: 3rem;
   margin-bottom: 4rem;
 
-  ${media("<=tablet")} {
-    font-size: 1.8rem;
-  }
+  ${media("<=tablet")} { font-size: 1.8rem; }
 `;
-
-// --- SIDEBAR STYLES ---
 
 const PaymentContainer = styled.div`
   display: flex;
   justify-content: start;
   margin-top: -3.5rem;
   align-items: start;
-  
-  img { 
-    margin-bottom: auto; 
-    padding: 0; 
-    max-width: 100%; 
-    height: auto;
-  }
-  
+  img { margin-bottom: auto; padding: 0; max-width: 100%; height: auto; }
   ${media("<largeDesktop")} { margin-top: 0rem; }
 `;
 
@@ -280,12 +254,11 @@ const PaymentBox = styled.div`
   align-items: center;
   margin: 0 0;
   width: 100%;
-  
   ${media(">=largeDesktop")} { width: 30%; }
   ${media("<=phone")} { margin: 2rem 0; }
 `;
 
-// --- DATA WITH HTML (REQUIRED FOR NEW STYLES) ---
+// --- DATA ---
 const STATIC_SERVICES_DATA: Record<string, any> = {
   automotive: {
     title: "Automotive",
