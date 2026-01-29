@@ -14,6 +14,8 @@ import PhoneBtn from "@/components/PhoneBtn";
 import ServicesGrid from "@/components/ServicesGrid";
 import GoogleScript from "@/components/Script";
 
+// irrelevant change
+
 // --- THE FINAL, FORCED LIST ---
 const STATIC_SERVICES = [
   { title: "Residential", slug: { current: "residential" } }, 
