@@ -7,7 +7,7 @@ export default function FetchCoordinates() {
   const [isComplete, setIsComplete] = useState(false);
   const [progress, setProgress] = useState(0);
 
-  const getCityName = (fullCity) => {
+  const getCityName = (fullCity:any) => {
     return fullCity.split(",")[0].trim(); // Extract city name before the comma
   };
 
