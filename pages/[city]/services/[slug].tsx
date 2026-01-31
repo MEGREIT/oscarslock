@@ -8,14 +8,14 @@ import TextBubble from "@/components/TextBubble";
 import ServiceCTA from "@/views/HomePage/ServiceCTA";
 import PhoneBtn from "@/components/PhoneBtn";
 import { media } from "@/utils/media";
-import Cta from "@/views/HomePage/Cta"; 
-import { getCityPhone } from "@/utils/getCityPhone"; 
+import Cta from "@/views/HomePage/Cta";
+import { getCityPhone } from "@/utils/getCityPhone";
 import cityData from "@/utils/cities_data.json";
 
 // --- INTERFACES ---
 interface ServiceProps {
   service: any;
-  phone: string; 
+  phone: string;
   navbarTitle: string;
 }
 
@@ -23,25 +23,26 @@ interface ServiceProps {
 export default function ServiceSlugRoute(props: ServiceProps) {
   const router = useRouter();
   const { service, phone, navbarTitle } = props;
-    
+
   if (router.isFallback) return <div>Loading...</div>;
   if (!service) return <div>Loading...</div>;
 
-  const isExcludedPage = ['gallery', 'coupons', 'coupon'].includes(service.slug.current);
-  
+  const isExcludedPage = ["gallery", "coupons", "coupon"].includes(
+    service.slug.current,
+  );
+
   // --- DYNAMIC LINKS LOGIC ---
   const citySlug = router.query.city as string;
-  
-  // 1. Link back to City Home (e.g., /cambridge) or Global Home (/)
   const homeLink = citySlug ? `/${citySlug}` : "/";
-  
-  // 2. Link to City Coupons (e.g., /cambridge/coupons) or Global Coupons (/coupons)
   const couponsLink = citySlug ? `/${citySlug}/coupons` : "/coupons";
 
   return (
     <>
       <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1"
+        />
       </Head>
 
       <Page
@@ -54,32 +55,34 @@ export default function ServiceSlugRoute(props: ServiceProps) {
       >
         <ServiceContainer>
           <PhoneBtn phone={phone} />
-          
+
           {/* Main Content Wrapper */}
           <div className="lg:flex xl:align-top lg:space-x-0 pl-0 md:pl-5 xl:px-5 md:space-y-0 space-y-2 lg:space-y-0 max-w-[1250px] w-full">
-            
             {/* Left Column (Text) */}
             <div className="flex-1 pr-0 md:pr-8 min-w-0">
-               <div className="mb-8">
-                 <button 
-                   onClick={() => router.push(homeLink)} 
-                   className="mb-10 px-6 md:px-10 py-4 bg-[#0a3161] text-white text-2xl rounded-lg shadow-md hover:bg-[#15233e] transition-all transform hover:scale-105 font-bold flex items-center font-serif"
-                 >
-                   Home
-                 </button>
-                 
-                 <StyledPageTitle>{service.title}</StyledPageTitle>
-                 <StyledPageDescription>{service.description}</StyledPageDescription>
-                 
-                 {/* Renders HTML content for correct styling */}
-                 <StyledFullText dangerouslySetInnerHTML={{ __html: service.fullText }} />
+              <div className="mb-8">
+                <button
+                  onClick={() => router.push(homeLink)}
+                  className="mb-10 px-6 md:px-10 py-4 bg-[#0a3161] text-white text-2xl rounded-lg shadow-md hover:bg-[#15233e] transition-all transform hover:scale-105 font-bold flex items-center font-serif"
+                >
+                  Home
+                </button>
 
-                 {!isExcludedPage && (
-                   <div style={{ marginBottom: '10px', marginTop: '40px' }}>
-                     <Cta />
-                   </div>
-                 )}
-               </div>
+                <StyledPageTitle>{service.title}</StyledPageTitle>
+                <StyledPageDescription>
+                  {service.description}
+                </StyledPageDescription>
+
+                <StyledFullText
+                  dangerouslySetInnerHTML={{ __html: service.fullText }}
+                />
+
+                {!isExcludedPage && (
+                  <div style={{ marginBottom: "10px", marginTop: "40px" }}>
+                    <Cta />
+                  </div>
+                )}
+              </div>
             </div>
 
             {/* Right Column (Sidebar) */}
@@ -89,59 +92,63 @@ export default function ServiceSlugRoute(props: ServiceProps) {
               </PaymentContainer>
               <PhoneBtn phone={phone} />
               <TextBubble />
-              {/* Force Image to Fit Mobile Width */}
-              <img src="/logos/oscar-logo.png" className="w-full max-w-[25rem] h-auto ml-0" alt="Logo" />
+              <img
+                src="/logos/oscar-logo.png"
+                className="w-full max-w-[25rem] h-auto ml-0"
+                alt="Logo"
+              />
             </PaymentBox>
           </div>
 
           <ServiceCTA />
           <PhoneBtn phone={phone} />
-          
-          {/* --- FIXED COUPON BUTTON --- */}
-          {/* Now links to couponsLink which contains the city! */}
-          <button 
-            onClick={() => router.push(couponsLink)} 
+
+          <button
+            onClick={() => router.push(couponsLink)}
             className="bg-[#751318] text-xl md:text-2xl px-8 md:px-32 py-3 text-white mx-auto block mt-8 hover:bg-[#5e0a0a] transition-colors font-bold rounded-md shadow-md font-serif w-11/12 md:w-auto"
           >
             FOR COUPONS CLICK HERE
           </button>
-          {/* --------------------------- */}
 
           {!isExcludedPage && (
             <BottomText>
               Don't Wait, Reach Out To Oscars Lock & Key Services!
             </BottomText>
           )}
-
         </ServiceContainer>
       </Page>
     </>
   );
 }
 
-// --- STYLED COMPONENTS (MERGED: Mobile Fixes + Your Text Styles) ---
+// --- STYLED COMPONENTS ---
 
 const WhiteBackgroundContainer = styled.div`
   background: rgb(255, 255, 255);
   display: flex;
   flex-direction: column;
   justify-content: center;
-  
-  width: 100%; 
-  max-width: 100%;
-  overflow-x: hidden; 
-  
-  /* MOBILE FIRST PADDING */
-  padding: 0 1.25rem; 
-  padding-top: 0rem;
-  
-  & > *:not(:first-child) { margin-top: 3rem; }
 
-  @media (min-width: 768px) { padding: 0 3rem; }
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+
+  /* MOBILE FIRST PADDING */
+  padding: 0 1.25rem;
+  padding-top: 0rem;
+
+  & > *:not(:first-child) {
+    margin-top: 3rem;
+  }
+
+  @media (min-width: 768px) {
+    padding: 0 3rem;
+  }
 
   @media (min-width: 1280px) {
-    padding: 0 10rem;
-    align-items: center; 
+    /* FIXED: Reduced padding from 10rem to 3rem to prevent squeezing */
+    padding: 0 3rem;
+    align-items: center;
     margin: 0 auto;
   }
 `;
@@ -157,10 +164,12 @@ const StyledPageTitle = styled.h1`
   font-size: 3rem;
   font-weight: 700;
   margin-bottom: 2rem;
-  color: #0A3161;
+  color: #0a3161;
   line-height: 1.1;
 
-  ${media("<=tablet")} { font-size: 2.4rem; }
+  ${media("<=tablet")} {
+    font-size: 2.4rem;
+  }
 `;
 
 const StyledPageDescription = styled.p`
@@ -171,7 +180,9 @@ const StyledPageDescription = styled.p`
   color: #1e4d8b;
   line-height: 1.3;
 
-  ${media("<=tablet")} { font-size: 1.6rem; }
+  ${media("<=tablet")} {
+    font-size: 1.6rem;
+  }
 `;
 
 const StyledFullText = styled.div`
@@ -180,7 +191,10 @@ const StyledFullText = styled.div`
   line-height: 1.6;
   color: #1e4d8b;
 
-  strong { font-weight: 700; color: #1e4d8b; }
+  strong {
+    font-weight: 700;
+    color: #1e4d8b;
+  }
 
   h2 {
     font-family: Arial, Helvetica, sans-serif;
@@ -202,7 +216,11 @@ const StyledFullText = styled.div`
     line-height: 1.3;
   }
 
-  ul { list-style: none; padding-left: 0; margin: 0.8rem 0; }
+  ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0.8rem 0;
+  }
 
   li {
     padding-left: 1.8rem;
@@ -221,10 +239,19 @@ const StyledFullText = styled.div`
     font-weight: 700;
   }
 
-  p { margin-top: 0; margin-bottom: 1rem; }
-  h1 + p, h2 + p, h3 + p { margin-top: 0; }
+  p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+  }
+  h1 + p,
+  h2 + p,
+  h3 + p {
+    margin-top: 0;
+  }
 
-  ${media("<=tablet")} { font-size: 1.4rem; }
+  ${media("<=tablet")} {
+    font-size: 1.4rem;
+  }
 `;
 
 const BottomText = styled.p`
@@ -236,16 +263,25 @@ const BottomText = styled.p`
   margin-top: 3rem;
   margin-bottom: 4rem;
 
-  ${media("<=tablet")} { font-size: 1.8rem; }
+  ${media("<=tablet")} {
+    font-size: 1.8rem;
+  }
 `;
 
 const PaymentContainer = styled.div`
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   margin-top: -3.5rem;
-  align-items: start;
-  img { margin-bottom: auto; padding: 0; max-width: 100%; height: auto; }
-  ${media("<largeDesktop")} { margin-top: 0rem; }
+  align-items: flex-start;
+  img {
+    margin-bottom: auto;
+    padding: 0;
+    max-width: 100%;
+    height: auto;
+  }
+  ${media("<largeDesktop")} {
+    margin-top: 0rem;
+  }
 `;
 
 const PaymentBox = styled.div`
@@ -254,17 +290,30 @@ const PaymentBox = styled.div`
   align-items: center;
   margin: 0 0;
   width: 100%;
-  ${media(">=largeDesktop")} { width: 30%; }
-  ${media("<=phone")} { margin: 2rem 0; }
+
+  /* FIXED: Match Tailwind 'lg' breakpoint (1024px) */
+  /* This prevents the sidebar from being 100% width when flex-row is active */
+  @media (min-width: 1024px) {
+    width: 30%;
+    min-width: 250px;
+  }
+
+  ${media(">=largeDesktop")} {
+    width: 30%;
+  }
+  ${media("<=phone")} {
+    margin: 2rem 0;
+  }
 `;
 
 // --- DATA ---
 const STATIC_SERVICES_DATA: Record<string, any> = {
   automotive: {
     title: "Automotive",
-    heroImage: "/service-bg/automotive.png", 
-    slug: { current: "automotive" }, 
-    description: "Lost your car keys? Our on-call automotive locksmith professional will make all keys & remotes on site. We can fix faulty auto ignitions or locks right on the spot.",
+    heroImage: "/service-bg/automotive.png",
+    slug: { current: "automotive" },
+    description:
+      "Lost your car keys? Our on-call automotive locksmith professional will make all keys & remotes on site. We can fix faulty auto ignitions or locks right on the spot.",
     fullText: `<p><strong>Oscars Lock & Key Services can help you quickly duplicate or replace lost, damaged or stolen electronic car keys and key fobs. We make electronic car keys for hundreds of car makes and models. Our locksmiths have the technical training and equipment that is necessary to provide fast and accurate car key duplication and replacement services. Our fully equipped mobile van comes to your location and offers the ultimate in convenience and time savings.</strong></p>
 <h3>Keys & Remotes for Most Vehicles, Makes & Models</h3>
 <p><strong>Oscars Lock & Key Services</strong> has an extensive stock of base keys, as well as more than 90 auto transponder keys for nearly 200 vehicle models, including cars, vans and trucks. Please call us with any questions regarding your specific vehicle make and model.</p>
@@ -286,8 +335,8 @@ const STATIC_SERVICES_DATA: Record<string, any> = {
   },
   residential: {
     title: "Residential",
-    heroImage: "/service-bg/residential.png", 
-    slug: { current: "residential" }, 
+    heroImage: "/service-bg/residential.png",
+    slug: { current: "residential" },
     description: "Ensuring the security of your home is a top priority",
     fullText: `<p><strong>Oscars Lock & key Services provides a comprehensive range of residential locksmith services. Our highly skilled licensed locksmith professionals can resolve your locksmith service needs.</strong></p>
 <p>With the support of qualified locksmiths, you can make right decisions and maximize the effectiveness of your security investments. We provide services which include fixing broken locks, installing new hardware, replacing lost keys or making your existing locks work with a different key and a master key.</p>
@@ -303,8 +352,8 @@ const STATIC_SERVICES_DATA: Record<string, any> = {
   },
   commercial: {
     title: "Commercial",
-    heroImage: "/service-bg/commercial.png", 
-    slug: { current: "commercial" }, 
+    heroImage: "/service-bg/commercial.png",
+    slug: { current: "commercial" },
     description: "Commercial Locksmith Services & Products",
     fullText: `<p><strong>Business security is a top priority for any organization. Oscars Lock & Key Services provides a wide range of commercial high-security locks, including un-pickable, do-not-duplicate, push and panic bars.</strong></p>
 <h3>Commercial Service Offerings:</h3>
@@ -324,8 +373,8 @@ const STATIC_SERVICES_DATA: Record<string, any> = {
   },
   emergency: {
     title: "Emergency",
-    heroImage: "/service-bg/emergency.png", 
-    slug: { current: "emergency" }, 
+    heroImage: "/service-bg/emergency.png",
+    slug: { current: "emergency" },
     description: "Quick and Reliable Emergency Locksmith Service",
     fullText: `<h2>Locked Out? We've Got the Key to Your Solution!</h2>
 <p><strong>Wе knоw hоw ѕtrеѕѕful it is to be lосkеd оut оf уоur home, break or lose your ignition kеу. Wе саn handle аnу tуре оf emergency lосkѕmіth situation.</strong></p>
@@ -343,8 +392,8 @@ const STATIC_SERVICES_DATA: Record<string, any> = {
   },
   mailbox: {
     title: "Mailbox",
-    heroImage: "/service-bg/mailbox.png", 
-    slug: { current: "mailbox" }, 
+    heroImage: "/service-bg/mailbox.png",
+    slug: { current: "mailbox" },
     description: "Mailbox lock replacement and key services",
     fullText: `<p>We have changed many mailbox locks for our customers.</p>
 <p><strong>We offer fully trained locksmith technicians who have every mailbox lock in stock at all times - so you never have to wait!</strong></p>
@@ -353,8 +402,8 @@ const STATIC_SERVICES_DATA: Record<string, any> = {
   },
   safe: {
     title: "Safe",
-    heroImage: "/service-bg/safe.png", 
-    slug: { current: "safe" }, 
+    heroImage: "/service-bg/safe.png",
+    slug: { current: "safe" },
     description: "Safe opening, repair, and installation",
     fullText: `<p><strong>Having issues with your safe?</strong></p>
 <p><strong>We are expert safe locksmiths!</strong></p>
@@ -365,29 +414,31 @@ const STATIC_SERVICES_DATA: Record<string, any> = {
   },
   coupons: {
     title: "Coupons",
-    heroImage: "/service/coupons.png", 
-    slug: { current: "coupons" }, 
+    heroImage: "/service/coupons.png",
+    slug: { current: "coupons" },
     description: "Discount coupons for locksmith services.",
-    fullText: "Check here for our latest offers and discounts. We strive to provide affordable locksmith services without compromising on quality.",
+    fullText:
+      "Check here for our latest offers and discounts. We strive to provide affordable locksmith services without compromising on quality.",
   },
   gallery: {
     title: "Gallery",
-    heroImage: "/service/images-regular.svg", 
-    slug: { current: "gallery" }, 
+    heroImage: "/service/images-regular.svg",
+    slug: { current: "gallery" },
     description: "Our work gallery.",
-    fullText: "Browse photos of our recent work and see the quality of our craftsmanship.",
-  }
+    fullText:
+      "Browse photos of our recent work and see the quality of our craftsmanship.",
+  },
 };
 
 // --- SERVER SIDE PROPS ---
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const { params = {} } = ctx;
   const slug = params.slug as string;
-  const city = params.city as string; 
+  const city = params.city as string;
   const service = STATIC_SERVICES_DATA[slug];
 
   let phone = "(800) 687- 0480";
-  let navbarTitle = "Need a Local Locksmith?"; 
+  let navbarTitle = "Need a Local Locksmith?";
 
   if (city) {
     try {
@@ -395,28 +446,28 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
       if (cityPhone) {
         phone = cityPhone;
       }
-      
+
       const cityObj = cityData.hcms_cities.find((c) => c.subdomain === city);
-      
+
       if (cityObj && cityObj.city) {
-         navbarTitle = cityObj.city;
+        navbarTitle = cityObj.city;
       } else {
-         navbarTitle = city.charAt(0).toUpperCase() + city.slice(1);
+        navbarTitle = city.charAt(0).toUpperCase() + city.slice(1);
       }
     } catch (error) {
       console.error("Error fetching city data:", error);
     }
   }
-    
+
   if (service) {
     return { props: { service, phone, navbarTitle } };
   }
 
-  return { 
-    props: { 
-      service: STATIC_SERVICES_DATA['residential'], 
+  return {
+    props: {
+      service: STATIC_SERVICES_DATA["residential"],
       phone,
-      navbarTitle 
-    } 
+      navbarTitle,
+    },
   };
 };

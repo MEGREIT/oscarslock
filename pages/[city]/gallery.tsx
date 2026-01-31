@@ -17,16 +17,24 @@ import { EnvVars } from "env";
 interface GalleryProps {
   phone: string;
   navbarTitle: string;
+  slug: any;
 }
 
 const Gallery = (props: GalleryProps) => {
   const router = useRouter();
-  const { phone, navbarTitle } = props; 
+  const { phone, navbarTitle } = props;
+  if (router.isFallback) return <div>Loading...</div>;
+  // --- DYNAMIC LINKS LOGIC ---
+  const citySlug = router.query.city as string;
+  const homeLink = citySlug ? `/${citySlug}` : "/";
+  const couponsLink = citySlug ? `/${citySlug}/coupons` : "/coupons";
 
   return (
     <>
       <Head>
-        <title>Gallery - {navbarTitle} | {EnvVars.SITE_NAME}</title>
+        <title>
+          Gallery - {navbarTitle} | {EnvVars.SITE_NAME}
+        </title>
         <meta name="description" content="View our recent work" />
         <script
           dangerouslySetInnerHTML={{
@@ -46,7 +54,7 @@ const Gallery = (props: GalleryProps) => {
         <div className="pl-5 xl:px-5 my-8 xl:max-w-[1190px] w-full">
           <GalleryComponent />
         </div>
-        
+
         <div className="w-full flex flex-col pb-10">
           <PaymentBox>
             <PaymentContainer>
@@ -54,16 +62,18 @@ const Gallery = (props: GalleryProps) => {
             </PaymentContainer>
             <PhoneBtn phone={phone} />
             <TextBubble />
-            <img src="/logos/oscar-logo.png" className="w-[25rem] ml-0" alt="Logo" />
+            <img
+              src="/logos/oscar-logo.png"
+              className="w-[25rem] ml-0"
+              alt="Logo"
+            />
           </PaymentBox>
 
           <PhoneBtn phone={phone} />
           <Cta />
-          
+
           <button
-            onClick={() => {
-              router.push("/coupons");
-            }}
+            onClick={() => router.push(couponsLink)}
             className="bg-[#751318] text-xl md:text-2xl px-8 md:px-32 py-3 text-white mx-auto block mt-8 hover:bg-[#5e0a0a] transition-colors font-bold rounded-md shadow-md font-serif w-11/12 md:w-auto"
           >
             FOR COUPONS CLICK HERE
@@ -72,14 +82,16 @@ const Gallery = (props: GalleryProps) => {
       </WhiteBackgroundContainer>
     </>
   );
-};
+};;
 
 export default Gallery;
 
 // --- SERVER SIDE LOGIC ---
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const { params = {} } = ctx;
+  const slug = params.slug as string;
   const city = params.city as string;
+
   let phone = "(800) 687- 0480";
   let navbarTitle = "Need a Local Locksmith?";
 
@@ -91,6 +103,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
       }
 
       const cityObj = cityData.hcms_cities.find((c) => c.subdomain === city);
+
       if (cityObj && cityObj.city) {
         navbarTitle = cityObj.city;
       } else {
@@ -139,3 +152,5 @@ const PaymentBox = styled.div`
   ${media(">=largeDesktop")} { width: 30%; }
   ${media("<=phone")} { margin: 0 2rem 2rem 2rem; }
 `;
+
+
