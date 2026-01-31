@@ -1,7 +1,6 @@
 import { InferGetServerSidePropsType } from "next";
 import Head from "next/head";
 import styled from "styled-components";
-import Cta from "views/HomePage/Cta";
 import Slider from "components/Slider";
 import "../style.css"; 
 import OurTeam from "@/views/AboutPage/OurTeam";

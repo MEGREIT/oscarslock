@@ -15,7 +15,6 @@ import { useEffect, useState } from "react";
 import { NormalContainer } from "./BlogContainer";
 // import { ServiceButton } from "./ServicesGrid";
 import { useRouter } from "next/router";
-import Cta from "@/views/HomePage/Cta";
 import { getLink } from "./Navbar";
 import PhoneBtn from "./PhoneBtn";
 
