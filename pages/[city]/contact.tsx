@@ -18,12 +18,16 @@ interface ContactProps {
 
 export default function ContactPage({ phone, navbarTitle }: ContactProps) {
   const router = useRouter();
+  // --- DYNAMIC LINKS LOGIC ---
+  const citySlug = router.query.city as string;
+  const homeLink = citySlug ? `/${citySlug}` : "/";
+  const couponsLink = citySlug ? `/${citySlug}/coupons` : "/coupons";
 
   return (
     <MobileFixWrapper>
-      <Page 
-        imgURL="/contact.jpg" 
-        title="Contact Us"  // <--- FIXED: Only shows "Contact Us" on the image
+      <Page
+        imgURL="/contact.jpg"
+        title="Contact Us" // <--- FIXED: Only shows "Contact Us" on the image
         description="Get in touch with us"
         // These props update the Top Navbar
         phone={phone}
@@ -34,22 +38,24 @@ export default function ContactPage({ phone, navbarTitle }: ContactProps) {
             <InformationSection />
             <FormSection />
           </ContactContainer>
-          
+
           <PaymentBox>
             <PaymentContainer>
               <img src="/payment.png" alt="Payments" />
             </PaymentContainer>
             <TextBubble />
-            <img src="/logos/oscar-logo.png" className="w-[25rem] ml-0" alt="Logo" />
+            <img
+              src="/logos/oscar-logo.png"
+              className="w-[25rem] ml-0"
+              alt="Logo"
+            />
           </PaymentBox>
         </div>
-        
+
         <div className="flex flex-col justify-center space-y-10">
           <ServiceCTA />
           <button
-            onClick={() => {
-              router.push("/coupons");
-            }}
+            onClick={() => router.push(couponsLink)}
             className="bg-[#751318] text-2xl px-32 py-2 text-white mx-auto"
           >
             FOR COUPONS CLICK HERE
