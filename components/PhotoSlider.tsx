@@ -12,18 +12,18 @@ import "swiper/css/autoplay";
 import "swiper/css/a11y";
 
 const images = [
-  "/slider/1.jpg",
-  "/slider/3.jpg",
-  "/slider/9.jpg",
-  "/slider/10.jpg",
-  "/slider/11.jpg",
-  "/slider/13.jpg",
-  "/slider/14.jpeg",
-  "/slider/16.jpeg",
-  "/slider/17.jpeg",
-  "/slider/18.jpeg",
-  "/slider/19.jpeg",
-  "/slider/20.jpeg",
+  "/slider/1.webp",
+  "/slider/3.webp",
+  "/slider/9.webp",
+  "/slider/10.webp",
+  "/slider/11.webp",
+  "/slider/13.webp",
+  "/slider/14.webp",
+  "/slider/16.webp",
+  "/slider/17.webp",
+  "/slider/18.webp",
+  "/slider/19.webp",
+  "/slider/20.webp",
 ];
 
 const PhotoSlider: React.FC = () => {
@@ -37,9 +37,9 @@ const PhotoSlider: React.FC = () => {
 
   // Define a placeholder for SSR or initial render
   const placeholder = (
-     <div className="flex w-[80vw] md:w-[267px] h-[30vh] min-h-[260px] border-2 border-gray-500 rounded-lg items-center justify-center bg-gray-200">
-       <p className="text-gray-500">Loading slider...</p>
-     </div>
+    <div className="flex w-[80vw] md:w-[267px] h-[30vh] min-h-[260px] border-2 border-gray-500 rounded-lg items-center justify-center bg-gray-200">
+      <p className="text-gray-500">Loading slider...</p>
+    </div>
   );
 
   return (
