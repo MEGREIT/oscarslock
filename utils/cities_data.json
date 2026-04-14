@@ -1,5 +1,5 @@
 {
-  "hcms_cities":[
+  "hcms_cities": [
     {
       "id": 1,
       "subdomain": "ashland",
@@ -1871,7 +1871,7 @@
       }
     },
 
-{
+    {
       "id": 188,
       "subdomain": "Pelham",
       "city": "Pelham, NH",
@@ -1882,7 +1882,7 @@
       }
     },
 
-{
+    {
       "id": 189,
       "subdomain": "Peterborough",
       "city": "Peterborough, NH",
@@ -1892,7 +1892,7 @@
         "latitude": 0
       }
     },
-{
+    {
       "id": 190,
       "subdomain": "boxborough",
       "city": "Boxborough, MA",
@@ -1903,7 +1903,7 @@
       }
     },
 
-{
+    {
       "id": 191,
       "subdomain": "Wareham",
       "city": "Wareham, MA",
@@ -1915,18 +1915,13 @@
     },
     {
       "id": 192,
-      "subdomain": "manchester",
-      "city": "Manchester, MA",
-      "phone": "617-949-9530",
+      "subdomain": "manchesternh",
+      "city": "Manchester, NH",
+      "phone": "603-573-5161",
       "coordinates": {
         "longitude": 0,
         "latitude": 0
       }
     }
-
-]
+  ]
 }
-
-
-
-
