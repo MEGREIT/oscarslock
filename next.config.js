@@ -29,6 +29,11 @@ const nextConfig = {
         destination: '/terms_static.html',
         permanent: false,
       },
+      {
+        source: '/manchester',
+        destination: '/manchesternh',
+        permanent: true, 
+      },
     ];
   },
 };
