@@ -2,28 +2,28 @@ import React, { useState, useEffect } from "react";
 // --- FIX: Use standard imports instead of dynamic for components ---
 import { Swiper, SwiperSlide } from "swiper/react";
 
-// Import Swiper modules
-import { A11y, Autoplay, Navigation } from "swiper/modules";
+// Import Swiper modules - Updated for Swiper v10
+import { Autoplay, Navigation, A11y } from "swiper/modules";
 
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/autoplay";
-import "swiper/css/a11y";
 
 const images = [
-  "/slider/1.webp",
-  "/slider/3.webp",
-  "/slider/9.webp",
-  "/slider/10.webp",
-  "/slider/11.webp",
-  "/slider/13.webp",
-  "/slider/14.webp",
-  "/slider/16.webp",
-  "/slider/17.webp",
-  "/slider/18.webp",
-  "/slider/19.webp",
-  "/slider/20.webp",
+  "/slider/1.jpg",
+  "/slider/3.jpg",
+  "/slider/9.jpg",
+  "/slider/10.jpg",
+  "/slider/11.jpg",
+  "/slider/13.jpg",
+  "/slider/14.jpeg",
+  "/slider/16.jpeg",
+  "/slider/17.jpeg",
+  "/slider/18.jpeg",
+  "/slider/19.jpeg",
+  "/slider/20.jpeg",
+  "/slider/21.jpeg",
 ];
 
 const PhotoSlider: React.FC = () => {
@@ -48,15 +48,17 @@ const PhotoSlider: React.FC = () => {
         {/* Only render Swiper if isClient is true */}
         {isClient ? (
           <Swiper
-            modules={[Navigation, Autoplay, A11y]}
+            modules={[Autoplay, Navigation, A11y]}
             slidesPerView={1}
             autoplay={{
               delay: 3000,
               disableOnInteraction: false,
             }}
-            centeredSlides
+            centeredSlides={true}
             navigation={false} // Set to true if you want arrows
-            loop
+            loop={true}
+            className="h-[30vh] min-h-[260px]"
+          >
           >
             {images.map((image: string, idx: number) => (
               <SwiperSlide key={idx}>
@@ -64,6 +66,10 @@ const PhotoSlider: React.FC = () => {
                   className="h-[30vh] min-h-[260px] w-full object-cover"
                   src={image}
                   alt={`Slider image ${idx + 1}`}
+                  onError={(e) => {
+                    console.error(`Failed to load image: ${image}`);
+                    e.currentTarget.style.display = 'none';
+                  }}
                 />
               </SwiperSlide>
             ))}
