@@ -34,11 +34,13 @@ export default function FormSection() {
 
             const data = await res.json();
             if (res.ok) {
-                setSuccess("Mail sent successfully!");
+                setSuccess("✅ Thank you! Your message has been sent successfully. We'll get back to you soon!");
                 setName("");
                 setEmail("");
                 setPhone("");
                 setMessage("");
+                // Auto-hide success message after 5 seconds
+                setTimeout(() => setSuccess(""), 5000);
             } else {
                 setError(data.error || "Failed to send mail");
             }
@@ -191,15 +193,49 @@ const SubmitButton = styled.button`
 `;
 
 const SuccessMsg = styled.p`
-    color: green;
+    color: #155724;
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    border-radius: 6px;
+    padding: 1.2rem;
     text-align: center;
-    font-size: 1rem; // Kept message size standard
-    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    animation: slideDown 0.3s ease-out;
+
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
 `;
 
 const ErrorMsg = styled.p`
-    color: red;
+    color: #721c24;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    border-radius: 6px;
+    padding: 1.2rem;
     text-align: center;
-    font-size: 1rem; // Kept message size standard
-    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    animation: slideDown 0.3s ease-out;
+
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
 `;
