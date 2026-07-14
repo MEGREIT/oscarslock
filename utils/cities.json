@@ -1085,10 +1085,8 @@
     "subdomain": "newipswich",
     "city": "New Ipswich",
     "phone": "603-573-5161"
-  }
-  ]
-}
-    {
+  }, 
+  {
       "id": 182,
       "subdomain": "amherst",
       "city": "Amherst, NH",
