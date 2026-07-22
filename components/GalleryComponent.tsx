@@ -9,23 +9,27 @@ export default function GalleryComponent() {
   //   (_, index) => `/gallery/${index + 1}.jpeg`
   // );
   const images = [
+    // Added side 1-4 at the top to guarantee side-by-side layout in the grid
+    "side1.webp",
+    "side2.webp",
+    "side3.webp",
+    "side4.webp",
     "1.webp",
     "2.webp",
     "3.webp",
     "4.webp",
     "5.webp",
-    "5_1.webp",
-    "6.webp",
+    // 5_1.webp and 6.webp removed
     "7.webp",
     "8.webp",
     "9.webp",
     "10.webp",
-    "11.webp",
+    // 11.webp removed
     "12.webp",
     "13.webp",
     "14.webp",
     "15.webp",
-    "16.webp",
+    // 16.webp removed
     "17.webp",
     "18.webp",
     "19.webp",
@@ -68,6 +72,8 @@ export default function GalleryComponent() {
     "55.webp",
     "56.webp",
     "57.webp",
+    // Placed side5 at the end to fit organically into the remaining grid space
+    "side5.webp",
   ];
 
   return (
