@@ -65,7 +65,7 @@ export default function GalleryComponent() {
     "48.webp",
     "49.webp",
     "50.webp",
-    "51.webp",
+    // 51.webp removed
     "52.webp",
     "53.webp",
     "54.webp",
@@ -74,6 +74,9 @@ export default function GalleryComponent() {
     "57.webp",
     // Placed side5 at the end to fit organically into the remaining grid space
     "side5.webp",
+    // Added side6 and side7
+    "side6.webp",
+    "side7.webp",
   ];
 
   return (
