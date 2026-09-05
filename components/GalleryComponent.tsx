@@ -9,38 +9,45 @@ export default function GalleryComponent() {
   //   (_, index) => `/gallery/${index + 1}.jpeg`
   // );
   const images = [
-    // Added side 1-4 at the top to guarantee side-by-side layout in the grid
+    // 1 and 2 placed as the first and second images
+    "1.webp",
+    "2.webp",
+    // 5 and 27 placed side by side
+    "5.webp",
+    "27.webp",
+    // 42 and 50 placed side by side
+    "42.webp",
+    "50.webp",
+    
+    // The rest of the original images
     "side1.webp",
     "side2.webp",
     "side3.webp",
     "side4.webp",
-    "1.webp",
-    "2.webp",
     "3.webp",
     "4.webp",
-    "5.webp",
-    // 5_1.webp and 6.webp removed
+    // 5 moved to top, 5_1, 6 removed previously
     "7.webp",
     "8.webp",
     "9.webp",
     "10.webp",
-    // 11.webp removed
+    // 11 removed previously
     "12.webp",
     "13.webp",
     "14.webp",
     "15.webp",
-    // 16.webp removed
+    // 16 removed previously
     "17.webp",
     "18.webp",
     "19.webp",
     "20.webp",
     "21.webp",
     "22.webp",
-    "23.webp",
+    // 23.webp removed
     "24.webp",
     "25.webp",
-    "26.webp",
-    "27.webp",
+    // 26.webp removed
+    // 27.webp moved to top
     "27_1.webp",
     "28.webp",
     "29.webp",
@@ -56,7 +63,7 @@ export default function GalleryComponent() {
     "39.webp",
     "40.webp",
     "41.webp",
-    "42.webp",
+    // 42.webp moved to top
     "43.webp",
     "44.webp",
     "45.webp",
@@ -64,17 +71,15 @@ export default function GalleryComponent() {
     "47.webp",
     "48.webp",
     "49.webp",
-    "50.webp",
-    // 51.webp removed
+    // 50.webp moved to top
+    // 51.webp removed previously
     "52.webp",
     "53.webp",
     "54.webp",
     "55.webp",
     "56.webp",
     "57.webp",
-    // Placed side5 at the end to fit organically into the remaining grid space
     "side5.webp",
-    // Added side6 and side7
     "side6.webp",
     "side7.webp",
   ];
