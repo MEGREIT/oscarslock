@@ -28,7 +28,7 @@ export default function GalleryComponent() {
     "4.webp",
     // 7.webp removed
     "8.webp",
-    "9.webp",
+    // 9.webp removed
     "10.webp",
     "12.webp",
     "13.webp",
@@ -50,10 +50,9 @@ export default function GalleryComponent() {
     "31.webp",
     "32.webp",
     "33.webp",
-    // 34 and 36 reversed
+    // 34 and 36 reversed, then 34.webp removed
     "36.webp",
     "35.webp",
-    "34.webp",
     "37.webp",
     "38.webp",
     "39.webp",
