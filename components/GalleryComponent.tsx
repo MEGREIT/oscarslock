@@ -12,12 +12,12 @@ export default function GalleryComponent() {
     // 1 and 2 placed as the first and second images
     "1.webp",
     "2.webp",
-    // 5 and 27 placed side by side
-    "5.webp",
+    // 5 and 27 reversed
     "27.webp",
-    // 42 and 50 placed side by side
-    "42.webp",
+    "5.webp",
+    // 42 and 50 reversed
     "50.webp",
+    "42.webp",
     
     // The rest of the original images
     "side1.webp",
@@ -26,56 +26,50 @@ export default function GalleryComponent() {
     "side4.webp",
     "3.webp",
     "4.webp",
-    // 5 moved to top, 5_1, 6 removed previously
-    "7.webp",
+    // 7.webp removed
     "8.webp",
     "9.webp",
     "10.webp",
-    // 11 removed previously
     "12.webp",
     "13.webp",
     "14.webp",
     "15.webp",
-    // 16 removed previously
     "17.webp",
     "18.webp",
     "19.webp",
     "20.webp",
     "21.webp",
     "22.webp",
-    // 23.webp removed
-    "24.webp",
-    "25.webp",
-    // 26.webp removed
-    // 27.webp moved to top
+    // 24 and 27_1 reversed
     "27_1.webp",
+    "25.webp",
+    "24.webp",
     "28.webp",
     "29.webp",
     "30.webp",
     "31.webp",
     "32.webp",
     "33.webp",
-    "34.webp",
-    "35.webp",
+    // 34 and 36 reversed
     "36.webp",
+    "35.webp",
+    "34.webp",
     "37.webp",
     "38.webp",
     "39.webp",
     "40.webp",
     "41.webp",
-    // 42.webp moved to top
     "43.webp",
     "44.webp",
-    "45.webp",
+    // 45 and 46 reversed
     "46.webp",
+    "45.webp",
     "47.webp",
     "48.webp",
     "49.webp",
-    // 50.webp moved to top
-    // 51.webp removed previously
     "52.webp",
     "53.webp",
-    "54.webp",
+    // 54.webp removed
     "55.webp",
     "56.webp",
     "57.webp",
