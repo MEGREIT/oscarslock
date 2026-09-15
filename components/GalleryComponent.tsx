@@ -3,11 +3,6 @@ import React, { useState } from "react";
 import { height } from './OpenGraphImage';
 
 export default function GalleryComponent() {
-  // Generate an array of image paths
-  // const images = Array.from(
-  //   { length: 56 },
-  //   (_, index) => `/gallery/${index + 1}.jpeg`
-  // );
   const images = [
     // 1 and 2 placed as the first and second images
     "1.webp",
@@ -50,8 +45,7 @@ export default function GalleryComponent() {
     "31.webp",
     "32.webp",
     "33.webp",
-    // 34 and 36 reversed, then 34.webp removed
-    "36.webp",
+    // 34.webp and 36.webp removed
     "35.webp",
     "37.webp",
     "38.webp",
@@ -92,25 +86,27 @@ function GalleryTile({ src, index }: { src: string; index: number }) {
   const [isLoaded, setIsLoaded] = useState(false);
 
   return (
-    <div className="relative mx-auto md:w-full mt-4 h-96">
+    // FIX: strict w-full ensures uniform columns. h-60 is used for mobile, md:h-96 for desktop
+    <div className="relative w-full h-60 md:h-96">
       {!isLoaded && (
         <div className="absolute inset-0 rounded-lg animate-pulse bg-gray-200" />
       )}
+      {/* FIX: Replaced width/height with 'fill' so Next.js automatically adapts without squishing */}
       <Image
         src={src}
-        width={100}
         alt="Gallery Image"
+        fill
         loading="lazy"
-        height={100}
         decoding="async"
         fetchPriority={index < 6 ? "high" : "auto"}
         sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
         onLoad={() => setIsLoaded(true)}
         className={
-          "rounded-lg object-cover w-full h-96 transition-opacity duration-300 " +
+          "rounded-lg object-cover transition-opacity duration-300 " +
           (isLoaded ? "opacity-100" : "opacity-0")
         }
       />
     </div>
   );
-}
+    }
+                     
